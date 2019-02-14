@@ -7,7 +7,7 @@
 
         <div slot="card-content">
             <FormEmail v-model="email" :validator="$v.email"/>
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Resend link</button>
+            <button class="btn btn-lg btn-secondary btn-block text-uppercase" type="submit">Resend link</button>
         </div>
     </FormNarrowCard>
 </template>

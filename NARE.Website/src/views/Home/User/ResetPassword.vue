@@ -23,7 +23,7 @@
                     :validator="$v.confirmationPassword"
                 />
             </div>
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Reset Password</button>
+            <button class="btn btn-lg btn-secondary btn-block text-uppercase" type="submit">Reset Password</button>
         </div>
     </FormNarrowCard>
 </template>

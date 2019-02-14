@@ -28,7 +28,7 @@
                     <td>{{ user.dateJoined.substr(0, 10) }}</td>
                     <td class="upper">{{ user.emailConfirmed }}</td>
                     <td class="upper">{{ user.accountEnabled }}</td>
-                    <td><button class="btn btn-primary" @click="viewDetailedUser(user.id)">Edit</button></td>
+                    <td><button class="btn btn-secondary" @click="viewDetailedUser(user.id)">Edit</button></td>
                 </tr>
             </tbody>
         </table>
