@@ -43,7 +43,7 @@ namespace NARE.Persistence
             });
             builder.Entity<ApplicationUser>()
                 .Property(b => b.DateJoined)
-                .HasDefaultValueSql("now()");
+                .HasDefaultValueSql("GETDATE()");
         }
     }
 }

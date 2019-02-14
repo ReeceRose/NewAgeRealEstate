@@ -35,7 +35,7 @@ namespace NARE.Persistence.Migrations.Identity
                 name: "DateJoined",
                 table: "AspNetUsers",
                 nullable: false,
-                defaultValue: new DateTimeOffset(new DateTime(1000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)));
+                defaultValue: new DateTimeOffset(new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)));
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
