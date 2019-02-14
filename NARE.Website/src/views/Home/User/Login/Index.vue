@@ -5,7 +5,7 @@
             <p v-if="error" class="text-danger text-center mb-3">{{ errorMessage }}</p>
 		</div>
 
-		<div slot="card-content">
+		<div slot="card-content" class="text-center">
 			<FormEmail v-model="email" :validator="$v.email"/>
 			<FormPassword v-model="password" :validator="$v.password"/>
 			
@@ -13,7 +13,11 @@
 				<router-link :to="{ name: 'resetPassword' }">Forgot your password?</router-link>
 			</div>
 
-			<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
+			<div class="mb-3">
+				<router-link :to="{ name: 'register' }">Not registered? Register here</router-link>
+			</div>
+
+			<button class="btn btn-lg btn-secondary btn-block text-uppercase" type="submit">Login</button>
 		</div>
 	</FormNarrowCard>
 	<div v-else>

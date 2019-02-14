@@ -5,12 +5,12 @@
             <p v-if="error" class="text-danger text-center mb-3">{{ errorMessage }}</p>
         </div>
 
-        <div slot="card-content">
+        <div slot="card-content" class="text-center">
             <FormEmail v-model="email" :validator="$v.email"/>
             <FormPassword v-model="password" :validator="$v.password"/>
             <FormPassword v-model="confirmationPassword" confirmationPassword="true" :validator="$v.confirmationPassword"/>
 
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+            <button class="btn btn-lg btn-secondary btn-block text-uppercase" type="submit">Register</button>
         </div>
     </FormNarrowCard>
 </template>
