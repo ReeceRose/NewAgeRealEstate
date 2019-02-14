@@ -5,18 +5,21 @@
         <div class="container">
             <router-view/>
         </div>
+        <TheFooter/>
     </div>
 </template>
 
 <script>
-import TheHeader from '@/components/UI/Navigation/Navigation.vue'
 import Spinner from '@/components/UI/Spinner.vue'
+import TheHeader from '@/components/UI/Navigation/Navigation.vue'
+import TheFooter from '@/components/UI/Navigation/Footer.vue'
 
 export default {
     name: 'App',
     components: {
+        Spinner,
         TheHeader,
-        Spinner
+        TheFooter
     },
     computed: {
         loading() {
