@@ -1,27 +1,34 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <router-link :to="{ name: 'home' }" class="navbar-brand">New Age Real Estate</router-link>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigationBar" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse text-center" id="navigationBar">
-                <ul class="navbar-nav ml-auto">
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <div class="container">
+            <router-link :to="{ name: 'home' }" class="navbar-brand">New Age Real Estate</router-link>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigationBar" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-center" id="navigationBar">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <router-link :to="{ name: 'home' }" class="btn btn-outline-primary">Home</router-link>
+                        <router-link :to="{ name: 'home' }" class="btn-header">Home</router-link>
                     </li>
-                    <li class="nav-item" v-if="!loggedIn">
-                        <router-link :to="{ name: 'login' }" class="btn btn-outline-primary">Login</router-link>
+                    <li class="nav-item">
+                        <router-link :to="{ name: 'about' }" class="btn-header">About</router-link>
                     </li>
-                    <li class="nav-item" v-if="!loggedIn">
-                        <router-link :to="{ name: 'register' }" class="btn btn-outline-primary">Register</router-link>
+                    <li class="nav-item">
+                        <router-link :to="{ name: 'about' }" class="btn-header">Featured</router-link>
                     </li>
-                    <li class="nav-item" v-if="loggedIn">
-                        <button class="btn btn-outline-primary" @click="logout">Logout</button>
-                    </li>
-                    <li class="nav-item" v-if="loggedIn && isAdmin">
-                        <router-link :to="{ name: 'dashboard' }" class="btn btn-outline-primary">Dashboard</router-link>
+                    <li class="nav-item">
+                        <router-link :to="{ name: 'about' }" class="btn-header">Listings</router-link>
                     </li>
                 </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" v-if="!loggedIn">
+                        <router-link :to="{ name: 'login' }" class="btn-header"><i class="fas fa-sign-in-alt"></i> Login</router-link>
+                    </li>
+                    <li class="nav-item" v-else>
+                        <span class="btn-header" @click="logout"><i class="fas fa-sign-out-alt"></i> Logout</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 </template>
@@ -37,17 +44,28 @@ export default {
     computed: {
         loggedIn() {
             return this.$store.getters['global/getToken']
-        },
-        isAdmin() {
-            return this.$store.getters['authentication/isAdmin']
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.btn {
-    width: 125px;
+.navbar-brand {
+    color: #212226;
+    font-weight: 700;
+    &:hover {
+        color: inherit;
+        opacity: 0.75;
+    }
+}
+.btn-header {
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+        color: #b4b6ba;
+    }
 }
 .nav-item {
     padding: 5px;
