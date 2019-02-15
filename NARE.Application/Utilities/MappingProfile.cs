@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using NARE.Application.User.Command.RegisterUser;
 using NARE.Application.User.Model;
 using NARE.Domain.Entities;
 
@@ -11,6 +12,8 @@ namespace NARE.Application.Utilities
             CreateMap<ApplicationUser, ApplicationUserDto>();
 
             CreateMap<ApplicationUserDto, ApplicationUser>();
+
+            CreateMap<RegisterUserCommand, ApplicationUserDto>();
         }
     }
 }
