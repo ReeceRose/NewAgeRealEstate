@@ -1,31 +1,31 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+    <nav class="navbar navbar-expand-lg navbar-light bg-blue">
         <div class="container">
-            <router-link :to="{ name: 'home' }" class="navbar-brand">New Age Real Estate</router-link>
+            <router-link :to="{ name: 'home' }" class="navbar-brand fade-on-hover font-main">New Age Real Estate</router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigationBar" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse text-center" id="navigationBar">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <router-link :to="{ name: 'home' }" class="btn btn-secondary">Home</router-link>
+                        <router-link :to="{ name: 'home' }" class="btn text-white fade-on-hover">Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link :to="{ name: 'about' }" class="btn btn-secondary">About</router-link>
+                        <router-link :to="{ name: 'about' }" class="btn text-white fade-on-hover">About</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link :to="{ name: 'about' }" class="btn btn-secondary">Featured</router-link>
+                        <router-link :to="{ name: 'featured' }" class="btn text-white fade-on-hover">Featured</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link :to="{ name: 'about' }" class="btn btn-secondary">Listings</router-link>
+                        <router-link :to="{ name: 'listings' }" class="btn text-white fade-on-hover">Listings</router-link>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item" v-if="!loggedIn">
-                        <router-link :to="{ name: 'login' }" class="btn btn-secondary"><i class="fas fa-sign-in-alt"></i> Login</router-link>
+                        <router-link :to="{ name: 'login' }" class="btn text-white fade-on-hover"><i class="fas fa-sign-in-alt"></i> Login</router-link>
                     </li>
                     <li class="nav-item" v-else>
-                        <span class="btn btn-secondary" @click="logout"><i class="fas fa-sign-out-alt"></i> Logout</span>
+                        <span class="btn text-white fade-on-hover" @click="logout"><i class="fas fa-sign-out-alt"></i> Logout</span>
                     </li>
                 </ul>
             </div>
@@ -50,14 +50,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.navbar-brand {
-    color: #212226;
-    font-weight: 700;
-    &:hover {
-        color: inherit;
-        opacity: 0.75;
-    }
-}
 .nav-item {
     padding: 5px;
 }

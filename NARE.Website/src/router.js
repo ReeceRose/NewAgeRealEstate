@@ -77,7 +77,7 @@ const router = new Router({
             component: Home
         },
         {
-            path: '/',
+            path: '/About',
             name: 'about',
             component: About
         },
