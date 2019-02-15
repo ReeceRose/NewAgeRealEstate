@@ -43,6 +43,9 @@ h1, .form {
 .bg-blue {
     background-color: #4a91f2;
 }
+.btn-blue {
+    background-color: #4a91f2;
+}
 .font-main {
     color: #212226;
 }

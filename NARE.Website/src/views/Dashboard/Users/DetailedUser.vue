@@ -34,8 +34,8 @@
                         <li>
                             <span class="item" v-if="user.emailConfirmed">Email Confirmed</span>
                             <span class="item" v-else>
-                                <button class="btn btn-secondary" @click="sendConfirmationEmail(user.email)">Send Confirmation Email</button>
-                                <button class="btn btn-secondary" @click="forceEmailConfirmaiton(user.id)">Force Email Confirmation</button>
+                                <button class="btn bg-blue fade-on-hover" @click="sendConfirmationEmail(user.email)">Send Confirmation Email</button>
+                                <button class="btn bg-blue fade-on-hover" @click="forceEmailConfirmaiton(user.id)">Force Email Confirmation</button>
                             </span>
                         </li>
                         <li class="pt-3">
@@ -51,18 +51,18 @@
                             </span>
                         </li>
                         <li class="pt-3">
-                            <span class="item" v-if="isAdministrator"><button class="btn btn-secondary" @click="revokeAdministrator(user.id)">Revoke administrator</button></span>
-                            <span v-else><button class="btn btn-secondary" @click="makeAdministrator(user.id)">Make administrator</button></span>
+                            <span class="item" v-if="isAdministrator"><button class="btn bg-blue fade-on-hover" @click="revokeAdministrator(user.id)">Revoke administrator</button></span>
+                            <span v-else><button class="btn bg-blue fade-on-hover" @click="makeAdministrator(user.id)">Make administrator</button></span>
                         </li>
                         <li>
-                            <span class="item" v-if="user.accountEnabled"><button class="btn btn-secondary" @click="disableAccount(user.id)">Disable Account</button></span>
-                            <span class="item" v-else><button class="btn btn-secondary" @click="enableAccount(user.id)">Enable Account</button></span>
+                            <span class="item" v-if="user.accountEnabled"><button class="btn bg-blue fade-on-hover" @click="disableAccount(user.id)">Disable Account</button></span>
+                            <span class="item" v-else><button class="btn bg-blue fade-on-hover" @click="enableAccount(user.id)">Enable Account</button></span>
                         </li>
                         <li>
-                            <span class="item"><button class="btn btn-secondary" @click="deleteUser(user.id)">Delete User</button></span>
+                            <span class="item"><button class="btn bg-blue fade-on-hover" @click="deleteUser(user.id)">Delete User</button></span>
                         </li>
                         <li class="pt-3">
-                            <button class="btn btn-secondary" @click="previous">Return <i class="fas fa-undo"></i></button>
+                            <button class="btn bg-blue fade-on-hover" @click="previous">Return <i class="fas fa-undo"></i></button>
                         </li>
                     </ul>
                 </div>
