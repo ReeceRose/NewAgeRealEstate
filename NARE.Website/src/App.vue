@@ -29,16 +29,23 @@ export default {
 }
 </script>
 
-
 <style lang="scss">
 * {
     padding: 0;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
 }
-h1, {
+h1 {
     padding-top: 75px;
     text-align: center;
+}
+.parallax {
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    max-width: 100%;
+    opacity: 0.95;
 }
 .bg-blue {
     background-color: #4a91f2;
