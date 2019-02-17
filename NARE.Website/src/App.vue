@@ -36,7 +36,7 @@ export default {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
 }
-h1, .form {
+h1, {
     padding-top: 75px;
     text-align: center;
 }
@@ -51,6 +51,9 @@ h1, .form {
 }
 .font-italic {
     font-style: italic;
+}
+.font-bold {
+    font-weight: 800;
 }
 .fade-on-hover {
     &:hover {
