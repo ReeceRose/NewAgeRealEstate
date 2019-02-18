@@ -30,6 +30,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/scss/global.scss";
 * {
     padding: 0;
     margin: 0;
@@ -48,13 +49,10 @@ h1 {
     opacity: 0.95;
 }
 .bg-blue {
-    background-color: #4a91f2;
-}
-.btn-blue {
-    background-color: #4a91f2;
+    background-color: color(primaryBlue);
 }
 .font-main {
-    color: #212226;
+    color: color(mainTextHover);
 }
 .font-italic {
     font-style: italic;

@@ -1,0 +1,9 @@
+$colors: (
+    primaryBlue: #4a91f2,
+    mainText: #22292f,
+);
+
+@function color($color-name)
+{
+    @return map-get($map: $colors, $key: $color-name)
+}
