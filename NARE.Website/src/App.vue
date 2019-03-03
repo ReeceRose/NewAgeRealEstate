@@ -52,7 +52,7 @@ h1 {
     background-color: color(primaryBlue);
 }
 .font-main {
-    color: color(mainTextHover);
+    color: color(mainText);
 }
 .font-italic {
     font-style: italic;

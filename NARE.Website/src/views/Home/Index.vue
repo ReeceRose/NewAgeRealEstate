@@ -1,7 +1,9 @@
 <template>
     <div>
         <div class="parallax">
-            <h1 class="font-main font-bold">New Age Real Estate</h1>
+            <h1 class="text-white font-bold">
+                New Age Real Estate
+            </h1>
         </div>
         <div class="container pb-5 text-center">
             <div class="row my-3">
@@ -16,7 +18,7 @@
                 <div class="col">
                     <div class="featured-listings">
                         <h2 class="font-main">Featured Listings</h2>
-                        <FeaturedListings/>
+                        <Listings :posts="null"/>
                     </div>
                 </div>
             </div>
@@ -24,7 +26,7 @@
                 <div class="col">
                     <div class="new-listings">
                         <h2 class="font-main">New Listings</h2>
-                        <NewListings/>
+                        <Listings :posts="null"/>
                     </div>
                 </div>
             </div>
@@ -34,15 +36,12 @@
 
 <script>
 import SearchListings from '@/components/UI/Home/SearchListings.vue'
-import FeaturedListings from '@/components/UI/Home/FeaturedListings.vue'
-import NewListings from '@/components/UI/Home/NewListings.vue'
-
+import Listings from '@/components/UI/Home/Listings.vue'
 export default {
     name: 'home',
     components: {
         SearchListings,
-        FeaturedListings,
-        NewListings
+        Listings
     }
 }
 </script>
