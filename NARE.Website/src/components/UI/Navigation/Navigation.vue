@@ -14,9 +14,6 @@
                         <router-link :to="{ name: 'about' }" class="btn text-white fade-on-hover">About</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link :to="{ name: 'featured' }" class="btn text-white fade-on-hover">Featured</router-link>
-                    </li>
-                    <li class="nav-item">
                         <router-link :to="{ name: 'listings' }" class="btn text-white fade-on-hover">Listings</router-link>
                     </li>
                 </ul>

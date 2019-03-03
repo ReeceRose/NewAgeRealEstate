@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="parallax">
-            <h1 class="font-main font-bold">New Age Real Estate</h1>
+            <h1 class="text-white font-bold">New Age Real Estate</h1>
         </div>
         <div class="container pb-5 text-center">
             <h1 class="font-main">About New Age Real Estate</h1>
