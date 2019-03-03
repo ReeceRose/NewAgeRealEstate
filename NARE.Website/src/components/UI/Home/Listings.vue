@@ -10,9 +10,13 @@
 import Listing from '@/components/UI/Listing.vue'
 
 export default {
-    name: 'FeaturedListings',
+    name: 'Listings',
     components: {
         Listing
+    },
+    props: {
+        // TODO: Add this back and remove the hard coded data below
+        // posts: Object
     },
     data() {
         return {

@@ -6,6 +6,8 @@ import utilities from '@/utilities.js'
 // Lazy load all imports
 const Home = () => import('@/views/Home/Index.vue')
 const About = () => import('@/views/Home/About.vue')
+const Listings = () => import('@/views/Home/Listings.vue')
+const Listing = () => import('@/views/Home/Listing.vue')
 
 // Dashboard
 const Dashboard = () => import('@/views/Dashboard/Index.vue')
@@ -80,6 +82,17 @@ const router = new Router({
             path: '/About',
             name: 'about',
             component: About
+        },
+        {
+            path: '/Listings',
+            name: 'listings',
+            component: Listings
+        },
+        {
+            // path: '/Listing/:listingNumber',
+            path: '/Listing',
+            name: 'listing',
+            component: Listing
         },
         {
             path: '/User',
