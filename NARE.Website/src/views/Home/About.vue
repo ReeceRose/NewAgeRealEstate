@@ -17,10 +17,6 @@
 </template>
 
 <style lang="scss" scoped>
-.parallax {
-    background-image: url("https://static.reecerose.com/images/projects/NewAgeRealEstate/city-skyline.jpeg");
-    height: 25vh;
-}
 .border {
     padding: 50px;
     border-radius: 35px;

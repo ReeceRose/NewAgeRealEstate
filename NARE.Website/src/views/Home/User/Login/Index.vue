@@ -17,7 +17,7 @@
 				<router-link :to="{ name: 'register' }">Not registered? Register here</router-link>
 			</div>
 
-			<button class="btn btn-lg bg-blue fade-on-hover btn-block text-uppercase" type="submit">Login</button>
+			<button class="btn btn-main btn-lg bg-blue fade-on-hover btn-block text-uppercase" type="submit">Login</button>
 		</div>
 	</FormNarrowCard>
 	<div v-else>

@@ -27,6 +27,7 @@
                     <div class="new-listings">
                         <h2 class="font-main">New Listings</h2>
                         <Listings :posts="null"/>
+                        <router-link :to="{ name: 'listings' }" class="mt-3 btn btn-main bg-blue font-main fade-on-hover text-uppercase">View All</router-link>
                     </div>
                 </div>
             </div>
@@ -45,10 +46,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-.parallax {
-    background-image: url("https://static.reecerose.com/images/projects/NewAgeRealEstate/city-skyline.jpeg");
-    height: 25vh;
-}
-</style>

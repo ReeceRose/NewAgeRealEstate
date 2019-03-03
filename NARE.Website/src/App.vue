@@ -36,11 +36,20 @@ export default {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
 }
+.btn-main {
+    font-size: 0.75rem;
+    border-radius: 5rem;
+    letter-spacing: .1rem;
+    font-weight: bold;
+    padding: 1rem;
+}
 h1 {
     padding-top: 75px;
     text-align: center;
 }
 .parallax {
+    background-image: url("https://static.reecerose.com/images/projects/NewAgeRealEstate/city-skyline.jpeg");
+    height: 25vh;
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;

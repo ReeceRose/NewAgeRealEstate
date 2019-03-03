@@ -10,7 +10,7 @@
             <FormPassword v-model="password" :validator="$v.password"/>
             <FormPassword v-model="confirmationPassword" confirmationPassword="true" :validator="$v.confirmationPassword"/>
 
-            <button class="btn btn-lg bg-blue fade-on-hover btn-block text-uppercase" type="submit">Register</button>
+            <button class="btn btn-main btn-lg bg-blue fade-on-hover btn-block text-uppercase" type="submit">Register</button>
         </div>
     </FormNarrowCard>
 </template>

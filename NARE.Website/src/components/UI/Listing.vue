@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col">
                         <!-- TODO: Change this to the listing -->
-                        <router-link :to="{ name: 'listing' }" class="btn btn-lg bg-blue font-main fade-on-hover btn-block text-uppercase">View</router-link>
+                        <router-link :to="{ name: 'listing' }" class="btn btn-main btn-lg bg-blue font-main fade-on-hover btn-block text-uppercase">View</router-link>
                     </div> 
                 </div>
             </div>
@@ -61,14 +61,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/global.scss"; 
-.btn {
-    font-size: 80%;
-    border-radius: 5rem;
-    letter-spacing: .1rem;
-    font-weight: bold;
-    padding: 1rem;
-    transition: all 0.2s;
-}
 .price {
     position: absolute;
     top: 0;
