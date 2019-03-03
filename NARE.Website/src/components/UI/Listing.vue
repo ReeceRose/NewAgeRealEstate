@@ -1,10 +1,12 @@
 <template>
-    <div>
+    <div class="pb-4">
         <img class="img-fluid w-100" :src="post.imageUrl" :alt="post.address" :title="post.address">
         <div class="price">${{post.price}}</div>
         <div class="information">
-            <div class="address-main font-main font-bold">{{ post.address }}</div>
-            <div class="address-minor font-main"><i class="fas fa-map-marker-alt"></i> {{ post.city }}, {{ post.province }}, {{ post.postalCode }}</div>
+            <div class="address text-center">
+                <div class="address-main font-main font-bold">{{ post.address }}</div>
+                <div class="address-minor font-main"><i class="fas fa-map-marker-alt"></i> {{ post.city }}, {{ post.province }}, {{ post.postalCode }}</div>
+            </div>
             <div class="details pt-0">
                 <hr>
                 <div class="row">
@@ -29,12 +31,12 @@
                 </div>
                 <hr>
                 <div class="row pb-2">
-                    <div class="col">
+                    <div class="col text-center">
                         <router-link :to="{ name: 'home' }"><i class="fas fa-user"></i> {{ post.agent }}</router-link>
                     </div>
                 </div>
                 <div class="row pb-2">
-                    <div class="col">
+                    <div class="col text-center">
                         <i class="fas fa-calendar-alt"></i>
                         {{ post.postedDate }}
                     </div>

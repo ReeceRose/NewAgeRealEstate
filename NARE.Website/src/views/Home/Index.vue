@@ -18,6 +18,7 @@
                 <div class="col">
                     <div class="featured-listings">
                         <h2 class="font-main">Featured Listings</h2>
+                        <!-- TODO: Pass the featured listings -->
                         <Listings :posts="null"/>
                     </div>
                 </div>
@@ -26,6 +27,7 @@
                 <div class="col">
                     <div class="new-listings">
                         <h2 class="font-main">New Listings</h2>
+                        <!-- TODO: Pass the 3 most recent listings -->
                         <Listings :posts="null"/>
                         <router-link :to="{ name: 'listings' }" class="mt-3 btn btn-main bg-blue font-main fade-on-hover text-uppercase">View All</router-link>
                     </div>
@@ -38,6 +40,7 @@
 <script>
 import SearchListings from '@/components/UI/Home/SearchListings.vue'
 import Listings from '@/components/UI/Home/Listings.vue'
+
 export default {
     name: 'home',
     components: {
