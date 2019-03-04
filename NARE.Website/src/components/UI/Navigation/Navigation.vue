@@ -18,11 +18,14 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item" v-if="!loggedIn">
-                        <router-link :to="{ name: 'login' }" class="btn text-white fade-on-hover"><i class="fas text-white fa-sign-in-alt"></i> Login</router-link>
+                    <li class="nav-item" v-if="loggedIn">
+                        <span class="btn text-white fade-on-hover" @click="$router.push({ name: 'dashboard' })"><i class="fas text-white fa-edit"></i> Dashboard</span>
+                    </li>
+                    <li class="nav-item" v-if="loggedIn">
+                        <span class="btn text-white fade-on-hover" @click="logout"><i class="fas text-white fa-sign-out-alt"></i> Logout</span>
                     </li>
                     <li class="nav-item" v-else>
-                        <span class="btn text-white fade-on-hover" @click="logout"><i class="fas fa-sign-out-alt"></i> Logout</span>
+                        <router-link :to="{ name: 'login' }" class="btn text-white fade-on-hover"><i class="fas text-white fa-sign-in-alt"></i> Login</router-link>
                     </li>
                 </ul>
             </div>

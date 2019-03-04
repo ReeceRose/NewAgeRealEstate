@@ -153,7 +153,7 @@ const router = new Router({
         },
         {
             path: '/Agent',
-            name: 'agent',
+            name: 'agentIndex',
             component: AgentIndex,
             children: [
                 {

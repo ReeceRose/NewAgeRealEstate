@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <ApiHealth/>
         <div v-if="this.$route.name === 'dashboard'" >
             <h1 class="text-left pt-3">
