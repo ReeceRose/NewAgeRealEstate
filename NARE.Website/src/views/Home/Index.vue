@@ -9,7 +9,7 @@
             <div class="row my-3">
                 <div class="col">
                     <div class="search-listings">
-                        <h2 class="font-main">Search Listings</h2>
+                        <h2>Search Listings</h2>
                         <SearchListings/>
                     </div>
                 </div>
@@ -17,19 +17,20 @@
             <div class="row my-3">
                 <div class="col">
                     <div class="featured-listings">
-                        <h2 class="font-main">Featured Listings</h2>
+                        <h2>Featured Listings</h2>
                         <!-- TODO: Pass the featured listings -->
-                        <Listings :posts="null"/>
+                        <p v-if="newListingsError" class="text-danger">Failed to load featured listings</p>
+                        <Listings :listings="null" v-else/>
                     </div>
                 </div>
             </div>
             <div class="row my-3">
                 <div class="col">
                     <div class="new-listings">
-                        <h2 class="font-main">New Listings</h2>
-                        <!-- TODO: Pass the 3 most recent listings -->
-                        <Listings :posts="null"/>
-                        <router-link :to="{ name: 'listings' }" class="mt-3 btn btn-main bg-blue font-main fade-on-hover text-uppercase">View All</router-link>
+                        <h2>New Listings</h2>
+                        <p v-if="featuredListingsError" class="text-danger">Failed to load new listings</p>
+                        <Listings :listings="null" v-else/>
+                        <router-link :to="{ name: 'listings' }" class="mt-3 btn btn-main bg-blue fade-on-hover text-uppercase">View All</router-link>
                     </div>
                 </div>
             </div>
@@ -46,6 +47,17 @@ export default {
     components: {
         SearchListings,
         Listings
+    },
+    data() {
+        return {
+            featuredListings: null,
+            featuredListingsError: false,
+            newListings: null,
+            newListingsError: false
+        }
+    },
+    beforeCreate() {
+
     }
 }
 </script>

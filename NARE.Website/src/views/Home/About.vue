@@ -4,7 +4,7 @@
             <h1 class="text-white font-bold">New Age Real Estate</h1>
         </div>
         <div class="container pb-5 text-center">
-            <h1 class="font-main">About New Age Real Estate</h1>
+            <h1>About New Age Real Estate</h1>
             <div class="row mt-3 mb-3 border">
                 <div class="col">
                     <img class="team img-fluid rounded" src="https://static.reecerose.com/images/projects/NewAgeRealEstate/team.jpeg" alt="Our team!">

@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-blue">
         <div class="container">
-            <router-link :to="{ name: 'home' }" class="navbar-brand fade-on-hover font-main">New Age Real Estate</router-link>
+            <router-link :to="{ name: 'home' }" class="navbar-brand fade-on-hover">New Age Real Estate</router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigationBar" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -19,7 +19,7 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item" v-if="!loggedIn">
-                        <router-link :to="{ name: 'login' }" class="btn text-white fade-on-hover"><i class="fas fa-sign-in-alt"></i> Login</router-link>
+                        <router-link :to="{ name: 'login' }" class="btn text-white fade-on-hover"><i class="fas text-white fa-sign-in-alt"></i> Login</router-link>
                     </li>
                     <li class="nav-item" v-else>
                         <span class="btn text-white fade-on-hover" @click="logout"><i class="fas fa-sign-out-alt"></i> Logout</span>

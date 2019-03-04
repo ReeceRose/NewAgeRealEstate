@@ -35,6 +35,11 @@ export default {
     padding: 0;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
+    color: color(mainText);
+}
+.border-main {
+    border: 1px solid color(border);
+    border-top: none;
 }
 .btn-main {
     font-size: 0.75rem;
@@ -42,6 +47,7 @@ export default {
     letter-spacing: .1rem;
     font-weight: bold;
     padding: 1rem;
+    color: color(mainText);
 }
 h1 {
     padding-top: 75px;

@@ -89,10 +89,10 @@ const router = new Router({
             component: Listings
         },
         {
-            // path: '/Listing/:listingNumber',
-            path: '/Listing',
+            path: '/Listing/:id',
             name: 'listing',
-            component: Listing
+            component: Listing,
+            props: true
         },
         {
             path: '/User',

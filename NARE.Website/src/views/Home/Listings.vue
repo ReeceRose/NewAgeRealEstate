@@ -1,6 +1,6 @@
 <template>
     <div class="container p-5">
-        <Listings :posts="null"/>
+        <Listings :listings="null"/>
     </div>
 </template>
 

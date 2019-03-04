@@ -1,5 +1,148 @@
 <template>
-    <div>
-        Listing
+    <div class="container pt-5 pb-5">
+        <router-link :to="{ name: 'listings' }" class="text-uppercase"><i class="fas fa-arrow-left"></i> Back to listings</router-link>
+        <div class="row pt-3">
+            <div class="col-lg-9 col-md-8 col-sm-12 pb-3">
+                <div class="property border-main">
+                    <img class="img-fluid" :src="post.imageUrl" alt="Main picture">
+                    <div class="row">
+                        <div v-for="(picture, index) in post.pictures" :key="index" class="col-3 m-2 pr-0">
+                            <img :src="picture.source" :alt="picture.alternative" class="img-fluid rounded">
+                        </div>
+                    </div>
+                    <p class="text-center address font-bold mb-2">{{ post.address }}</p>
+                    <p class="text-center address-minor">{{ post.city }}, {{ post.province }}, {{ post.postalCode }}</p>
+                    <hr>
+                    <div class="row details pl-5 pr-5">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <hr>
+                            <div class="row">
+                                <div class="col"><p><i class="fas fa-money-bill"></i> Asking Price:</p></div>
+                                <div class="col text-right">$ {{ post.price }}</div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col"><p><i class="fas fa-bed"></i> Bedrooms:</p></div>
+                                <div class="col text-right">{{ post.bedrooms }}</div>
+                            </div>
+                            <hr>
+                                <div class="row">
+                                <div class="col"><p><i class="fas fa-bath"></i> Bathrooms:</p></div>
+                                <div class="col text-right">{{ post.bathrooms }}</div>
+                            </div>
+                            <hr>
+                                <div class="row">
+                                <div class="col"><p><i class="fas fa-car"></i> Garage:</p></div>
+                                <div class="col text-right">{{ post.garage }}</div>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <hr>
+                            <div class="row">
+                                <div class="col"><p><i class="fas fa-square"></i> Square Feet:</p></div>
+                                <div class="col text-right">{{ post.squareFootage }}</div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col"><p><i class="fas fa-square"></i> Lot Size:</p></div>
+                                <div class="col text-right">{{ post.lotSize }}</div>
+                            </div>
+                            <hr>
+                                <div class="row">
+                                <div class="col"><p><i class="fas fa-calendar-alt"></i> Listing Date:</p></div>
+                                <div class="col text-right">{{ post.listingDate }}</div>
+                            </div>
+                            <hr>
+                                <div class="row">
+                                <div class="col"><p><i class="fas fa-user"></i> Realtor:</p></div>
+                                <div class="col text-right">{{ post.agent.name }}</div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col p-5">
+                            {{ post.description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12 pb-3">
+                <div class="agent border-main text-center">
+                    <img class="img-fluid" :src="post.agent.picture" :alt="post.agent.name">
+                    <p class="agent-name">{{ post.agent.name }}</p>
+                    <p>Inquire here</p>
+                    <hr>
+                    <p><a :href="`tel:${post.agent.telephone}`"><i class="fas fa-phone"></i> {{ post.agent.telephone }}</a></p>
+                    <p><a :href="`mailto:${post.agent.email}`"><i class="fas fa-envelope"></i> {{ post.agent.email }}</a></p>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
+
+<script>
+export default {
+    name: 'listing',
+    data() {
+        return {
+            post: {
+                    id: '1231',
+                    address: '123 Test Ave',
+                    city: 'Kitchener',
+                    province: 'ON',
+                    postalCode: 'A1B 2C3',
+                    squareFootage: '2750',
+                    lotSize: '1.2 Acres',
+                    garage: '3',
+                    bedrooms: '4',
+                    bathrooms: '2.5',
+                    price: '1115000',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dapibus scelerisque congue. Nullam aliquet efficitur rutrum. Praesent ac justo dictum, vehicula quam sed, vestibulum nunc. Curabitur fringilla tempor lacus sit amet pellentesque. Ut elit sem, scelerisque ac lectus at, congue bibendum arcu. Curabitur scelerisque non diam et volutpat. Aenean finibus egestas sapien, in vehicula est maximus pretium. Sed id nisi orci. Vivamus ut commodo lacus. Proin a arcu vel nulla fermentum pretium. ',
+                    agent: {
+                        name: 'Jane Doe',
+                        picture: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+                        telephone: '111-222-3333',
+                        email: 'nare@reecerose.com'
+                    },
+                    pictures: [
+                        {
+                            source: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+                            alternative: 'alt'
+                        },
+                        {
+                            source: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+                            alternative: 'alt'
+                        }
+                    ],
+                    listingDate: '01/01/2019',
+                    imageUrl: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                },
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/global.scss"; 
+.fas {
+    color: color(primaryBlue);
+}
+.agent {
+    .agent-name {
+        font-size: 1.5rem;
+        padding: 0.8rem 0.8rem 0 0.8rem;  
+    }
+}
+.fas {
+    color: color(primaryBlue);
+}
+.address {
+    font-size: 1.5rem;
+}
+.address-minor {
+    font-size: 0.75rem;
+}
+</style>
