@@ -10,12 +10,12 @@
             <div class="details pt-0">
                 <hr>
                 <div class="row">
-                    <div class="col"><i class="fas fa-square"></i>Sqft: {{ post.squareFootage }}</div>
-                    <div class="col"><i class="fas fa-car"></i>Garage: {{ post.garage }}</div>
+                    <div class="col"><i class="fas fa-square"></i> Sqft: {{ post.squareFootage }}</div>
+                    <div class="col"><i class="fas fa-car"></i> Garage: {{ post.garage }}</div>
                 </div>
                 <div class="row">
-                    <div class="col"><i class="fas fa-bed"></i>Bedrooms: {{ post.bedrooms }}</div>
-                    <div class="col"><i class="fas fa-bath"></i>Bathrooms: {{ post.bathrooms }}</div>
+                    <div class="col"><i class="fas fa-bed"></i> Bedrooms: {{ post.bedrooms }}</div>
+                    <div class="col"><i class="fas fa-bath"></i> Bathrooms: {{ post.bathrooms }}</div>
                 </div>
                 <hr>
                 <div class="row pb-2">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="row pb-2">
-                    <div class="col text-center"><i class="fas fa-calendar-alt"></i>{{ post.listingDate }}</div>
+                    <div class="col text-center"><i class="fas fa-calendar-alt"></i> {{ post.listingDate }}</div>
                 </div>
                 <div class="row">
                     <div class="col">

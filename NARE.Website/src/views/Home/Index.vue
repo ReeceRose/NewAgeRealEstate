@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import SearchListings from '@/components/UI/Home/SearchListings.vue'
+import SearchListings from '@/components/UI/SearchListings.vue'
 import Listings from '@/components/UI/Home/Listings.vue'
 
 export default {
