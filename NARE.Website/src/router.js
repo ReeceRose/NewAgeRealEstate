@@ -18,8 +18,6 @@ const DetailedUserDashboard = () => import('@/views/Dashboard/Users/DetailedUser
 const UserIndex = () => import('@/views/Home/User/Index.vue')
 const LoginIndex  = () => import('@/views/Home/User/Login/Index.vue')
 
-const Register = () => import('@/views/Home/User/Register/Index.vue')
-
 const AccessDenied = () => import('@/views/Home/AccessDenied.vue')
 const SessionExpired = () => import('@/views/Home/SessionExpired.vue')
 
@@ -104,12 +102,6 @@ const router = new Router({
                     name: 'login',
                     component: LoginIndex,
                     ...NotLoggedIn,
-                },
-                {
-                    path: 'Register',
-                    name: 'register',
-                    component: Register,
-                    ...NotLoggedIn
                 },
                 {
                     path: 'ResetPassword',
