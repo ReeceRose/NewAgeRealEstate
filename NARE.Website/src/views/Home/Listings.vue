@@ -1,7 +1,7 @@
 <template>
-    <div class="container p-5 ">
+    <div class="container p-5">
         <SearchListings/>
-        <Listings :listings="null"/>
+        <Listings :listings="null" class="pt-5"/>
         <ul class="pagination">
             <li class="page-item" :class="c == 1 ? 'disabled' : ''">
                 <span class="page-link" @click="setPage(c-1)">Previous</span>
