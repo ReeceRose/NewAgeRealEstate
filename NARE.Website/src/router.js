@@ -14,15 +14,40 @@ const SessionExpired = () => import('@/views/Home/SessionExpired.vue')
 
 // Dashboard
 const Dashboard = () => import('@/views/Dashboard/Index.vue')
-const UserDashboard = () => import('@/views/Dashboard/Users/Index.vue')
-const DetailedUserDashboard = () => import('@/views/Dashboard/Users/DetailedUser.vue')
+const AgentDashboard = () => import('@/views/Dashboard/Agent/Index.vue')
+const DetailedAgentDashboard = () => import('@/views/Dashboard/Agent/Agent.vue')
 
-// User
-const UserIndex = () => import('@/views/Home/User/Index.vue')
-const Login  = () => import('@/views/Home/User/Login.vue')
-const ResetPassword = () => import('@/views/Home/User/ResetPassword.vue')
+// Agent
+const AgentIndex = () => import('@/views/Home/Agent/Index.vue')
+const Login  = () => import('@/views/Home/Agent/Login.vue')
+const ResetPassword = () => import('@/views/Home/Agent/ResetPassword.vue')
 
 Vue.use(Router)
+
+const AgentProtected = {
+    beforeEnter: (to, from, next) => {
+        const redirect = () => {
+            const token = store.getters['global/getToken']
+            if (token) {
+                    next()
+            } else {
+                next({ name: 'login', params: { redirect: to.fullPath }})
+            }
+        }
+        if (store.getters['global/isLoading']) {
+            store.watch(
+                (getters) => {
+                    getters['global/isLoading']
+                },
+                () => {
+                    redirect()
+                }
+            )
+        } else {
+            redirect()
+        }
+    }
+}
 
 const AdminProtected = {
     beforeEnter: (to, from, next) => {
@@ -52,6 +77,7 @@ const AdminProtected = {
         }
     }
 }
+
 const NotLoggedIn = {
     beforeEnter: (to, from, next) => {
         const token = store.getters['global/getToken']
@@ -108,26 +134,27 @@ const router = new Router({
             path: '/Dashboard',
             name: 'dashboard',
             component: Dashboard,
-            ...AdminProtected,
+            ...AgentProtected,
             children: [
                 {
-                    path: 'Users',
-                    name: 'userDashboard',
-                    component: UserDashboard,
+                    path: 'Agent',
+                    name: 'agentDashboard',
+                    component: AgentDashboard,
+                    ...AdminProtected,
                     children: [
                         {
                             path: ':id',
-                            name: 'detailedUserDashboard',
-                            component: DetailedUserDashboard
+                            name: 'detailedAgentDashboard',
+                            component: DetailedAgentDashboard
                         }
                     ]
                 }
             ]
         },
         {
-            path: '/User',
-            name: 'user',
-            component: UserIndex,
+            path: '/Agent',
+            name: 'agent',
+            component: AgentIndex,
             children: [
                 {
                     path: 'Login/:redirect?',

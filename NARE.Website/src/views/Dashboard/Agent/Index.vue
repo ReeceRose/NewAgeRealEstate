@@ -1,15 +1,15 @@
 <template>
-    <div v-if="this.$route.name === 'userDashboard' " class="pt-3 table-responsive">
-        <h2 class="text-center">Users</h2 >
+    <div v-if="this.$route.name === 'agentDashboard' " class="pt-3 table-responsive">
+        <h2 class="text-center">Agents</h2 >
 
         <SearchBar class="col-12" :submit="searchEmail"/>
 
         <div class="text-right col-1 offset-11">
-            <i class="fas fa-sync-alt pointer" @click="getAllUsers"></i>
+            <i class="fas fa-sync-alt pointer" @click="getAllAgents"></i>
         </div>
 
         <div>
-            <h5 v-if="error" class="text-danger">Failed to load users</h5>
+            <h5 v-if="error" class="text-danger">Failed to load agents</h5>
         </div>
 
         <table border="1" class="table table-bordered table-hover text-center">
@@ -23,12 +23,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users" :key="user.id" @click="viewDetailedUser(user.id)" class="pointer">
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.dateJoined.substr(0, 10) }}</td>
-                    <td class="upper">{{ user.emailConfirmed }}</td>
-                    <td class="upper">{{ user.accountEnabled }}</td>
-                    <td><button class="btn bg-blue fade-on-hover" @click="viewDetailedUser(user.id)">Edit</button></td>
+                <tr v-for="agent in agents" :key="agent.id" @click="viewDetailedAgent(agent.id)" class="pointer">
+                    <td>{{ agent.email }}</td>
+                    <td>{{ agent.dateJoined.substr(0, 10) }}</td>
+                    <td class="upper">{{ agent.emailConfirmed }}</td>
+                    <td class="upper">{{ agent.accountEnabled }}</td>
+                    <td><button class="btn bg-blue fade-on-hover" @click="viewDetailedAgent(agent.id)">Edit</button></td>
                 </tr>
             </tbody>
         </table>
@@ -59,13 +59,13 @@
 import SearchBar from '@/components/UI/SearchBar.vue'
 
 export default {
-    name: 'UserDashboard',
+    name: 'AgentDashboard',
     components: {
         SearchBar
     },
     data() {
         return {
-            users: [],
+            agents: [],
             error: false,
             currentPage: 1,
             pageCount: 1
@@ -80,12 +80,12 @@ export default {
         searchEmail(event) {
             let email = event.target[0].value
             if (email === '' || email === null) {
-                this.getAllUsers()
+                this.getAllAgents()
                 return
             }
-            this.$store.dispatch("users/userByEmail", email)
+            this.$store.dispatch("agents/agentByEmail", email)
                 .then((result) => {
-                    this.users = result.users
+                    this.agents = result.agents
                     this.pageCount = result.paginationModel.totalPages
                     this.error = false
                 })
@@ -93,13 +93,13 @@ export default {
                     this.error = true
                 })
         },
-        viewDetailedUser(id) {
-            this.$router.push({ name: 'detailedUserDashboard', params: { id: id } })
+        viewDetailedAgent(id) {
+            this.$router.push({ name: 'detailedAgentDashboard', params: { id: id } })
         },
-        getAllUsers() {
-            this.$store.dispatch("users/users", { currentPage: this.currentPage, pageSize: 10})
+        getAllAgents() {
+            this.$store.dispatch("agents/agents", { currentPage: this.currentPage, pageSize: 10})
                 .then((result) => {
-                    this.users = result.users
+                    this.agents = result.agents
                     this.pageCount = result.paginationModel.totalPages
                     this.error = false
                 })
@@ -110,11 +110,11 @@ export default {
         setPage(pageIndex) {
             if (pageIndex <= 0 || pageIndex > this.pageCount) return
             this.currentPage = pageIndex
-            this.getAllUsers()
+            this.getAllAgents()
         }
     },
     created() {
-        this.getAllUsers()
+        this.getAllAgents()
     }
 }
 </script>

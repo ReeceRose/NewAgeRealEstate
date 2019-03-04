@@ -2,8 +2,8 @@
     <div class="pt-3">
         <div class="row">
             <div class="col">
-                <h2 class="text-center pb-4">User</h2>
-                <p v-if="error" class="text-danger text-center">Failed to load user</p>
+                <h2 class="text-center pb-4">Agent</h2>
+                <p v-if="error" class="text-danger text-center">Failed to load agent</p>
 
                 <p v-if="promotedToAdministrator" class="text-success text-center">Promoted to administrator</p>
                 <p v-if="promotedToAdministratorError" class="text-danger text-center">Cannot promote to administrator</p>
@@ -12,21 +12,21 @@
                 <p v-if="revokedAdministratorError" class="text-danger text-center">Cannot revoke administrative rights</p>
 
                 <p v-if="accountDisabled" class="text-success text-center">Account has been disabled</p>
-                <p v-if="accountEnabledError" class="text-danger text-center">Failed to enable user</p>
+                <p v-if="accountEnabledError" class="text-danger text-center">Failed to enable agent</p>
 
                 <p v-if="accountEnabled" class="text-success text-center">Account has been enabled</p>
-                <p v-if="accountDisabledError" class="text-danger text-center">Failed to disable user</p>
+                <p v-if="accountDisabledError" class="text-danger text-center">Failed to disable agent</p>
 
-                <p v-if="deleteUserError" class="text-danger text-center">Failed to delete user</p>
+                <p v-if="deleteAgentError" class="text-danger text-center">Failed to delete agent</p>
             </div>
         </div>
-        <WideCard :title="user.email" v-if="user">
+        <WideCard :title="agent.email" v-if="agent">
             <div slot="card-content" class="text-center">
                 <div class="col-12">
                     <ul>
-                        <li><span class="item" v-if="user.dateJoined">Date Joined: {{ user.dateJoined.substr(0, 10) }}</span></li>
+                        <li><span class="item" v-if="agent.dateJoined">Date Joined: {{ agent.dateJoined.substr(0, 10) }}</span></li>
                         <li class="pt-3">
-                            <h3>User Claims:</h3>
+                            <h3>Agent Claims:</h3>
                             <span v-if="claims.length > 0">
                                 <span v-for="(claim, index) in claims" :key="index">
                                     {{ checkIsAdministrator(claim) }}
@@ -38,15 +38,15 @@
                             </span>
                         </li>
                         <li class="pt-3">
-                            <span class="item" v-if="isAdministrator"><button class="btn bg-blue fade-on-hover" @click="revokeAdministrator(user.id)">Revoke administrator</button></span>
-                            <span v-else><button class="btn bg-blue fade-on-hover" @click="makeAdministrator(user.id)">Make administrator</button></span>
+                            <span class="item" v-if="isAdministrator"><button class="btn bg-blue fade-on-hover" @click="revokeAdministrator(agent.id)">Revoke administrator</button></span>
+                            <span v-else><button class="btn bg-blue fade-on-hover" @click="makeAdministrator(agent.id)">Make administrator</button></span>
                         </li>
                         <li>
-                            <span class="item" v-if="user.accountEnabled"><button class="btn bg-blue fade-on-hover" @click="disableAccount(user.id)">Disable Account</button></span>
-                            <span class="item" v-else><button class="btn bg-blue fade-on-hover" @click="enableAccount(user.id)">Enable Account</button></span>
+                            <span class="item" v-if="agent.accountEnabled"><button class="btn bg-blue fade-on-hover" @click="disableAccount(agent.id)">Disable Account</button></span>
+                            <span class="item" v-else><button class="btn bg-blue fade-on-hover" @click="enableAccount(agent.id)">Enable Account</button></span>
                         </li>
                         <li>
-                            <span class="item"><button class="btn bg-blue fade-on-hover" @click="deleteUser(user.id)">Delete User</button></span>
+                            <span class="item"><button class="btn bg-blue fade-on-hover" @click="deleteAgent(agent.id)">Delete Agent</button></span>
                         </li>
                         <li class="pt-3">
                             <button class="btn bg-blue fade-on-hover" @click="previous">Return <i class="fas fa-undo"></i></button>
@@ -62,13 +62,13 @@
 import WideCard from '@/components/UI/Card/WideCard.vue'
 
 export default {
-    name: 'DetailedUser',
+    name: 'DetailedAgent',
     components: {
         WideCard
     },
     data() {
         return {
-            user: false,
+            agent: false,
             claims: false,
             isAdministrator: false,
             error: false,
@@ -80,14 +80,14 @@ export default {
             accountDisabledError: false,
             accountEnabled: false,
             accountEnabledError: false,
-            deleteUserError: false,
+            deleteAgentError: false,
         }
     },
     methods: {
-        getUser(userId) {
-            this.$store.dispatch("users/userById", userId)
+        getAgent(agentId) {
+            this.$store.dispatch("agents/agentById", agentId)
                 .then((data) => {
-                    this.user = data.user
+                    this.agent = data.agent
                     this.claims = data.claims
                 })
                 .catch(() => {
@@ -97,8 +97,8 @@ export default {
         checkIsAdministrator(claim) {
             claim.type == 'Administrator' ? this.isAdministrator = true : null;
         },
-        revokeAdministrator(userId) {
-            this.$store.dispatch("users/removeClaim", { userId, claim: "Administrator" })
+        revokeAdministrator(agentId) {
+            this.$store.dispatch("agents/removeClaim", { agentId, claim: "Administrator" })
                 .then(() => {
                     this.isAdministrator = false
                     this.revokedAdministrator = true
@@ -107,8 +107,8 @@ export default {
                     this.revokedAdministratorError = true
                 })
         },
-        makeAdministrator(userId) {
-            this.$store.dispatch("users/addClaim", { userId, claim: "Administrator"})
+        makeAdministrator(agentId) {
+            this.$store.dispatch("agents/addClaim", { agentId, claim: "Administrator"})
                 .then(() => {
                     this.isAdministrator = true
                     this.promotedToAdministrator = true
@@ -117,10 +117,10 @@ export default {
                     this.promotedToAdministratorError = true
                 })
         },
-        enableAccount(userId) {
-            this.$store.dispatch("users/enableAccount", userId)
+        enableAccount(agentId) {
+            this.$store.dispatch("agents/enableAccount", agentId)
                 .then(() => {
-                    this.user.accountEnabled = true
+                    this.agent.accountEnabled = true
                     this.accountEnabled = true
                 })
                 .catch(() => {
@@ -133,10 +133,10 @@ export default {
                     }, 3000)
                 })
         },
-        disableAccount(userId) {
-            this.$store.dispatch("users/disableAccount", userId)
+        disableAccount(agentId) {
+            this.$store.dispatch("agents/disableAccount", agentId)
                 .then(() => {
-                    this.user.accountEnabled = false
+                    this.agent.accountEnabled = false
                     this.accountDisabled = true
                 })
                 .catch(() => {
@@ -149,17 +149,17 @@ export default {
                     }, 3000)
                 })
         },
-        deleteUser(userId) {
-            this.$store.dispatch("users/deleteUser", userId)
+        deleteAgent(agentId) {
+            this.$store.dispatch("agents/deleteAgent", agentId)
                 .then(() => {
-                    this.$router.push({ name: 'userDashboard'})
+                    this.$router.push({ name: 'agentDashboard'})
                 })
                 .catch(() => {
-                    this.deleteUserError = true
+                    this.deleteAgentError = true
                 })
                 .finally(() => {
                     setTimeout(() => {
-                        this.deleteUserError = false
+                        this.deleteAgentError = false
                     }, 3000)
                 })
         },
@@ -168,7 +168,7 @@ export default {
         }
     },
     created() {
-        this.getUser(this.$route.params.id)
+        this.getAgent(this.$route.params.id)
     }
 }
 </script>

@@ -52,7 +52,7 @@ export default {
         getAllListings() {
             this.$store.dispatch("listings", { currentPage: this.currentPage, pageSize: 10})
                 .then((result) => {
-                    this.users = result.users
+                    this.agents = result.agents
                     this.pageCount = result.paginationModel.totalPages
                     this.error = false
                 })

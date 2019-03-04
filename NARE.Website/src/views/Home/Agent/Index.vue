@@ -5,7 +5,7 @@
 <script>
 export default {
     beforeCreate() {
-        if (this.$route.name === 'user') {
+        if (this.$route.name === 'agents') {
             this.$router.push({ name: 'home' })
         }
     }
