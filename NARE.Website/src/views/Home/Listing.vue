@@ -209,9 +209,6 @@ export default {
         padding: 0.8rem 0.8rem 0 0.8rem;  
     }
 }
-.fas {
-    color: color(primaryBlue);
-}
 .address {
     font-size: 1.5rem;
 }
