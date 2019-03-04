@@ -120,25 +120,6 @@ const users = {
                 })
             })
         },
-        forceEmailConfirmation: ({ commit, rootGetters }, userId) => {
-            return new Promise((resolve, reject) => {
-                commit('global/setLoading', true, { root: true })
-                axios({
-                    method: 'get',
-                    url: `users/${userId}/forceEmailConfirmation`,
-                    headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
-                })
-                    .then(() => {
-                        resolve()
-                    })
-                    .catch(() => {
-                        reject()
-                    })
-                    .finally(() => {
-                        commit('global/setLoading', false, { root: true })
-                    })
-            })
-        },
         enableAccount: ({ commit, rootGetters }, userId) => {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
@@ -184,64 +165,6 @@ const users = {
                     method: 'get',
                     url: `users/${userId}/delete`,
                     headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
-                })
-                    .then(() => {
-                        resolve()
-                    })
-                    .catch(() => {
-                        reject()
-                    })
-                    .finally(() => {
-                        commit('global/setLoading', false, { root: true })
-                    })
-            })
-        },
-        sendEmailConfirmation: ({ commit, rootGetters }, email) => {
-            return new Promise((resolve, reject) => {
-                commit('global/setLoading', true, { root: true })
-                axios({
-                    method: 'get',
-                    url: 'authentication/GenerateConfirmationEmail',
-                    data: { email: email },
-                    headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
-                })
-                    .then(() => {
-                        resolve()
-                    })
-                    .catch(() => {
-                        reject()
-                    })
-                    .finally(() => {
-                        commit('global/setLoading', false, { root: true })
-                    })
-            })
-        },
-        confirmEmail: ({ commit }, payload) => {
-            return new Promise((resolve, reject) => {
-                commit('global/setLoading', true, { root: true })
-                axios({
-                    method: 'post',
-                    url: 'users/confirmEmail',
-                    data: { userId: payload.userId, token: payload.token },
-                })
-                    .then(() => {
-                        resolve()
-                    })
-                    .catch(() => {
-                        reject()
-                    })
-                    .finally(() => {
-                        commit('global/setLoading', false, { root: true })
-                    })
-            })
-        },
-        regenerateConfirmationEmail: ({ commit }, email) => {
-            return new Promise((resolve, reject) => {
-                commit('global/setLoading', true, { root: true })
-                axios({
-                    method: 'post',
-                    url: 'users/generateConfirmationEmail',
-                    data: { email },
                 })
                     .then(() => {
                         resolve()

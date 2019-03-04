@@ -17,12 +17,6 @@
                 <p v-if="accountEnabled" class="text-success text-center">Account has been enabled</p>
                 <p v-if="accountDisabledError" class="text-danger text-center">Failed to disable user</p>
 
-                <p v-if="emailSent" class="text-success text-center">Email has been sent</p>
-                <p v-if="emailNotSent" class="text-danger text-center">Email cannot be sent</p>
-
-                <p v-if="emailedConfirmed" class="text-success text-center">Email has been confirmed</p>
-                <p v-if="emailedConfirmedError" class="text-danger text-center">Email cannot be confirmed</p>
-
                 <p v-if="deleteUserError" class="text-danger text-center">Failed to delete user</p>
             </div>
         </div>
@@ -31,13 +25,6 @@
                 <div class="col-12">
                     <ul>
                         <li><span class="item" v-if="user.dateJoined">Date Joined: {{ user.dateJoined.substr(0, 10) }}</span></li>
-                        <li>
-                            <span class="item" v-if="user.emailConfirmed">Email Confirmed</span>
-                            <span class="item" v-else>
-                                <button class="btn bg-blue fade-on-hover" @click="sendConfirmationEmail(user.email)">Send Confirmation Email</button>
-                                <button class="btn bg-blue fade-on-hover" @click="forceEmailConfirmaiton(user.id)">Force Email Confirmation</button>
-                            </span>
-                        </li>
                         <li class="pt-3">
                             <h3>User Claims:</h3>
                             <span v-if="claims.length > 0">
@@ -93,10 +80,6 @@ export default {
             accountDisabledError: false,
             accountEnabled: false,
             accountEnabledError: false,
-            emailSent: false,
-            emailNotSent: false,
-            emailedConfirmed: false,
-            emailedConfirmedError: false,
             deleteUserError: false,
         }
     },
@@ -132,38 +115,6 @@ export default {
                 })
                 .catch(() => {
                     this.promotedToAdministratorError = true
-                })
-        },
-        sendConfirmationEmail(email) {
-            this.$store.dispatch("users/regenerateConfirmationEmail", email)
-                .then(() => {
-                    this.user.accountEnabled = true
-                    this.emailSent = true
-                })
-                .catch(() => {
-                    this.emailNotSent = true
-                })
-                .finally(() => {
-                    setTimeout(() => {
-                        this.emailSent = false 
-                        this.emailNotSent = false
-                    }, 3000)
-                })
-        },
-        forceEmailConfirmaiton(userId) {
-            this.$store.dispatch("users/forceEmailConfirmation", userId)
-                .then(() => {
-                    this.user.emailConfirmed = true
-                    this.emailedConfirmed = true
-                })
-                .catch(() => {
-                    this.emailedConfirmedError = true
-                })
-                .finally(() => {
-                    setTimeout(() => {
-                        this.emailedConfirmed = false 
-                        this.emailedConfirmedError = false
-                    }, 3000)
                 })
         },
         enableAccount(userId) {

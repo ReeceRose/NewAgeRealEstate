@@ -16,14 +16,12 @@ const DetailedUserDashboard = () => import('@/views/Dashboard/Users/DetailedUser
 
 // USER
 const UserIndex = () => import('@/views/Home/User/Index.vue')
-const LoginIndex  = () => import('@/views/Home/User/Login/Index.vue')
+const Login  = () => import('@/views/Home/User/Login.vue')
 
 const AccessDenied = () => import('@/views/Home/AccessDenied.vue')
 const SessionExpired = () => import('@/views/Home/SessionExpired.vue')
 
 const ResetPassword = () => import('@/views/Home/User/ResetPassword.vue')
-const ConfirmEmail = () => import('@/views/Home/User/ConfirmEmail.vue')
-const RegenerateConfirmationEmail = () => import('@/views/Home/User/RegenerateConfirmationEmail.vue')
 
 Vue.use(Router)
 
@@ -100,25 +98,13 @@ const router = new Router({
                 {
                     path: 'Login/:redirect?',
                     name: 'login',
-                    component: LoginIndex,
+                    component: Login,
                     ...NotLoggedIn,
                 },
                 {
                     path: 'ResetPassword',
                     name: 'resetPassword',
                     component: ResetPassword
-                },
-                {
-                    path: 'ConfirmEmail',
-                    name: 'confirmEmail',
-                    component: ConfirmEmail,
-                    ...NotLoggedIn
-                },
-                {
-                    path: 'RegenerateConfirmationEmail',
-                    name: 'regenerateConfirmationEmail',
-                    component: RegenerateConfirmationEmail,
-                    ...NotLoggedIn
                 },
             ]
         },
