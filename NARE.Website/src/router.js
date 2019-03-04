@@ -4,23 +4,22 @@ import store from '@/store/store.js'
 import utilities from '@/utilities.js'
 
 // Lazy load all imports
-const Home = () => import('@/views/Home/Index.vue')
 const About = () => import('@/views/Home/About.vue')
-const Listings = () => import('@/views/Home/Listings.vue')
+const AccessDenied = () => import('@/views/Home/AccessDenied.vue')
+const Agent = () => import('@/views/Home/Agent.vue')
+const Home = () => import('@/views/Home/Index.vue')
 const Listing = () => import('@/views/Home/Listing.vue')
+const Listings = () => import('@/views/Home/Listings.vue')
+const SessionExpired = () => import('@/views/Home/SessionExpired.vue')
 
 // Dashboard
 const Dashboard = () => import('@/views/Dashboard/Index.vue')
 const UserDashboard = () => import('@/views/Dashboard/Users/Index.vue')
 const DetailedUserDashboard = () => import('@/views/Dashboard/Users/DetailedUser.vue')
 
-// USER
+// User
 const UserIndex = () => import('@/views/Home/User/Index.vue')
 const Login  = () => import('@/views/Home/User/Login.vue')
-
-const AccessDenied = () => import('@/views/Home/AccessDenied.vue')
-const SessionExpired = () => import('@/views/Home/SessionExpired.vue')
-
 const ResetPassword = () => import('@/views/Home/User/ResetPassword.vue')
 
 Vue.use(Router)
@@ -80,9 +79,14 @@ const router = new Router({
             component: About
         },
         {
-            path: '/Listings',
-            name: 'listings',
-            component: Listings
+            path: '/AccessDenied',
+            name: 'accessDenied',
+            component: AccessDenied
+        },
+        {
+            path: '/Agent/:id',
+            name: 'agent',
+            component: Agent
         },
         {
             path: '/Listing/:id',
@@ -91,22 +95,14 @@ const router = new Router({
             props: true
         },
         {
-            path: '/User',
-            name: 'user',
-            component: UserIndex,
-            children: [
-                {
-                    path: 'Login/:redirect?',
-                    name: 'login',
-                    component: Login,
-                    ...NotLoggedIn,
-                },
-                {
-                    path: 'ResetPassword',
-                    name: 'resetPassword',
-                    component: ResetPassword
-                },
-            ]
+            path: '/Listings',
+            name: 'listings',
+            component: Listings
+        },
+        {
+            path: '/SessionExpired',
+            name: 'sessionExpired',
+            component: SessionExpired
         },
         {
             path: '/Dashboard',
@@ -129,14 +125,22 @@ const router = new Router({
             ]
         },
         {
-            path: '/AccessDenied',
-            name: 'accessDenied',
-            component: AccessDenied
-        },
-        {
-            path: '/SessionExpired',
-            name: 'sessionExpired',
-            component: SessionExpired
+            path: '/User',
+            name: 'user',
+            component: UserIndex,
+            children: [
+                {
+                    path: 'Login/:redirect?',
+                    name: 'login',
+                    component: Login,
+                    ...NotLoggedIn,
+                },
+                {
+                    path: 'ResetPassword',
+                    name: 'resetPassword',
+                    component: ResetPassword
+                },
+            ]
         },
         {
             path: '*',

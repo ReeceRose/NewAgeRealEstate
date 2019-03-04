@@ -20,7 +20,7 @@
                 <hr>
                 <div class="row pb-2">
                     <div class="col text-center">
-                        <router-link :to="{ name: 'home' }"><i class="fas fa-user"></i> {{ post.agent }}</router-link>
+                        <router-link :to="{ name: 'agent', params: { id: post.agent.id } }"><i class="fas fa-user"></i> {{ post.agent.name }}</router-link>
                     </div>
                 </div>
                 <div class="row pb-2">

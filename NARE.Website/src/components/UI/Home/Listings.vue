@@ -32,7 +32,13 @@ export default {
                     bedrooms: '4',
                     bathrooms: '2.5',
                     price: '15000',
-                    agent: 'Test Agent',
+                    agent: {
+                        id: '456',
+                        name: 'Jane Doe',
+                        picture: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+                        telephone: '111-222-3333',
+                        email: 'nare@reecerose.com'
+                    },
                     listingDate: '01/01/2019',
                     imageUrl: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
                 },
@@ -47,7 +53,13 @@ export default {
                     bedrooms: '4',
                     bathrooms: '2.5',
                     price: '15000',
-                    agent: 'Test Agent',
+                    agent: {
+                        id: '123',
+                        name: 'Jane Doe',
+                        picture: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+                        telephone: '111-222-3333',
+                        email: 'nare@reecerose.com'
+                    },
                     listingDate: '01/01/2019',
                     imageUrl: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
                 },

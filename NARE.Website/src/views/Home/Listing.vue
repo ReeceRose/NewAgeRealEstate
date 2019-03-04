@@ -78,7 +78,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col"><p><i class="fas fa-user"></i> Realtor:</p></div>
-                                <div class="col text-right">{{ post.agent.name }}</div>
+                                <div class="col text-right"><router-link :to="{ name: 'agent', params: { id: post.agent.id } }"><i class="fas fa-user"></i> {{ post.agent.name }}</router-link></div>
                             </div>
                             <hr>
                         </div>
@@ -94,7 +94,7 @@
             <div class="col-lg-3 col-md-4 col-sm-12 pb-3">
                 <div class="agent border-main text-center">
                     <img class="img-fluid" :src="post.agent.picture" :alt="post.agent.name">
-                    <p class="agent-name">{{ post.agent.name }}</p>
+                    <p class="agent-name"><router-link :to="{ name: 'agent', params: { id: post.agent.id } }"><i class="fas fa-user"></i> {{ post.agent.name }}</router-link></p>
                     <p>Inquire here</p>
                     <hr>
                     <p><a :href="`tel:${post.agent.telephone}`"><i class="fas fa-phone"></i> {{ post.agent.telephone }}</a></p>
@@ -158,6 +158,7 @@ export default {
                     price: '1115000',
                     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dapibus scelerisque congue. Nullam aliquet efficitur rutrum. Praesent ac justo dictum, vehicula quam sed, vestibulum nunc. Curabitur fringilla tempor lacus sit amet pellentesque. Ut elit sem, scelerisque ac lectus at, congue bibendum arcu. Curabitur scelerisque non diam et volutpat. Aenean finibus egestas sapien, in vehicula est maximus pretium. Sed id nisi orci. Vivamus ut commodo lacus. Proin a arcu vel nulla fermentum pretium. ',
                     agent: {
+                        id: '456',
                         name: 'Jane Doe',
                         picture: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
                         telephone: '111-222-3333',
