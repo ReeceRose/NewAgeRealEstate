@@ -38,18 +38,18 @@
                             </span>
                         </li>
                         <li class="pt-3">
-                            <span class="item" v-if="isAdministrator"><button class="btn bg-blue fade-on-hover" @click="revokeAdministrator(agent.id)">Revoke administrator</button></span>
-                            <span v-else><button class="btn bg-blue fade-on-hover" @click="makeAdministrator(agent.id)">Make administrator</button></span>
+                            <span class="item" v-if="isAdministrator"><button class="btn btn-main bg-blue fade-on-hover" @click="revokeAdministrator(agent.id)">Revoke administrator</button></span>
+                            <span v-else><button class="btn btn-main bg-blue fade-on-hover" @click="makeAdministrator(agent.id)">Make administrator</button></span>
                         </li>
                         <li>
-                            <span class="item" v-if="agent.accountEnabled"><button class="btn bg-blue fade-on-hover" @click="disableAccount(agent.id)">Disable Account</button></span>
-                            <span class="item" v-else><button class="btn bg-blue fade-on-hover" @click="enableAccount(agent.id)">Enable Account</button></span>
+                            <span class="item" v-if="agent.accountEnabled"><button class="btn btn-main bg-blue fade-on-hover" @click="disableAccount(agent.id)">Disable Account</button></span>
+                            <span class="item" v-else><button class="btn btn-main bg-blue fade-on-hover" @click="enableAccount(agent.id)">Enable Account</button></span>
                         </li>
                         <li>
-                            <span class="item"><button class="btn bg-blue fade-on-hover" @click="deleteAgent(agent.id)">Delete Agent</button></span>
+                            <span class="item"><button class="btn btn-main bg-blue fade-on-hover" @click="deleteAgent(agent.id)">Delete Agent</button></span>
                         </li>
                         <li class="pt-3">
-                            <button class="btn bg-blue fade-on-hover" @click="previous">Return <i class="fas fa-undo"></i></button>
+                            <button class="btn btn-main bg-blue fade-on-hover" @click="previous">Return <i class="fas fa-undo"></i></button>
                         </li>
                     </ul>
                 </div>

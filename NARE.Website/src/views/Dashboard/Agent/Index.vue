@@ -3,7 +3,6 @@
         <h2 class="text-center">Agents</h2 >
 
         <SearchBar class="col-12" :submit="searchEmail"/>
-
         <div class="text-right col-1 offset-11">
             <i class="fas fa-sync-alt pointer" @click="getAllAgents"></i>
         </div>
@@ -17,7 +16,6 @@
                 <tr>
                     <th class="header">Email</th>
                     <th class="">Date Joined</th>
-                    <th class="">Email Confirmed</th>
                     <th class="header">Account Enabled</th>
                     <th class="header">Management</th>
                 </tr>
@@ -27,7 +25,7 @@
                     <td>{{ agent.email }}</td>
                     <td>{{ agent.dateJoined.substr(0, 10) }}</td>
                     <td class="upper">{{ agent.accountEnabled }}</td>
-                    <td><button class="btn bg-blue fade-on-hover" @click="viewDetailedAgent(agent.id)">Edit</button></td>
+                    <td><button class="btn btn-main bg-blue fade-on-hover" @click="viewDetailedAgent(agent.id)">Edit</button></td>
                 </tr>
             </tbody>
         </table>
@@ -46,6 +44,9 @@
             </li>
             <li class="page-item" :class="c == pageCount || c == 1 ? 'disabled' : ''">
                 <span class="page-link" @click="setPage(c+1)">Next</span>
+            </li>
+            <li class="page-item ml-auto">
+                <router-link :to="{ name: 'newAgent' }" class="btn btn-main bg-blue fade-on-hover">New Agent</router-link>
             </li>
         </ul>
     </div>
@@ -93,7 +94,7 @@ export default {
                 })
         },
         viewDetailedAgent(id) {
-            this.$router.push({ name: 'detailedAgentDashboard', params: { id: id } })
+            this.$router.push({ name: 'agentDetails', params: { id: id } })
         },
         getAllAgents() {
             this.$store.dispatch("agents/agents", { currentPage: this.currentPage, pageSize: 10})
