@@ -41,16 +41,6 @@ export default {
 
 <style lang="scss">
 .custom-form {
-    width: 100%;
-
-    .btn {
-        font-size: 80%;
-        border-radius: 5rem;
-        letter-spacing: .1rem;
-        font-weight: bold;
-        padding: 1rem;
-        transition: all 0.2s;
-    }
 
     .form-label-group {
         position: relative;

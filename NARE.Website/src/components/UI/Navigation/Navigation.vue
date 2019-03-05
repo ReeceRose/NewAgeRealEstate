@@ -1,27 +1,34 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <router-link :to="{ name: 'home' }" class="navbar-brand">New Age Real Estate</router-link>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigationBar" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse text-center" id="navigationBar">
-                <ul class="navbar-nav ml-auto">
+    <nav class="navbar navbar-expand-lg navbar-light bg-blue">
+        <div class="container">
+            <router-link :to="{ name: 'home' }" class="navbar-brand fade-on-hover">New Age Real Estate</router-link>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigationBar" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-center" id="navigationBar">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <router-link :to="{ name: 'home' }" class="btn btn-outline-primary">Home</router-link>
+                        <router-link :to="{ name: 'home' }" class="btn text-white fade-on-hover">Home</router-link>
                     </li>
-                    <li class="nav-item" v-if="!loggedIn">
-                        <router-link :to="{ name: 'login' }" class="btn btn-outline-primary">Login</router-link>
+                    <li class="nav-item">
+                        <router-link :to="{ name: 'about' }" class="btn text-white fade-on-hover">About</router-link>
                     </li>
-                    <li class="nav-item" v-if="!loggedIn">
-                        <router-link :to="{ name: 'register' }" class="btn btn-outline-primary">Register</router-link>
-                    </li>
-                    <li class="nav-item" v-if="loggedIn">
-                        <button class="btn btn-outline-primary" @click="logout">Logout</button>
-                    </li>
-                    <li class="nav-item" v-if="loggedIn && isAdmin">
-                        <router-link :to="{ name: 'dashboard' }" class="btn btn-outline-primary">Dashboard</router-link>
+                    <li class="nav-item">
+                        <router-link :to="{ name: 'listings' }" class="btn text-white fade-on-hover">Listings</router-link>
                     </li>
                 </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" v-if="loggedIn">
+                        <span class="btn text-white fade-on-hover" @click="$router.push({ name: 'dashboard' })"><i class="fas text-white fa-edit"></i> Dashboard</span>
+                    </li>
+                    <li class="nav-item" v-if="loggedIn">
+                        <span class="btn text-white fade-on-hover" @click="logout"><i class="fas text-white fa-sign-out-alt"></i> Logout</span>
+                    </li>
+                    <li class="nav-item" v-else>
+                        <router-link :to="{ name: 'login' }" class="btn text-white fade-on-hover"><i class="fas text-white fa-sign-in-alt"></i> Login</router-link>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 </template>
@@ -37,18 +44,12 @@ export default {
     computed: {
         loggedIn() {
             return this.$store.getters['global/getToken']
-        },
-        isAdmin() {
-            return this.$store.getters['authentication/isAdmin']
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.btn {
-    width: 125px;
-}
 .nav-item {
     padding: 5px;
 }

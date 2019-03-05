@@ -175,7 +175,7 @@ namespace NARE.API
                     {
                         context.Database.Migrate();
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         // Database is already migrated. No issues here
                     }

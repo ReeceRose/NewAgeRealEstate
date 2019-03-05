@@ -5,7 +5,7 @@
             <p v-if="error" class="text-danger text-center mb-3">{{ errorMessage }}</p>
 		</div>
 
-		<div slot="card-content">
+		<div slot="card-content" class="text-center">
 			<FormEmail v-model="email" :validator="$v.email"/>
 			<FormPassword v-model="password" :validator="$v.password"/>
 			
@@ -13,7 +13,7 @@
 				<router-link :to="{ name: 'resetPassword' }">Forgot your password?</router-link>
 			</div>
 
-			<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
+			<button class="btn btn-main btn-lg bg-blue fade-on-hover btn-block text-uppercase" type="submit">Login</button>
 		</div>
 	</FormNarrowCard>
 	<div v-else>
@@ -73,9 +73,6 @@ export default {
 				})
 				.catch((error) => {
 					if (error.response) {
-						if (String(error.response.data.error[0]).toLowerCase().includes("email not confirmed")) {
-							this.$router.push({ name: "confirmEmail" })
-						}
 						this.errorMessage = error.response.data.error[0]
 					}
 					this.error = true

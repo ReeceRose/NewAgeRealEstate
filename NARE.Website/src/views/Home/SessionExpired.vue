@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="text-danger">Session Expired</h1>
         <p class="text-center">
             Your session has expired. <router-link :to=" {name: 'login' }">Login here</router-link>            

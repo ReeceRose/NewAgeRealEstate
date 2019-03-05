@@ -23,7 +23,7 @@
                     :validator="$v.confirmationPassword"
                 />
             </div>
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Reset Password</button>
+            <button class="btn btn-main btn-lg bg-blue fade-on-hover btn-block text-uppercase" type="submit">Reset Password</button>
         </div>
     </FormNarrowCard>
 </template>
@@ -77,7 +77,7 @@ export default {
                         return
                     }
                     this.$store
-                        .dispatch("users/resetPassword", {
+                        .dispatch("agents/resetPassword", {
                             token: this.token,
                             email: this.email,
                             password: this.password
@@ -96,7 +96,7 @@ export default {
                     return
                 }
                     this.$store
-                        .dispatch("usersgenerateResetPasswordEmail", {
+                        .dispatch("agents/generateResetPasswordEmail", {
                             email: this.email
                         })
                         .then(() => {
