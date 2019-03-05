@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <a @click="$router.go(-1)" class="btn btn-link"><i class="fas fa-arrow-left"></i> Back</a>
         <WideCard :title="agent.name">
             <div slot="card-content">
                 <div class="agent text-center">

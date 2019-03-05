@@ -14,6 +14,7 @@
                     <div class="form-group">
                         <label for="bedrooms">Bedrooms: </label>
                         <select class="form-control" id="bedrooms" v-model="bedrooms">
+                            <option value="0">0</option>
                             <option value="1" selected>1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -35,6 +36,7 @@
                     <div class="form-group">
                         <label for="bathrooms">Bathrooms: </label>
                         <select class="form-control" id="bathrooms" v-model="bathrooms">
+                            <option value="0">0</option>
                             <option value="1" selected>1</option>
                             <option value="1.5">1.5</option>
                             <option value="2">2</option>
@@ -68,7 +70,7 @@ export default {
     },
     methods: {
         search() {
-            
+
         }
     }
 }

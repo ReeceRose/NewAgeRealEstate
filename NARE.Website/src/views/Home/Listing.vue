@@ -1,6 +1,6 @@
 <template>
     <div class="container pt-5 pb-5">
-        <router-link :to="{ name: 'listings' }" class="text-uppercase"><i class="fas fa-arrow-left"></i> Back to listings</router-link>
+        <a @click="$router.go(-1)" class="btn btn-link"><i class="fas fa-arrow-left"></i> Back</a>
         <div class="row pt-3">
             <div class="col-lg-9 col-md-8 col-sm-12 pb-3">
                 <div class="property border-main">
