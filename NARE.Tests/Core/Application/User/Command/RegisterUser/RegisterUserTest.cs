@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using NARE.Application.User.Command.CreateUser;
 using NARE.Application.User.Command.RegisterUser;
-using NARE.Application.User.Query.GenerateEmailConfirmation.Email;
 using NARE.Application.User.Query.GetUserByEmail;
 using NARE.Application.Utilities;
 using NARE.Domain.Entities;
@@ -43,9 +42,7 @@ namespace NARE.Tests.Core.Application.User.Command.RegisterUser
         {
             // Arrange
             Mediator.Setup(m => m.Send(It.IsAny<GetUserByEmailQuery>(), default(CancellationToken))).ReturnsAsync((ApplicationUser) null);
-            Mediator.Setup(m => m.Send(It.IsAny<GenerateEmailConfirmationEmailQuery>(), default(CancellationToken))).ReturnsAsync(It.IsAny<string>());
             Mediator.Setup(m => m.Send(It.IsAny<CreateUserCommand>(), default(CancellationToken))).ReturnsAsync(IdentityResult.Success);
-            Mediator.Setup(m => m.Send(It.IsAny<GenerateEmailConfirmationEmailQuery>(), default(CancellationToken))).ReturnsAsync("123");
             // Act
             var result = Handler.Handle(new RegisterUserCommand(email, password), CancellationToken.None).Result;
             // Assert

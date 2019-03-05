@@ -20,21 +20,5 @@ namespace NARE.Tests.Helpers
                 new Mock<IServiceProvider>().Object,
                 new Mock<ILogger<UserManager<ApplicationUser>>>().Object)
         { }
-
-        //public override Task<IdentityResult> CreateAsync(ApplicationUser user, string password)
-        //{
-        //    return Task.FromResult(IdentityResult.Success);
-        //}
-
-        //public override Task<IdentityResult> AddToRoleAsync(ApplicationUser user, string role)
-        //{
-        //    return Task.FromResult(IdentityResult.Success);
-        //}
-
-        //public override Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user)
-        //{
-        //    return Task.FromResult(Guid.NewGuid().ToString());
-        //}
-
     }
 }

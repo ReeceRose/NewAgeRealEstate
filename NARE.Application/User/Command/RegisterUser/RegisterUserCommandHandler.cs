@@ -5,7 +5,6 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using NARE.Application.User.Command.CreateUser;
 using NARE.Application.User.Model;
-using NARE.Application.User.Query.GenerateEmailConfirmation.Email;
 using NARE.Application.User.Query.GetUserByEmail;
 using NARE.Domain.Exceptions;
 
@@ -46,8 +45,6 @@ namespace NARE.Application.User.Command.RegisterUser
                 _logger.LogInformation($"Register User: {email}: Registration failed: {result.Errors}");
                 throw new InvalidRegisterException();
             }
-
-            await _mediator.Send(new GenerateEmailConfirmationEmailQuery(email), cancellationToken);
 
             _logger.LogInformation($"Register User: {email}: Registration successful");
             return await Task.FromResult(result.Succeeded);

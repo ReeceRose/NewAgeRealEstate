@@ -7,7 +7,6 @@ namespace NARE.Application.User.Model
         public string Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public bool EmailConfirmed { get; set; }
         public bool AccountEnabled { get; set; }
         public DateTime DateJoined { get; set; }
     }

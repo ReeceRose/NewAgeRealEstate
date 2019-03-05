@@ -53,11 +53,6 @@ namespace NARE.Application.User.Query.LoginUser
 
             if (!(result.Succeeded))
             {
-                if (!(await _userManager.IsEmailConfirmedAsync(user)))
-                {
-                    _logger.LogInformation($"LoginUser: {request.Email}: Failed login: Email not confirmed");
-                    throw new EmailNotConfirmedException();
-                }
                 _logger.LogInformation($"LoginUser: {request.Email}: Failed login: Invalid credentials");
                 throw new InvalidCredentialException();
             }

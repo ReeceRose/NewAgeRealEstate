@@ -74,7 +74,6 @@ namespace NARE.Tests.Core.Application.User.Query.LoginUser
             SignInManager
                 .Setup(s => s.CheckPasswordSignInAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<bool>()))
                 .ReturnsAsync(SignInResult.Failed);
-            UserManager.Setup(u => u.IsEmailConfirmedAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(true);
             // Act / Assert
             await Assert.ThrowsAsync<InvalidCredentialException>(() =>
                 Handler.Handle(new LoginUserQuery(email, password), CancellationToken.None));
@@ -110,26 +109,6 @@ namespace NARE.Tests.Core.Application.User.Query.LoginUser
             await Assert.ThrowsAsync<AccountLockedException>(() =>
                 Handler.Handle(new LoginUserQuery(email, password), CancellationToken.None));
         }
-        [Theory]
-        [InlineData("test@test.ca", "Test123!")]
-        [InlineData("user@domain.com", "Password!1f4")]
-        public async Task LoginUser_ThrowsEmailNotConfirmedException(string email, string password)
-        {
-            // Arrange
-            var requestedUser = new ApplicationUser()
-            {
-                Email = email,
-                AccountEnabled = true
-            };
-            Mediator.Setup(m => m.Send(It.IsAny<GetUserByEmailQuery>(), default(CancellationToken)))
-                .ReturnsAsync(requestedUser);
-            SignInManager
-                .Setup(s => s.CheckPasswordSignInAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<bool>()))
-                .ReturnsAsync(SignInResult.Failed);
-            UserManager.Setup(u => u.IsEmailConfirmedAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(false);
-            // Act / Assert
-            await Assert.ThrowsAsync<EmailNotConfirmedException>(() =>
-                Handler.Handle(new LoginUserQuery(email, password), CancellationToken.None));
-        }
+    
     }
 }

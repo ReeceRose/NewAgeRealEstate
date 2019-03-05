@@ -26,7 +26,6 @@
                 <tr v-for="agent in agents" :key="agent.id" @click="viewDetailedAgent(agent.id)" class="pointer">
                     <td>{{ agent.email }}</td>
                     <td>{{ agent.dateJoined.substr(0, 10) }}</td>
-                    <td class="upper">{{ agent.emailConfirmed }}</td>
                     <td class="upper">{{ agent.accountEnabled }}</td>
                     <td><button class="btn bg-blue fade-on-hover" @click="viewDetailedAgent(agent.id)">Edit</button></td>
                 </tr>
