@@ -15,7 +15,7 @@ namespace NARE.Tests.Context
 
             var context = new ApplicationDbContext(options);
             context.Database.EnsureCreated();
-            context.Users.Add(new ApplicationUser() { Email = "test@test.ca", Id = "123", UserName = "test-user" });
+            context.Users.Add(new Agent() { Email = "test@test.ca", Id = "123", UserName = "test-user" });
             context.SaveChanges();
             return context;
         }

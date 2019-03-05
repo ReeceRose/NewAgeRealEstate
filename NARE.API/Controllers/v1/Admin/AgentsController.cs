@@ -2,19 +2,19 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NARE.Application.User.Command.AddUserClaim;
-using NARE.Application.User.Command.DisableUser;
-using NARE.Application.User.Command.EnableUser;
-using NARE.Application.User.Command.RemoveUser;
-using NARE.Application.User.Command.RemoveUserClaim;
-using NARE.Application.User.Command.ResetPassword;
-using NARE.Application.User.Query.GenerateResetPassword.Email;
-using NARE.Application.User.Query.GetAllUsersPaginated;
-using NARE.Application.User.Query.GetAUserById;
-using NARE.Application.User.Query.GetUserById;
-using NARE.Application.User.Query.GetUserClaim;
-using NARE.Application.User.Query.GetUserCount;
-using NARE.Application.User.Query.SearchUsersByEmail;
+using NARE.Application.Agent.Command.AddAgentClaim;
+using NARE.Application.Agent.Command.DisableAgent;
+using NARE.Application.Agent.Command.EnableAgent;
+using NARE.Application.Agent.Command.RemoveAgent;
+using NARE.Application.Agent.Command.RemoveAgentClaim;
+using NARE.Application.Agent.Command.ResetPassword;
+using NARE.Application.Agent.Query.GenerateResetPassword.Email;
+using NARE.Application.Agent.Query.GetAgentById;
+using NARE.Application.Agent.Query.GetAgentClaim;
+using NARE.Application.Agent.Query.GetAgentCount;
+using NARE.Application.Agent.Query.GetAgentDtoById;
+using NARE.Application.Agent.Query.GetAllAgentsPaginated;
+using NARE.Application.Agent.Query.SearchAgentsByEmail;
 using NARE.Domain.Entities;
 
 namespace NARE.API.Controllers.v1.Admin
@@ -34,46 +34,46 @@ namespace NARE.API.Controllers.v1.Admin
 
         [HttpPost]
         [Authorize(Policy = "AdministratorOnly")]
-        public async Task<IActionResult> PostAllUsersAsync([FromBody] PaginationModel model) => Ok(new { result = await _mediator.Send(new GetAllUsersPaginatedQuery(model)) });
+        public async Task<IActionResult> PostAllAgentsAsync([FromBody] PaginationModel model) => Ok(new { result = await _mediator.Send(new GetAllAgentsPaginatedQuery(model)) });
 
 
         [HttpGet("Count")]
         [Authorize(Policy = "AdministratorOnly")]
-        public async Task<IActionResult> GetUserCountAsync() => Ok(new { result = await _mediator.Send(new GetUserCountQuery()) });
+        public async Task<IActionResult> GetAgentCountAsync() => Ok(new { result = await _mediator.Send(new GetAgentCountQuery()) });
 
-        // User specific actions
+        // Agent specific actions
 
-        [HttpGet("{UserId}/Details")]
+        [HttpGet("{AgentId}/Details")]
         [Authorize(Policy = "AdministratorOnly")]
-        public async Task<IActionResult> GetUserDetailsByIdAsync(string userId)
+        public async Task<IActionResult> GetAgentDetailsByIdAsync(string agentId)
         {
-            var user = await _mediator.Send(new GetAUserByIdQuery(userId));
-            return Ok(new { result = new { user, claims = await _mediator.Send(new GetUserClaimQuery(user)) }});
+            var agent = await _mediator.Send(new GetAgentDtoByIdQuery(agentId));
+            return Ok(new { result = new { agent, claims = await _mediator.Send(new GetAgentClaimQuery(agent)) }});
         }
 
         [HttpGet("Search/{Email}")]
         [Authorize(Policy = "AdministratorOnly")]
-        public async Task<IActionResult> GetUsersDetailsByEmailAsync(string email) => Ok(new { result = await _mediator.Send(new SearchUsersByEmailQuery(email)) });
+        public async Task<IActionResult> GetAgentsDetailsByEmailAsync(string email) => Ok(new { result = await _mediator.Send(new SearchAgentsByEmailQuery(email)) });
 
-        [HttpGet("{UserId}/Enable")]
+        [HttpGet("{AgentId}/Enable")]
         [Authorize(Policy = "AdministratorOnly")]
-        public async Task<IActionResult> GetEnableAUserByIdAsync(string userId) => Ok(new { result = await _mediator.Send(new EnableUserCommand(userId)) });
+        public async Task<IActionResult> GetEnableAAgentByIdAsync(string agentId) => Ok(new { result = await _mediator.Send(new EnableAgentCommand(agentId)) });
 
-        [HttpGet("{UserId}/Disable")]
+        [HttpGet("{AgentId}/Disable")]
         [Authorize(Policy = "AdministratorOnly")]
-        public async Task<IActionResult> GetDisableAUserByIdAsync(string userId) => Ok(new { result = await _mediator.Send(new DisableUserCommand(userId)) });
+        public async Task<IActionResult> GetDisableAAgentByIdAsync(string agentId) => Ok(new { result = await _mediator.Send(new DisableAgentCommand(agentId)) });
 
-        [HttpGet("{UserId}/Delete")]
+        [HttpGet("{AgentId}/Delete")]
         [Authorize(Policy = "AdministratorOnly")]
-        public async Task<IActionResult> GetRemoveUserAsync(string userId) => Ok(new { result = await _mediator.Send(new RemoveUserCommand(userId)) });
+        public async Task<IActionResult> GetRemoveAgentAsync(string agentId) => Ok(new { result = await _mediator.Send(new RemoveAgentCommand(agentId)) });
 
-        [HttpPost("{UserId}/AddClaim/{Claim}")]
+        [HttpPost("{AgentId}/AddClaim/{Claim}")]
         [Authorize(Policy = "AdministratorOnly")]
-        public async Task<IActionResult> PostAddClaimAsync(string userId, string claim) => Ok( new { result = await _mediator.Send(new AddUserClaimCommand(await _mediator.Send(new GetUserByIdQuery(userId)), claim, "")) });
+        public async Task<IActionResult> PostAddClaimAsync(string agentId, string claim) => Ok( new { result = await _mediator.Send(new AddAgentClaimCommand(await _mediator.Send(new GetAgentByIdQuery(agentId)), claim, "")) });
 
-        [HttpPost("{UserId}/RemoveClaim/{Claim}")]
+        [HttpPost("{AgentId}/RemoveClaim/{Claim}")]
         [Authorize(Policy = "AdministratorOnly")]
-        public async Task<IActionResult> PostRemoveClaimAsync(string userId, string claim) => Ok( new { result = await _mediator.Send(new RemoveUserClaimCommand(await _mediator.Send(new GetUserByIdQuery(userId)), claim))} );
+        public async Task<IActionResult> PostRemoveClaimAsync(string agentId, string claim) => Ok( new { result = await _mediator.Send(new RemoveAgentClaimCommand(await _mediator.Send(new GetAgentByIdQuery(agentId)), claim))} );
 
         [HttpPost("GenerateResetPasswordEmail")]
         public async Task<IActionResult> PostGenerateRestResetPasswordEmailAsync([FromBody] GenerateResetPasswordEmailQuery generateResetPasswordEmailQuery) => Ok(new { result = await _mediator.Send(generateResetPasswordEmailQuery) });

@@ -10,7 +10,7 @@ namespace NARE.API.Controllers.v1.Admin
     [ApiController]
     public class AdminController : ControllerBase
     {
-        // If the user is authenticated this will simply just return Ok, if not return an error
+        // If the agent is authenticated this will simply just return Ok, if not return an error
         [HttpGet("Verify")]
         public IActionResult GetVerifyIsAdmin() { return Ok(new { result = true }); }
     }

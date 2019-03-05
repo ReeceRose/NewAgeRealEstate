@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using NARE.Application.User.Command.RegisterUser;
-using NARE.Application.User.Model;
-using NARE.Domain.Entities;
+using NARE.Application.Agent.Model;
 
 namespace NARE.Application.Utilities
 {
@@ -9,11 +7,9 @@ namespace NARE.Application.Utilities
     {
         public MappingProfile()
         {
-            CreateMap<ApplicationUser, ApplicationUserDto>();
+            CreateMap<Domain.Entities.Agent, AgentDto>();
 
-            CreateMap<ApplicationUserDto, ApplicationUser>();
-
-            CreateMap<RegisterUserCommand, ApplicationUserDto>();
+            CreateMap<AgentDto, Domain.Entities.Agent>();
         }
     }
 }

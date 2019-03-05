@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NARE.Application.User.Command.RegisterUser;
-using NARE.Application.User.Query.LoginUser;
+using NARE.Application.Agent.Query.LoginAgent;
 
 namespace NARE.API.Controllers.v1
 {
@@ -17,9 +16,9 @@ namespace NARE.API.Controllers.v1
         public AuthenticationController(IMediator mediator) => _mediator = mediator;
 
         [HttpPost("Login")]
-        public async Task<IActionResult> PostLoginAsync([FromBody] LoginUserQuery loginUserQuery) => Ok(new { token = await _mediator.Send(loginUserQuery) });
+        public async Task<IActionResult> PostLoginAsync([FromBody] LoginAgentQuery loginAgentQuery) => Ok(new { token = await _mediator.Send(loginAgentQuery) });
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> PostRegisterAsync([FromBody] RegisterUserCommand registerUserCommand) => Ok(new { result = await _mediator.Send(registerUserCommand) });
+//        [HttpPost("Register")]
+//        public async Task<IActionResult> PostRegisterAsync([FromBody] RegisterAgentCommand registerAgentCommand) => Ok(new { result = await _mediator.Send(registerAgentCommand) });
     }
 }
