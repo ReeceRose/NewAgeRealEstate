@@ -26,11 +26,11 @@ namespace NARE.API.Controllers.v1.Admin
     [Route("api/v{version:apiVersion}/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class AgentsController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public UsersController(IMediator mediator)
+        public AgentsController(IMediator mediator)
         {
             _mediator = mediator;
         }
