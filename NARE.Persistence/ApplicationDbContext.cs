@@ -5,7 +5,7 @@ using NARE.Domain.Entities;
 
 namespace NARE.Persistence
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<Agent>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -15,7 +15,7 @@ namespace NARE.Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<ApplicationUser>(entity => entity.Property(m => m.Id).HasMaxLength(127));
+            builder.Entity<Agent>(entity => entity.Property(m => m.Id).HasMaxLength(127));
             builder.Entity<IdentityRole>(entity => entity.Property(m => m.Id).HasMaxLength(127));
             builder.Entity<IdentityUserLogin<string>>(entity =>
             {
@@ -33,7 +33,7 @@ namespace NARE.Persistence
                 entity.Property(m => m.LoginProvider).HasMaxLength(127);
                 entity.Property(m => m.Name).HasMaxLength(127);
             });
-            builder.Entity<ApplicationUser>(i =>
+            builder.Entity<Agent>(i =>
             {
                 i.Property(o => o.EmailConfirmed).HasConversion<int>();
                 i.Property(o => o.LockoutEnabled).HasConversion<int>();
@@ -41,7 +41,7 @@ namespace NARE.Persistence
                 i.Property(o => o.TwoFactorEnabled).HasConversion<int>();
                 i.Property(o => o.AccountEnabled).HasConversion<short>();
             });
-            builder.Entity<ApplicationUser>()
+            builder.Entity<Agent>()
                 .Property(b => b.DateJoined)
                 .HasDefaultValueSql("GETDATE()");
         }

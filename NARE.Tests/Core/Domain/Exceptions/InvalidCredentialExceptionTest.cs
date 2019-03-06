@@ -17,7 +17,7 @@ namespace NARE.Tests.Core.Domain.Exceptions
 
         [Theory]
         [InlineData("Invalid login attempt")]
-        [InlineData("Error: No user with these credentials found")]
+        [InlineData("Error: No agent with these credentials found")]
         public void InvalidCredentialException_ReturnsProvidedErrorMessage(string errorMessage)
         {
             // Act

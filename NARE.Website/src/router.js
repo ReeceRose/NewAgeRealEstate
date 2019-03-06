@@ -15,7 +15,8 @@ const SessionExpired = () => import('@/views/Home/SessionExpired.vue')
 // Dashboard
 const Dashboard = () => import('@/views/Dashboard/Index.vue')
 const AgentDashboard = () => import('@/views/Dashboard/Agent/Index.vue')
-const DetailedAgentDashboard = () => import('@/views/Dashboard/Agent/Agent.vue')
+const AgentDetails = () => import('@/views/Dashboard/Agent/Details.vue')
+const NewAgent = () => import('@/views/Dashboard/Agent/NewAgent.vue')
 
 // Agent
 const AgentIndex = () => import('@/views/Home/Agent/Index.vue')
@@ -143,11 +144,16 @@ const router = new Router({
                     ...AdminProtected,
                     children: [
                         {
-                            path: ':id',
-                            name: 'detailedAgentDashboard',
-                            component: DetailedAgentDashboard
-                        }
+                            path: 'Details/:id',
+                            name: 'agentDetails',
+                            component: AgentDetails
+                        },
                     ]
+                },
+                {
+                    path: 'NewAgent',
+                    name: 'newAgent',
+                    component: NewAgent
                 }
             ]
         },

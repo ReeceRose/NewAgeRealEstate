@@ -38,12 +38,12 @@ const authentication = {
             commit("global/removeToken", null, { root: true })
             dispatch("global/updateCookie", null, { root: true })
         },
-        register: ({ commit }, payload) => {
+        create: ({ commit }, payload) => {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
                     method: 'post',
-                    url: 'authentication/register',
+                    url: 'authentication/create',
                     data: { email: payload.email, password: payload.password }
                 })
                     .then(response => {
