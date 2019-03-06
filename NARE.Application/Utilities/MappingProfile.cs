@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using NARE.Application.Agent.Command.NewAgent;
 using NARE.Application.Agent.Model;
 
 namespace NARE.Application.Utilities
@@ -10,6 +11,8 @@ namespace NARE.Application.Utilities
             CreateMap<Domain.Entities.Agent, AgentDto>();
 
             CreateMap<AgentDto, Domain.Entities.Agent>();
+
+            CreateMap<NewAgentCommand, AgentDto>();
         }
     }
 }

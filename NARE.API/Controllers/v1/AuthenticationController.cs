@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NARE.Application.Agent.Command.NewAgent;
 using NARE.Application.Agent.Query.LoginAgent;
 
 namespace NARE.API.Controllers.v1
@@ -18,7 +19,7 @@ namespace NARE.API.Controllers.v1
         [HttpPost("Login")]
         public async Task<IActionResult> PostLoginAsync([FromBody] LoginAgentQuery loginAgentQuery) => Ok(new { token = await _mediator.Send(loginAgentQuery) });
 
-//        [HttpPost("Register")]
-//        public async Task<IActionResult> PostRegisterAsync([FromBody] RegisterAgentCommand registerAgentCommand) => Ok(new { result = await _mediator.Send(registerAgentCommand) });
+        [HttpPost("Create")]
+        public async Task<IActionResult> PostRegisterAsync([FromBody] NewAgentCommand newAgentCommand) => Ok(new { result = await _mediator.Send(newAgentCommand) });
     }
 }
