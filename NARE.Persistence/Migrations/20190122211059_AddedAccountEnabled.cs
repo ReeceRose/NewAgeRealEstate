@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NARE.Persistence.Migrations.Identity
+namespace NARE.Persistence.Migrations
 {
     public partial class AddedAccountEnabled : Migration
     {

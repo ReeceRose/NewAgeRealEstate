@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NARE.Persistence.Migrations.Identity
+namespace NARE.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20190118034910_SetDefaultDateJoined")]

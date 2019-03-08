@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NARE.Persistence.Migrations.Identity
+namespace NARE.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190122211059_AddedAccountEnabled")]
-    partial class AddedAccountEnabled
+    [Migration("20190107215617_AddedIdentity")]
+    partial class AddedIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,21 +25,15 @@ namespace NARE.Persistence.Migrations.Identity
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<bool>("AccountEnabled");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<DateTime>("DateJoined")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
-                    b.Property<int>("EmailConfirmed");
+                    b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int>("LockoutEnabled");
+                    b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
@@ -53,11 +47,11 @@ namespace NARE.Persistence.Migrations.Identity
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<int>("PhoneNumberConfirmed");
+                    b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int>("TwoFactorEnabled");
+                    b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
