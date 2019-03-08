@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace NARE.API.Controllers.v1.Agent
+namespace NARE.API.Controllers.v1
 {
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -15,5 +15,8 @@ namespace NARE.API.Controllers.v1.Agent
         {
             _mediator = mediator;
         }
+
+//        [HttpGet]
+//        public async Task<IActionResult> GetListingByIdAsync([FromBody] Guid id) => Ok(new { result = await _mediator.Send(new GetListingById(id)) });
     }
 }
