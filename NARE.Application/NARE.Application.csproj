@@ -22,7 +22,6 @@
   <ItemGroup>
     <Folder Include="Listing\Command\" />
     <Folder Include="Listing\Model\" />
-    <Folder Include="Listing\Query\" />
   </ItemGroup>
 
 </Project>
