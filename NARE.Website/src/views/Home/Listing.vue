@@ -77,8 +77,8 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col"><p><i class="fas fa-user"></i> Realtor:</p></div>
-                                <div class="col text-right"><router-link :to="{ name: 'agent', params: { id: post.agent.id } }"><i class="fas fa-user"></i> {{ post.agent.name }}</router-link></div>
+                                <div class="col"><p><i class="fas fa-home"></i> Year Built:</p></div>
+                                <div class="col text-right">{{ post.yearBuilt }}</div>
                             </div>
                             <hr>
                         </div>
@@ -156,6 +156,7 @@ export default {
                     bedrooms: '4',
                     bathrooms: '2.5',
                     price: '1115000',
+                    yearBuilt: '2009',
                     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dapibus scelerisque congue. Nullam aliquet efficitur rutrum. Praesent ac justo dictum, vehicula quam sed, vestibulum nunc. Curabitur fringilla tempor lacus sit amet pellentesque. Ut elit sem, scelerisque ac lectus at, congue bibendum arcu. Curabitur scelerisque non diam et volutpat. Aenean finibus egestas sapien, in vehicula est maximus pretium. Sed id nisi orci. Vivamus ut commodo lacus. Proin a arcu vel nulla fermentum pretium. ',
                     agent: {
                         id: '456',
@@ -199,7 +200,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/global.scss"; 
+@import "@/assets/scss/global.scss";
+.property, .details {
+    font-size: 0.95rem;
+}
 .fas {
     color: color(primaryBlue);
 }

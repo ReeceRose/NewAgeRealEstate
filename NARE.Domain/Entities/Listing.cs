@@ -16,6 +16,7 @@ namespace NARE.Domain.Entities
         public double GarageSize { get; set; }
         public int SquareFeet { get; set; }
         public double LotSize { get; set; }
+        public int YearBuilt { get; set; }
         public DateTime ListingDate { get; set; }
         public string Description { get; set; }
         public Agent Agent { get; set; }
