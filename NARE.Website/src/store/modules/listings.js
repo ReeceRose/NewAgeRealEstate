@@ -1,3 +1,5 @@
+import axios from '@/axios.js'
+
 const listings  = {
     namespaced: true,
     state: {
@@ -9,13 +11,32 @@ const listings  = {
     mutations: {
 
     },
-    actions: {
+    actions: {        
+        listingCount: ({ commit, rootGetters }) => {
+        return new Promise((resolve, reject) => {
+            commit('global/setLoading', true, { root: true })
+            axios({
+                method: 'get',
+                url: 'listings/count',
+                headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
+            })
+                .then((response) => {
+                    resolve(response.data.result)
+                })
+                .catch(() => {
+                    reject()
+                })
+                .finally(() => {
+                    commit('global/setLoading', false, { root: true })
+                })
+        })
+    },
         create: ({ commit }, listing) => {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
                     method: 'post',
-                    url: 'listing/create',
+                    url: 'listings/create',
                     data: { listing: listing }
                 })
                     .then(response => {

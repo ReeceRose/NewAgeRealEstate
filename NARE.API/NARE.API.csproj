@@ -33,8 +33,4 @@
     <ProjectReference Include="..\NARE.Persistence\NARE.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\v1\Agent\" />
-  </ItemGroup>
-
 </Project>

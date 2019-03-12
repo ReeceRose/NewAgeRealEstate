@@ -49,7 +49,7 @@
                             <span class="item"><button class="btn btn-main bg-blue fade-on-hover" @click="deleteAgent(agent.id)">Delete Agent</button></span>
                         </li>
                         <li class="pt-3">
-                            <button class="btn btn-main bg-blue fade-on-hover" @click="previous">Return <i class="fas fa-undo"></i></button>
+                            <button class="btn btn-main bg-blue fade-on-hover" @click="$router.go(-1)">Return <i class="fas fa-undo"></i></button>
                         </li>
                     </ul>
                 </div>
@@ -163,9 +163,6 @@ export default {
                     }, 3000)
                 })
         },
-        previous() {
-            this.$router.go(-1)
-        }
     },
     created() {
         this.getAgent(this.$route.params.id)

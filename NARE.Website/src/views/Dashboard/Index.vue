@@ -14,6 +14,14 @@
                         <p>Agent Count: {{ agentCount }}</p>
                     </div>
                 </HeaderCard>
+                <HeaderCard title="Listings" class="text-center" :click="listingClick">
+                    <div slot="card-icon">
+                        <i class="fas fa fa-4x fa-home"></i>
+                    </div>
+                    <div slot="card-content">
+                        <p>Listing Count: {{ listingCount }}</p>
+                    </div>
+                </HeaderCard>
             </div>
         </div>
         <div v-else>
@@ -35,11 +43,15 @@ export default {
     data() {
         return {
             agentCount: 0,
+            listingCount: 0,
         }
     },
     methods: {
         agentClick() {
             this.$router.push({ name: 'agentDashboard' })
+        },
+        listingClick() {
+            this.$router.push({ name: 'listingDashboard' })
         },
         getAgentCount() {
             this.$store.dispatch("agents/agentCount")
@@ -49,10 +61,20 @@ export default {
                 .catch(() => {
                     this.agentCount = 'Failed to load'
                 })
+        },
+        getListingCount() {
+            this.$store.dispatch("listings/listingCount")
+                .then((listingCount) => {
+                    this.listingCount = listingCount;
+                })
+                .catch(() => {
+                    this.listingCount = 'Failed to load'
+                })
         }
     },
     created() {
         this.getAgentCount()
+        this.getListingCount()
     }
 }
 </script>

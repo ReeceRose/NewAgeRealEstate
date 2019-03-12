@@ -1,7 +1,6 @@
 import axios from '@/axios.js'
 import utilities from '@/utilities.js'
-// For reference
-// headers: { Authorization: `Bearer ${getters['uthentication/getToken'] || ''}`}
+
 const authentication = {
     namespaced: true,
     getters: {

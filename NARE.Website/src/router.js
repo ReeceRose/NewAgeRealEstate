@@ -14,9 +14,14 @@ const SessionExpired = () => import('@/views/Home/SessionExpired.vue')
 
 // Dashboard
 const Dashboard = () => import('@/views/Dashboard/Index.vue')
+// Agent - Dashboard
 const AgentDashboard = () => import('@/views/Dashboard/Agent/Index.vue')
 const AgentDetails = () => import('@/views/Dashboard/Agent/Details.vue')
 const NewAgent = () => import('@/views/Dashboard/Agent/NewAgent.vue')
+// Listing - Dashboard
+const ListingDashboard = () => import('@/views/Dashboard/Listing/Index.vue')
+const ListingDetails = () => import('@/views/Dashboard/Listing/Details.vue')
+const NewListing = () => import('@/views/Dashboard/Listing/NewListing.vue')
 
 // Agent
 const AgentIndex = () => import('@/views/Home/Agent/Index.vue')
@@ -147,13 +152,30 @@ const router = new Router({
                             path: 'Details/:id',
                             name: 'agentDetails',
                             component: AgentDetails
-                        },
+                        },                        
+                        {
+                            path: 'NewAgent',
+                            name: 'newAgent',
+                            component: NewAgent
+                        }
                     ]
                 },
                 {
-                    path: 'NewAgent',
-                    name: 'newAgent',
-                    component: NewAgent
+                    path: 'Listing',
+                    name: 'listingDashboard',
+                    component: ListingDashboard,
+                    children: [
+                        {
+                            path: 'Details/:id',
+                            name: 'listingDetails',
+                            component: ListingDetails
+                        },                        
+                        {
+                            path: 'NewListing',
+                            name: 'newListing',
+                            component: NewListing
+                        }
+                    ]
                 }
             ]
         },
