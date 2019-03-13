@@ -2,12 +2,12 @@
     <div class="container">
         <a @click="$router.go(-1)" class="btn btn-link"><i class="fas fa-arrow-left"></i> Back</a>
         <WideCard :title="agent.name">
-            <div slot="card-content">
+            <div slot="card-content" v-if="agent.name">
                 <div class="agent text-center">
-                    <img class="img-fluid" :src="agent.picture" :alt="agent.name">
+                    <img class="img-fluid" :src="agent.imageUrl" :alt="agent.name">
                     <p class="pt-2">Inquire here</p>
                     <hr>
-                    <p><a :href="`tel:${agent.telephone}`"><i class="fas fa-phone"></i> {{ agent.telephone }}</a></p>
+                    <p><a :href="`tel:${agent.phoneNumber}`"><i class="fas fa-phone"></i> {{ agent.phoneNumber }}</a></p>
                     <p><a :href="`mailto:${agent.email}`"><i class="fas fa-envelope"></i> {{ agent.email }}</a></p>
                 </div>
                 <hr>
@@ -25,18 +25,25 @@ export default {
     components: {
         WideCard
     },
+    methods: {
+        loadAgentInformation() {
+            this.$store.dispatch("agents/agentById", this.$route.params.id)
+                .then((data) => {
+                    console.log(JSON.stringify(data.agent))
+                    this.agent = data.agent
+                })
+                .catch(() => {
+                    this.error = true
+                })
+        }
+    },
     data() {
         return {
-            // TODO: Load this from the API
-            agent: {
-                id: '456',
-                name: 'Jane Doe',
-                picture: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-                telephone: '111-222-3333',
-                email: 'nare@reecerose.com',
-                description: 'Short description here'
-            },
+            agent: {},
         }
+    },
+    created() {
+        this.loadAgentInformation()
     }
 }
 </script>

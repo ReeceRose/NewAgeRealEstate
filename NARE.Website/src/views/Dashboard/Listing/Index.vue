@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="listing in listings" :key="listing.id" class="pointer">
+                <tr v-for="listing in listings" :key="listing.id">
                     <td>{{ listing.address }}</td>
                     <td>{{ listing.status }}</td>
                     <td>{{ listing.listingDate.substr(0, 10) }}</td>
@@ -99,12 +99,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-.pointer {
-    cursor: pointer;
-}
-.upper::first-letter {
-    text-transform: capitalize;
-}
-</style>
