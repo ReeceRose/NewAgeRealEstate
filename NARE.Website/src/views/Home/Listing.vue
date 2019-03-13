@@ -6,8 +6,8 @@
                 <div class="property border-main">
                     <img class="img-fluid" :src="listing.mainImageUrl" alt="Main picture">
                     <div class="row p-3">
-                        <div v-for="(picture, index) in listing.pictures" :key="index" class="col-lg-3 col-md-4 col-sm-6 pb-4">
-                            <img :src="picture.src" :alt="picture.title" class="img-fluid rounded" @click="toggleModal(index)">
+                        <div v-for="(image, index) in listing.images" :key="index" class="col-lg-3 col-md-4 col-sm-6 pb-4">
+                            <img :src="image.url" :alt="image.alternative" class="img-fluid rounded" @click="toggleModal(index)">
                         </div>
                         <div class="modal" v-if="displayModal">
                             <div class="modal-header">
@@ -16,8 +16,8 @@
                             <div class="modal-body text-center">
                                 <div class="carousel slide" data-interval="false" data-ride="carousel">
                                     <div class="carousel-inner">
-                                        <div class="carousel-item" v-for="(picture, pictureIndex) in listing.pictures" :key="pictureIndex" :class="pictureIndex == currentImage ? 'active' : ''">                            
-                                            <img :src="picture.src" :alt="picture.title" class="image-modal">
+                                        <div class="carousel-item" v-for="(image, imageIndex) in listing.images" :key="imageIndex" :class="imageIndex == currentImage ? 'active' : ''">                            
+                                            <img :src="image.url" :alt="image.alternative" class="image-modal">
                                         </div>
                                     </div>
                                     <a class="carousel-control-prev" @click="previouseSlide">
@@ -124,7 +124,7 @@ export default {
             this.currentImage = imageIndex
         },
         nextSlide() {
-            if (this.currentImage >= this.listing.pictures.length - 1) {
+            if (this.currentImage >= this.listing.images.length - 1) {
                 this.currentImage = 0
             } else {
                 this.currentImage++
@@ -132,7 +132,7 @@ export default {
         },
         previouseSlide() {
             if (this.currentImage <= 0) {
-                this.currentImage = this.listing.pictures.length - 1
+                this.currentImage = this.listing.images.length - 1
             } else {
                 this.currentImage--
             }
