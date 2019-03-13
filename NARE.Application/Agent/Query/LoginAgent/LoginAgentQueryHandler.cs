@@ -16,16 +16,14 @@ namespace NARE.Application.Agent.Query.LoginAgent
     {
         private readonly IMediator _mediator;
         private readonly SignInManager<Domain.Entities.Agent> _signInManager;
-        private readonly UserManager<Domain.Entities.Agent> _userManager;
         private readonly IMapper _mapper;
         private readonly ILogger<LoginAgentQueryHandler> _logger;
 
 
-        public LoginAgentQueryHandler(IMediator mediator, SignInManager<Domain.Entities.Agent> signInManager, UserManager<Domain.Entities.Agent> userManager, IMapper mapper, ILogger<LoginAgentQueryHandler> logger)
+        public LoginAgentQueryHandler(IMediator mediator, SignInManager<Domain.Entities.Agent> signInManager, IMapper mapper, ILogger<LoginAgentQueryHandler> logger)
         {
             _mediator = mediator;
             _signInManager = signInManager;
-            _userManager = userManager;
             _mapper = mapper;
             _logger = logger;
         }

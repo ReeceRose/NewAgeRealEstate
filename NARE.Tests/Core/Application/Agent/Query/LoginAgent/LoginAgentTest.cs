@@ -19,7 +19,6 @@ namespace NARE.Tests.Core.Application.Agent.Query.LoginAgent
     {
         public Mock<IMediator> Mediator { get; }
         public Mock<MockSignInManager> SignInManager { get; }
-        public Mock<MockUserManager> UserManager { get; }
         public IMapper Mapper { get; }
         public Mock<ILogger<LoginAgentQueryHandler>> Logger { get; }
         public LoginAgentQueryHandler Handler { get; }
@@ -29,10 +28,9 @@ namespace NARE.Tests.Core.Application.Agent.Query.LoginAgent
             // Arrange
             Mediator = new Mock<IMediator>();
             SignInManager = new Mock<MockSignInManager>();
-            UserManager = new Mock<MockUserManager>();
             Mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile())));
             Logger = new Mock<ILogger<LoginAgentQueryHandler>>();
-            Handler = new LoginAgentQueryHandler(Mediator.Object, SignInManager.Object, UserManager.Object, Mapper, Logger.Object);
+            Handler = new LoginAgentQueryHandler(Mediator.Object, SignInManager.Object, Mapper, Logger.Object);
         }
 
         [Theory]

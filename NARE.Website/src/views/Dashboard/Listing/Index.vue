@@ -24,7 +24,7 @@
                 <tr v-for="listing in listings" :key="listing.id" @click="viewDetailedListing(listing.id)" class="pointer">
                     <td>{{ listing.address }}</td>
                     <td>{{ listing.status }}</td>
-                    <td>{{ listing.listingDate }}</td>
+                    <td>{{ listing.listingDate.substr(0, 10) }}</td>
                     <td><router-link :to="{ name: 'agent', params: { id: listing.agent.id } }">{{ listing.agent.name }}</router-link></td>
                     <td><button class="btn btn-main bg-blue fade-on-hover" @click="viewDetailedListing(listing.id)">Edit</button></td>
                 </tr>
@@ -62,58 +62,7 @@ export default {
     name: 'ListingDashboard',
     data() {
         return {
-            listings: [
-{
-                    id: '1231',
-                    address: '123 Test Ave',
-                    city: 'Kitchener',
-                    province: 'ON',
-                    postalCode: 'A1B 2C3',
-                    squareFootage: '2750',
-                    lotSize: '1.2 Acres',
-                    garage: '3',
-                    bedrooms: '4',
-                    bathrooms: '2.5',
-                    price: '1115000',
-                    yearBuilt: '2009',
-                    listingDate: '01/01/2019',
-                    status: 'For sale',
-                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dapibus scelerisque congue. Nullam aliquet efficitur rutrum. Praesent ac justo dictum, vehicula quam sed, vestibulum nunc. Curabitur fringilla tempor lacus sit amet pellentesque. Ut elit sem, scelerisque ac lectus at, congue bibendum arcu. Curabitur scelerisque non diam et volutpat. Aenean finibus egestas sapien, in vehicula est maximus pretium. Sed id nisi orci. Vivamus ut commodo lacus. Proin a arcu vel nulla fermentum pretium. ',
-                    agent: {
-                        id: '456',
-                        name: 'Jane Doe',
-                        picture: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-                        telephone: '111-222-3333',
-                        email: 'nare@reecerose.com'
-                    },
-                    pictures: [
-                        {
-                            src: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                            title: 'Alt'
-                        },
-                        {
-                            src: 'https://images.pexels.com/photos/584399/living-room-couch-interior-room-584399.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-                            title: 'Alt'
-                        },
-                        {
-                            src: 'https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-                            title: 'Alt'
-                        },
-                        {
-                            src: 'https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-                            title: 'Alt'
-                        },
-                        {
-                            src: 'https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-                            title: 'Alt'
-                        },
-                        {
-                            src: 'https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-                            title: 'Alt'
-                        },
-                    ]
-                }
-            ],
+            listings: [],
             error: false,
             currentPage: 1,
             pageCount: 1
