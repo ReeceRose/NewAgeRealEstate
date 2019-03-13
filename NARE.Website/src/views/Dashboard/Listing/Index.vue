@@ -25,7 +25,7 @@
                     <td>{{ listing.address }}</td>
                     <td>{{ listing.status }}</td>
                     <td>{{ listing.listingDate.substr(0, 10) }}</td>
-                    <td><router-link :to="{ name: 'agent', params: { id: listing.agent.id } }">{{ listing.agent.name }}</router-link></td>
+                    <td><router-link :to="{ name: 'agent', params: { id: listing.agentDto.id } }">{{ listing.agentDto.name }}</router-link></td>
                     <td><button class="btn btn-main bg-blue fade-on-hover" @click="viewDetailedListing(listing.id)">Edit</button></td>
                 </tr>
             </tbody>
