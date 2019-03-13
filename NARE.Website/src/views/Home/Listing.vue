@@ -92,9 +92,9 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-12 pb-3">
-                <div class="agentDtoDto border-main text-center">
+                <div class="agent border-main text-center">
                     <img class="img-fluid" :src="listing.agentDto.imageUrl" :alt="listing.agentDto.name">
-                    <p class="agentDto-name"><router-link :to="{ name: 'agent', params: { id: listing.agentDto.id } }"><i class="fas fa-user"></i> {{ listing.agentDto.name }}</router-link></p>
+                    <p class="agent-name"><router-link :to="{ name: 'agent', params: { id: listing.agentDto.id } }"><i class="fas fa-user"></i> {{ listing.agentDto.name }}</router-link></p>
                     <p>Inquire here</p>
                     <hr>
                     <p><a :href="`tel:${listing.agentDto.telephone}`"><i class="fas fa-phone"></i> {{ listing.agentDto.phoneNumber }}</a></p>
@@ -174,8 +174,8 @@ export default {
 .fas {
     color: color(primaryBlue);
 }
-.agentDto {
-    .agentDto-name {
+.agent {
+    .agent-name {
         font-size: 1.5rem;
         padding: 0.8rem 0.8rem 0 0.8rem;  
     }
