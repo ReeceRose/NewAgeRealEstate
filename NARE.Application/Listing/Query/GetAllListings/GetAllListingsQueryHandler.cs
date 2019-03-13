@@ -31,6 +31,7 @@ namespace NARE.Application.Listing.Query.GetAllListings
             {
                 l.AgentDto = _mapper.Map<Domain.Entities.Agent, AgentDto>(l.Agent);
                 l.Agent = null;
+                l.ListingStatus = l.Status.ToString();
             });
             return listings;
         }

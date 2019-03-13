@@ -1,5 +1,5 @@
 <template>
-        <div v-if="this.$route.name === 'listingDashboard' " class="pt-3 table-responsive">
+    <div v-if="this.$route.name === 'listingDashboard' " class="pt-3 table-responsive">
         <h2 class="text-center">Listings</h2 >
 
         <div class="text-right col-1 offset-11">
@@ -23,7 +23,7 @@
             <tbody>
                 <tr v-for="listing in listings" :key="listing.id">
                     <td>{{ listing.address }}</td>
-                    <td>{{ listing.status }}</td>
+                    <td>{{ listing.listingStatus }}</td>
                     <td>{{ listing.listingDate.substr(0, 10) }}</td>
                     <td><router-link :to="{ name: 'agent', params: { id: listing.agentDto.id } }">{{ listing.agentDto.name }}</router-link></td>
                     <td><button class="btn btn-main bg-blue fade-on-hover" @click="viewDetailedListing(listing.id)">Edit</button></td>

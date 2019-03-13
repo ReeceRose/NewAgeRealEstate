@@ -3,4 +3,9 @@ Add-Migration AddedDateJoined -Context ApplicationDbContext -OutputDir Migration
 Add-Migration AddedListing -Context ApplicationDbContext -OutputDir Migrations
 Add-Migration AddedYearBuilt -Context ApplicationDbContext -OutputDir Migrations
 Add-Migration AddedAgentDescription -Context ApplicationDbContext -OutputDir Migrations
+Add-Migration AddedAgentImage -Context ApplicationDbContext -OutputDir Migrations
+Add-Migration AddedListingImage -Context ApplicationDbContext -OutputDir Migrations
+Add-Migration AddedListingStatus -Context ApplicationDbContext -OutputDir Migrations
+Add-Migration AlteredListingStatus -Context ApplicationDbContext -OutputDir Migrations
+Add-Migration RevertListingStatus -Context ApplicationDbContext -OutputDir Migrations
 Update-Database

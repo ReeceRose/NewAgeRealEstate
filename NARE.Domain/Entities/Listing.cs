@@ -21,7 +21,11 @@ namespace NARE.Domain.Entities
         public DateTime ListingDate { get; set; }
         public string Description { get; set; }
         public Agent Agent { get; set; }
-        [NotMapped] public AgentDto AgentDto { get; set; }
+        [NotMapped]
+        public AgentDto AgentDto { get; set; }
+        public ListingStatus Status { get; set; }
+        [NotMapped]
+        public string ListingStatus { get; set; }
         public string MainImageUrl { get; set; }
         public virtual IEnumerable<Image> Images { get; set; }
     }
