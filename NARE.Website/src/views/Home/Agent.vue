@@ -29,7 +29,6 @@ export default {
         loadAgentInformation() {
             this.$store.dispatch("agents/agentById", this.$route.params.id)
                 .then((data) => {
-                    console.log(JSON.stringify(data.agent))
                     this.agent = data.agent
                 })
                 .catch(() => {

@@ -1,23 +1,24 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using NARE.Persistence;
+using NARE.Application.Listing.Query.GetAllListings;
 
 namespace NARE.Application.Listing.Query.GetListingById
 {
     public class GetListingByIdQueryHandler : IRequestHandler<GetListingByIdQuery, Domain.Entities.Listing>
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IMediator _mediator;
 
-        public GetListingByIdQueryHandler(ApplicationDbContext context)
+        public GetListingByIdQueryHandler(IMediator mediator)
         {
-            _context = context;
+            _mediator = mediator;
         }
 
         public async Task<Domain.Entities.Listing> Handle(GetListingByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Listings.FirstOrDefaultAsync(l => l.Id == request.Id, cancellationToken: cancellationToken);
+            var listings = await _mediator.Send(new GetAllListingsQuery(), cancellationToken);
+            return listings.FirstOrDefault(l => l.Id == request.Id);
         }
     }
 }

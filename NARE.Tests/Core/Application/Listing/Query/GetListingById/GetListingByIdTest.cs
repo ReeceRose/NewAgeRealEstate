@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
+using Moq;
+using NARE.Application.Listing.Query.GetAllListings;
 using NARE.Application.Listing.Query.GetListingById;
 using NARE.Persistence;
 using NARE.Tests.Context;
@@ -11,13 +15,16 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetListingById
     public class GetListingByIdTest : IDisposable
     {
         public ApplicationDbContext Context { get; }
+        public Mock<IMediator> Mediator { get; }
         public GetListingByIdQueryHandler Handler { get; }
 
         public GetListingByIdTest()
         {
             // Arrange
             Context = ContextFactory.Create();
-            Handler = new GetListingByIdQueryHandler(Context);
+            Mediator = new Mock<IMediator>();
+            Handler = new GetListingByIdQueryHandler(Mediator.Object);
+            Mediator.Setup(m => m.Send(It.IsAny<GetAllListingsQuery>(), default(CancellationToken))).ReturnsAsync(Context.Listings.ToList());
         }
 
         [Theory]

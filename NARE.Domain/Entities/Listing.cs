@@ -20,6 +20,7 @@ namespace NARE.Domain.Entities
         public DateTime ListingDate { get; set; }
         public string Description { get; set; }
         public Agent Agent { get; set; }
+        public string MainImageUrl { get; set; }
         public virtual IEnumerable<Image> Images { get; set; }
     }
 }
