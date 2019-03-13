@@ -6,7 +6,7 @@ using AutoMapper;
 using MediatR;
 using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GetAllAgents;
-using NARE.Application.Agent.Query.GetPaginatedResults;
+using NARE.Application.Agent.Query.GetPaginatedAgentsResult;
 using NARE.Domain.Entities;
 
 namespace NARE.Application.Agent.Query.SearchAgentsByEmail
@@ -27,7 +27,7 @@ namespace NARE.Application.Agent.Query.SearchAgentsByEmail
             var result = await _mediator.Send(new GetAllAgentsQuery(), cancellationToken);
             var agents = _mapper.Map<List<AgentDto>>(result.Where(u => u.Email.Contains(request.Email)));
             var model = new PaginationModel {Count = agents.Count};
-            return await _mediator.Send(new GetPaginatedResultsQuery(agents, model), cancellationToken);
+            return await _mediator.Send(new GetPaginatedAgentResultQuery(agents, model), cancellationToken);
         }
     }
 }

@@ -3,11 +3,11 @@ using MediatR;
 using NARE.Application.Agent.Model;
 using NARE.Domain.Entities;
 
-namespace NARE.Application.Agent.Query.GetPaginatedResults
+namespace NARE.Application.Agent.Query.GetPaginatedAgentsResult
 {
-    public class GetPaginatedResultsQuery : IRequest<PaginatedAgentsDto>
+    public class GetPaginatedAgentResultQuery : IRequest<PaginatedAgentsDto>
     {
-        public GetPaginatedResultsQuery(List<AgentDto> agents, PaginationModel paginationModel)
+        public GetPaginatedAgentResultQuery(List<AgentDto> agents, PaginationModel paginationModel)
         {
             Agents = agents;
             PaginationModel = paginationModel;

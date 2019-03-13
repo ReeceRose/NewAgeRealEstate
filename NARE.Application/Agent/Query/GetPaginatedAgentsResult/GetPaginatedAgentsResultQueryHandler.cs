@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using MediatR;
 using NARE.Application.Agent.Model;
 
-namespace NARE.Application.Agent.Query.GetPaginatedResults
+namespace NARE.Application.Agent.Query.GetPaginatedAgentsResult
 {
-    public class GetPaginatedResultsQueryHandler : IRequestHandler<GetPaginatedResultsQuery, PaginatedAgentsDto>
+    public class GetPaginatedAgentsResultQueryHandler : IRequestHandler<GetPaginatedAgentResultQuery, PaginatedAgentsDto>
     {
-        public Task<PaginatedAgentsDto> Handle(GetPaginatedResultsQuery request, CancellationToken cancellationToken)
+        public Task<PaginatedAgentsDto> Handle(GetPaginatedAgentResultQuery request, CancellationToken cancellationToken)
         {
             return Task.FromResult(new PaginatedAgentsDto()
             {

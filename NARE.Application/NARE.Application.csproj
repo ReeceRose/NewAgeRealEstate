@@ -19,8 +19,4 @@
     <ProjectReference Include="..\NARE.Persistence\NARE.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Listing\Model\" />
-  </ItemGroup>
-
 </Project>

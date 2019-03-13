@@ -7,7 +7,7 @@ using Moq;
 using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GetAllAgents;
 using NARE.Application.Agent.Query.GetAllAgentsPaginated;
-using NARE.Application.Agent.Query.GetPaginatedResults;
+using NARE.Application.Agent.Query.GetPaginatedAgentsResult;
 using NARE.Application.Utilities;
 using NARE.Domain.Entities;
 using Xunit;
@@ -57,7 +57,7 @@ namespace NARE.Tests.Core.Application.Agent.Query.GetAllAgentsPaginated
                 },
                 Agents = Mapper.Map<List<AgentDto>>(Agents)
             };
-            Mediator.Setup(m => m.Send(It.IsAny<GetPaginatedResultsQuery>(), default(CancellationToken))).ReturnsAsync(paginatedAgents);
+            Mediator.Setup(m => m.Send(It.IsAny<GetPaginatedAgentResultQuery>(), default(CancellationToken))).ReturnsAsync(paginatedAgents);
             // Act
             var result = await Handler.Handle(new GetAllAgentsPaginatedQuery(paginatedAgents.PaginationModel), CancellationToken.None);
             // Assert
