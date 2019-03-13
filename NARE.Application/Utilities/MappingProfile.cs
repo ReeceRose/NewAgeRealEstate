@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using NARE.Application.Agent.Command.NewAgent;
-using NARE.Application.Agent.Model;
+using NARE.Domain.Entities;
 
 namespace NARE.Application.Utilities
 {

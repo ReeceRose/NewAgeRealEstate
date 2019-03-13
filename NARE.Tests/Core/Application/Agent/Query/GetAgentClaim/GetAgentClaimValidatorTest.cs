@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GetAgentClaim;
+using NARE.Domain.Entities;
 using Xunit;
 
 namespace NARE.Tests.Core.Application.Agent.Query.GetAgentClaim

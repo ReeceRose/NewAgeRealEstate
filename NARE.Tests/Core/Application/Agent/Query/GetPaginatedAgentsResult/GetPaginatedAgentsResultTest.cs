@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GetPaginatedAgentsResult;
 using NARE.Domain.Entities;
 using Xunit;

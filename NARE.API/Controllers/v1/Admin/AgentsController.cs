@@ -44,7 +44,6 @@ namespace NARE.API.Controllers.v1.Admin
         // Agent specific actions
 
         [HttpGet("{AgentId}/Details")]
-        [Authorize(Policy = "AdministratorOnly")]
         public async Task<IActionResult> GetAgentDetailsByIdAsync(string agentId)
         {
             var agent = await _mediator.Send(new GetAgentDtoByIdQuery(agentId));

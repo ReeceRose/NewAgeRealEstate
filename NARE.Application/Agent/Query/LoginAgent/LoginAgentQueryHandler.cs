@@ -4,10 +4,10 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GenerateLoginToken;
 using NARE.Application.Agent.Query.GetAgentByEmail;
 using NARE.Application.Agent.Query.GetAgentClaim;
+using NARE.Domain.Entities;
 using NARE.Domain.Exceptions;
 
 namespace NARE.Application.Agent.Query.LoginAgent

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using NARE.Application.Agent.Model;
+using NARE.Domain.Entities;
 
 namespace NARE.Application.Agent.Command.CreateAgent
 {

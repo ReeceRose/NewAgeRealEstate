@@ -7,6 +7,7 @@ using MediatR;
 using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GetAllAgents;
 using NARE.Application.Agent.Query.GetPaginatedAgentsResult;
+using NARE.Domain.Entities;
 
 namespace NARE.Application.Agent.Query.GetAllAgentsPaginated
 {

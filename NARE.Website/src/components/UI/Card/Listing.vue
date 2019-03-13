@@ -5,7 +5,7 @@
         <div class="information border-main">
             <div class="address text-center">
                 <p class="address-main font-bold">{{ listing.address }}</p>
-                <p class="address-minor"><i class="fas fa-map-marker-alt"></i> {{ listing.city }}, {{ listing.provinceCode }}, {{ listing.listingalCode }}</p>
+                <p class="address-minor"><i class="fas fa-map-marker-alt"></i> {{ listing.city }}, {{ listing.provinceCode }}, {{ listing.postalCode }}</p>
             </div>
             <div class="details pt-0">
                 <hr>
@@ -20,7 +20,7 @@
                 <hr>
                 <div class="row pb-2">
                     <div class="col text-center">
-                        <router-link :to="{ name: 'agent', params: { id: listing.agent.id } }"><i class="fas fa-user"></i> {{ listing.agent.name }}</router-link>
+                        <router-link :to="{ name: 'agent', params: { id: listing.agentDto.id } }"><i class="fas fa-user"></i> {{ listing.agentDto.name }}</router-link>
                     </div>
                 </div>
                 <div class="row pb-2">

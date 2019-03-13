@@ -4,7 +4,7 @@
         <div class="row pt-3" v-if="listing.address">
             <div class="col-lg-9 col-md-8 col-sm-12 pb-3">
                 <div class="property border-main">
-                    <img class="img-fluid" :src="listing.imageUrl" alt="Main picture">
+                    <img class="img-fluid" :src="listing.mainImageUrl" alt="Main picture">
                     <div class="row p-3">
                         <div v-for="(picture, index) in listing.pictures" :key="index" class="col-lg-3 col-md-4 col-sm-6 pb-4">
                             <img :src="picture.src" :alt="picture.title" class="img-fluid rounded" @click="toggleModal(index)">
@@ -33,29 +33,29 @@
                         </div>
                     </div>
                     <p class="text-center address font-bold mb-2">{{ listing.address }}</p>
-                    <p class="text-center address-minor">{{ listing.city }}, {{ listing.province }}, {{ listing.listingalCode }}</p>
+                    <p class="text-center address-minor">{{ listing.city }}, {{ listing.provinceCode }}, {{ listing.postalCode }}</p>
                     <hr>
                     <div class="row details pl-5 pr-5">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <hr>
                             <div class="row">
                                 <div class="col"><p><i class="fas fa-money-bill"></i> Asking Price:</p></div>
-                                <div class="col text-right">$ {{ listing.price }}</div>
+                                <div class="col text-right">{{ format(listing.askingPrice) }}</div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col"><p><i class="fas fa-bed"></i> Bedrooms:</p></div>
-                                <div class="col text-right">{{ listing.bedrooms }}</div>
+                                <div class="col text-right">{{ listing.bedroomCount }}</div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col"><p><i class="fas fa-bath"></i> Bathrooms:</p></div>
-                                <div class="col text-right">{{ listing.bathrooms }}</div>
+                                <div class="col text-right">{{ listing.bathroomCount }}</div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col"><p><i class="fas fa-car"></i> Garage:</p></div>
-                                <div class="col text-right">{{ listing.garage }}</div>
+                                <div class="col text-right">{{ listing.garageSize }}</div>
                             </div>
                             <hr>
                         </div>
@@ -63,7 +63,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col"><p><i class="fas fa-square"></i> Square Feet:</p></div>
-                                <div class="col text-right">{{ listing.squareFootage }}</div>
+                                <div class="col text-right">{{ listing.squareFeet }}</div>
                             </div>
                             <hr>
                             <div class="row">
@@ -73,7 +73,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col"><p><i class="fas fa-calendar-alt"></i> Listing Date:</p></div>
-                                <div class="col text-right">{{ listing.listingDate }}</div>
+                                <div class="col text-right">{{ listing.listingDate.substr(0, 10) }}</div>
                             </div>
                             <hr>
                             <div class="row">
@@ -92,13 +92,13 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-12 pb-3">
-                <div class="agent border-main text-center">
-                    <img class="img-fluid" :src="listing.agent.picture" :alt="listing.agent.name">
-                    <p class="agent-name"><router-link :to="{ name: 'agent', params: { id: listing.agent.id } }"><i class="fas fa-user"></i> {{ listing.agent.name }}</router-link></p>
+                <div class="agentDtoDto border-main text-center">
+                    <img class="img-fluid" :src="listing.agentDto.imageUrl" :alt="listing.agentDto.name">
+                    <p class="agentDto-name"><router-link :to="{ name: 'agent', params: { id: listing.agentDto.id } }"><i class="fas fa-user"></i> {{ listing.agentDto.name }}</router-link></p>
                     <p>Inquire here</p>
                     <hr>
-                    <p><a :href="`tel:${listing.agent.telephone}`"><i class="fas fa-phone"></i> {{ listing.agent.telephone }}</a></p>
-                    <p><a :href="`mailto:${listing.agent.email}`"><i class="fas fa-envelope"></i> {{ listing.agent.email }}</a></p>
+                    <p><a :href="`tel:${listing.agentDto.telephone}`"><i class="fas fa-phone"></i> {{ listing.agentDto.phoneNumber }}</a></p>
+                    <p><a :href="`mailto:${listing.agentDto.email}`"><i class="fas fa-envelope"></i> {{ listing.agentDto.email }}</a></p>
                 </div>
             </div>
         </div>
@@ -116,6 +116,9 @@ export default {
         }
     },
     methods: {
+        format(number) {
+            return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        },
         toggleModal(imageIndex) {
             this.displayModal = !this.displayModal
             this.currentImage = imageIndex
@@ -171,8 +174,8 @@ export default {
 .fas {
     color: color(primaryBlue);
 }
-.agent {
-    .agent-name {
+.agentDto {
+    .agentDto-name {
         font-size: 1.5rem;
         padding: 0.8rem 0.8rem 0 0.8rem;  
     }

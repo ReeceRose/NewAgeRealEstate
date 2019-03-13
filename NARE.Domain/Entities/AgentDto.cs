@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NARE.Application.Agent.Model
+namespace NARE.Domain.Entities
 {
     public class AgentDto
     {
