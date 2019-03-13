@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using NARE.Application.Listing.Command.CreateListing;
 using NARE.Application.Listing.Query.GetAllListingsPaginated;
 using NARE.Application.Listing.Query.GetListingById;
+using NARE.Application.Listing.Query.GetListingCount;
 using NARE.Domain.Entities;
 
 namespace NARE.API.Controllers.v1
@@ -26,11 +27,11 @@ namespace NARE.API.Controllers.v1
         [HttpPost]
         public async Task<IActionResult> PostAllListingsAsync([FromBody] PaginationModel model) => Ok(new { result = await _mediator.Send(new GetAllListingsPaginatedQuery(model)) });
 
-        //        [HttpGet("Count")]
-        //        public async Task<IActionResult> GetListingCountAsync() => Ok(new { result = await _mediator.Send(new GetListingCountQuery()) });
+        [HttpGet("Count")]
+        public async Task<IActionResult> GetListingCountAsync() => Ok(new { result = await _mediator.Send(new GetListingCountQuery()) });
 
-        [HttpGet]
-        public async Task<IActionResult> GetListingByIdAsync([FromBody] Guid id) => Ok(new { result = await _mediator.Send(new GetListingByIdQuery(id)) });
+        [HttpGet("{ListingId}/Details")]
+        public async Task<IActionResult> GetListingByIdAsync([FromBody] Guid listingId) => Ok(new { result = await _mediator.Send(new GetListingByIdQuery(listingId)) });
 
         [HttpPost("Create")]
         public async Task<IActionResult> PostCreateListingAsync([FromBody] Listing listing) => Ok(new { result = await _mediator.Send(new CreateListingCommand(listing)) });

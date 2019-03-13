@@ -18,7 +18,10 @@ namespace NARE.Application.Listing.Query.GetAllListings
 
         public async Task<List<Domain.Entities.Listing>> Handle(GetAllListingsQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Listings.ToListAsync(cancellationToken);
+            return await _context.Listings
+                .Include(l => l.Agent)
+                .Include(l => l.Images)
+                .ToListAsync(cancellationToken);
         }
     }
 }

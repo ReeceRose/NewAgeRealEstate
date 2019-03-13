@@ -80,6 +80,7 @@ export default {
         getAllListings() {
             this.$store.dispatch("listings/listings", { currentPage: this.currentPage, pageSize: 10})
                 .then((result) => {
+                    console.log(JSON.stringify(result.listings))
                     this.listings = result.listings
                     this.pageCount = result.paginationModel.totalPages
                     this.error = false

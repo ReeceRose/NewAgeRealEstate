@@ -20,7 +20,8 @@ namespace NARE.Application.Listing.Query.GetAllListingsPaginated
         public async Task<PaginatedListingsDto> Handle(GetAllListingsPaginatedQuery request, CancellationToken cancellationToken)
         {
             var allListings = await _mediator.Send(new GetAllListingsQuery(), cancellationToken);
-            var orderedListings = allListings.OrderBy(l => l.Address);
+            var orderedListings = allListings
+                .OrderBy(l => l.Address);
             request.PaginationModel.Count = orderedListings.Count();
             var paginatedListings = orderedListings
                 .Skip((request.PaginationModel.CurrentPage - 1) * request.PaginationModel.PageSize)
