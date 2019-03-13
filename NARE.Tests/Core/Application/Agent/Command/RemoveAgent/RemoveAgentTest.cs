@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Moq;
 using NARE.Application.Agent.Command.RemoveAgent;
 using NARE.Application.Agent.Query.GetAgentById;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Agent;
 using NARE.Tests.Helpers;
 using Xunit;
 

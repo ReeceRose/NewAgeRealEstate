@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NARE.Domain.Exceptions
+namespace NARE.Domain.Exceptions.Account
 {
     public class FailedToResetPassword : Exception
     {

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using NARE.Application.Agent.Query.GetAgentById;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Agent;
 
 namespace NARE.Application.Agent.Command.RemoveAgent
 {

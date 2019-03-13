@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using Moq;
 using NARE.Application.Listing.Model;
 using NARE.Application.Listing.Query.GetAllListings;
 using NARE.Application.Listing.Query.GetAllListingsPaginated;
 using NARE.Application.Listing.Query.GetPaginatedListingsResult;
+using NARE.Application.Utilities;
 using NARE.Domain.Entities;
 using Xunit;
 
@@ -15,6 +17,7 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetAllListingsPaginated
     public class GetAllListingsPaginatedTest
     {
         public Mock<IMediator> Mediator { get; }
+        public IMapper Mapper { get; }
         public GetAllListingsPaginatedQueryHandler Handler { get; }
 
         public List<NARE.Domain.Entities.Listing> Listings { get; }
@@ -23,7 +26,8 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetAllListingsPaginated
         {
             // Arrange
             Mediator = new Mock<IMediator>();
-            Handler = new GetAllListingsPaginatedQueryHandler(Mediator.Object);
+            Mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile())));
+            Handler = new GetAllListingsPaginatedQueryHandler(Mediator.Object, Mapper);
             // Arrange
             Listings = new List<NARE.Domain.Entities.Listing>()
             {

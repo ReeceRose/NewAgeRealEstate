@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NARE.Application.Agent.Command.UpdateAgent;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Agent;
 using NARE.Persistence;
 using NARE.Tests.Context;
 using Xunit;

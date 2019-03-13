@@ -8,7 +8,7 @@ using NARE.Application.Agent.Query.GenerateLoginToken;
 using NARE.Application.Agent.Query.GetAgentByEmail;
 using NARE.Application.Agent.Query.GetAgentClaim;
 using NARE.Domain.Entities;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Account;
 
 namespace NARE.Application.Agent.Query.LoginAgent
 {

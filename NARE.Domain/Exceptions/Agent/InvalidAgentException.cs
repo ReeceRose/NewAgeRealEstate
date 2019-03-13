@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NARE.Domain.Exceptions
+namespace NARE.Domain.Exceptions.Agent
 {
     public class InvalidAgentException : Exception
     {

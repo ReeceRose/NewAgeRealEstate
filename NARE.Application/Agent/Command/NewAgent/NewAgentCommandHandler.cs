@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using NARE.Application.Agent.Command.CreateAgent;
 using NARE.Application.Agent.Query.GetAgentByEmail;
 using NARE.Domain.Entities;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Account;
 
 namespace NARE.Application.Agent.Command.NewAgent
 {

@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NARE.Application.Agent.Query.GetAgentByEmail;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Account;
+using NARE.Domain.Exceptions.Agent;
 
 namespace NARE.Application.Agent.Command.ResetPassword
 {

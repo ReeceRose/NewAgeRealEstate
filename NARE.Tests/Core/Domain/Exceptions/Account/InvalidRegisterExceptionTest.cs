@@ -1,7 +1,7 @@
-﻿using NARE.Domain.Exceptions;
+﻿using NARE.Domain.Exceptions.Account;
 using Xunit;
 
-namespace NARE.Tests.Core.Domain.Exceptions
+namespace NARE.Tests.Core.Domain.Exceptions.Account
 {
     public class InvalidRegisterExceptionTest
     {

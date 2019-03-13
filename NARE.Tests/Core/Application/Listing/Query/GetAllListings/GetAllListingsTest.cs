@@ -2,9 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using NARE.Application.Listing.Query.GetAllListings;
-using NARE.Application.Utilities;
 using NARE.Persistence;
 using NARE.Tests.Context;
 using Xunit;
@@ -14,19 +12,13 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetAllListings
     public class GetAllListingsTest : IDisposable
     {
         public ApplicationDbContext Context { get; }
-        public IMapper Mapper { get; set; }
         public GetAllListingsQueryHandler Handler { get; }
 
         public GetAllListingsTest()
         {
             // Arrange
             Context = ContextFactory.Create();
-            Mapper = new Mapper(new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new MappingProfile());
-                cfg.ValidateInlineMaps = false;
-            }));
-            Handler = new GetAllListingsQueryHandler(Context, Mapper);
+            Handler = new GetAllListingsQueryHandler(Context);
         }
 
         [Fact]

@@ -9,7 +9,7 @@ using NARE.Application.Agent.Command.CreateAgent;
 using NARE.Application.Agent.Command.NewAgent;
 using NARE.Application.Agent.Query.GetAgentByEmail;
 using NARE.Application.Utilities;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Account;
 using Xunit;
 
 namespace NARE.Tests.Core.Application.Agent.Command.NewAgent

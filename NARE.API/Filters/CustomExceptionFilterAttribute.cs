@@ -2,7 +2,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Account;
 
 namespace NARE.API.Filters
 {

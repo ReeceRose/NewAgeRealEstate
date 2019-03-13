@@ -9,7 +9,7 @@ using NARE.Application.Agent.Query.GenerateLoginToken;
 using NARE.Application.Agent.Query.GetAgentByEmail;
 using NARE.Application.Agent.Query.LoginAgent;
 using NARE.Application.Utilities;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Account;
 using NARE.Tests.Helpers;
 using Xunit;
 

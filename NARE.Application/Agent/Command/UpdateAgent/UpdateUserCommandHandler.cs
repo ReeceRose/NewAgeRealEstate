@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Agent;
 using NARE.Persistence;
 
 namespace NARE.Application.Agent.Command.UpdateAgent
