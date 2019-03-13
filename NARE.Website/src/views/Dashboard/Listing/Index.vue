@@ -129,7 +129,7 @@ export default {
             this.$router.push({ name: 'listingDetails', params: { id: id } })
         },
         getAllListings() {
-            this.$store.dispatch("listing/listings", { currentPage: this.currentPage, pageSize: 10})
+            this.$store.dispatch("listings/listings", { currentPage: this.currentPage, pageSize: 10})
                 .then((result) => {
                     this.listings = result.listings
                     this.pageCount = result.paginationModel.totalPages
