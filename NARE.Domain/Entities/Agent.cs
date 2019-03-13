@@ -23,6 +23,8 @@ namespace NARE.Domain.Entities
             Two Factor Enabled
             Username
          */
+        public string Name { get; set; }
+        public string Description { get; set; }
         public DateTime DateJoined { get; set; }
         // Different from Lockout Enabled as that's for password attempts
         public bool AccountEnabled { get; set; }

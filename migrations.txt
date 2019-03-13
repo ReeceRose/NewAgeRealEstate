@@ -2,4 +2,5 @@ Add-Migration AddedIdentity -Context ApplicationDbContext -OutputDir Migrations
 Add-Migration AddedDateJoined -Context ApplicationDbContext -OutputDir Migrations
 Add-Migration AddedListing -Context ApplicationDbContext -OutputDir Migrations
 Add-Migration AddedYearBuilt -Context ApplicationDbContext -OutputDir Migrations
+Add-Migration AddedAgentDescription -Context ApplicationDbContext -OutputDir Migrations
 Update-Database

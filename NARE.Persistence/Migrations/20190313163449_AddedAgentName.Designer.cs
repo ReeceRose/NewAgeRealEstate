@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NARE.Persistence;
 
 namespace NARE.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190313163449_AddedAgentName")]
+    partial class AddedAgentName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,8 +149,6 @@ namespace NARE.Persistence.Migrations
                     b.Property<DateTime>("DateJoined")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<string>("Description");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
