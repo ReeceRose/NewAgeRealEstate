@@ -23,11 +23,12 @@ namespace NARE.Tests.Core.Application.Listing.Command.CreateListing
 
         [Theory]
         [InlineData("7a8b0360-a637-434d-aa42-f82bfa8afd81", "789 Test", "Test description")]
+        [InlineData("7a8b0360-a637-434d-aa42-f82bfa8afd93", "167 Test", "Description")]
         public async Task CreateListing_AddsNewListing(string id, string address, string description)
         {
             // Arrange
             var listingId = Guid.Parse(id);
-            var listing = new NARE.Domain.Entities.Listing() { Address = address, Id = listingId, Description = description};
+            var listing = new NARE.Domain.Entities.Listing() { Address = address, Id = listingId, Description = description, Agent = new NARE.Domain.Entities.Agent() { Id = "123" }};
             // Act
             await Handler.Handle(new CreateListingCommand(listing), CancellationToken.None);
             // Assert

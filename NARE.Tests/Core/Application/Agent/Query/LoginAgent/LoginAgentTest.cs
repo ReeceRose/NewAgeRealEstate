@@ -34,13 +34,14 @@ namespace NARE.Tests.Core.Application.Agent.Query.LoginAgent
         }
 
         [Theory]
-        [InlineData("test@test.ca", "Test123!", "1234567890")]
-        [InlineData("user@domain.com", "Password!1f4", "0987654321")]
-        public void LoginAgent_ReturnsValidToken(string email, string password, string token)
+        [InlineData("test@test.ca", "Test123!", "1234567890", "a23df1")]
+        [InlineData("user@domain.com", "Password!1f4", "0987654321", "asd123h56")]
+        public void LoginAgent_ReturnsValidToken(string email, string password, string token, string id)
         {
             // Arrange
             var requestedAgent = new NARE.Domain.Entities.Agent()
             {
+                Id = id,
                 Email = email,
                 AccountEnabled = true
             };

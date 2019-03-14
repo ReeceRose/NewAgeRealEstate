@@ -80,4 +80,7 @@ h1 {
         opacity: 0.75;
     }
 }
+.pointer {
+    cursor: pointer;
+}
 </style>

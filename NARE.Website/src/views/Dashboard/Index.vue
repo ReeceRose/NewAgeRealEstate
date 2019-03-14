@@ -3,7 +3,7 @@
         <ApiHealth/>
         <div v-if="this.$route.name === 'dashboard'" >
             <h1 class="text-left pt-3">
-                Agent Dashboard
+                Dashboard
             </h1>
             <div class="row">
                 <HeaderCard title="Agents" class="text-center" :click="agentClick" v-if="this.$store.getters['authentication/isAdmin']">

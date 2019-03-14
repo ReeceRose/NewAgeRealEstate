@@ -54,14 +54,13 @@ const listings  = {
                     })
             })
         },
-        listingById: ({ commit, rootGetters }, listingId) => {
+        listingById: ({ commit }, listingId) => {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
                     method: 'get',
                     url: `listings/${listingId}/details`,
                     data: { listingId: listingId },
-                    headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
                 })
                     .then((response) => {
                         resolve(response.data.result)
@@ -74,13 +73,34 @@ const listings  = {
                     })
             })
         },
-        create: ({ commit }, listing) => {
+        create: ({ commit, rootGetters }, listing) => {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
                     method: 'post',
                     url: 'listings/create',
-                    data: { listing: listing }
+                    data: { listing: listing },
+                    headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
+                })
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch((error) => {
+                        reject(error)
+                    })
+                    .finally(() => {
+                        commit('global/setLoading', false, { root: true })
+                    })
+            })
+        },
+        update: ({ commit, rootGetters }, listing) => {
+            return new Promise((resolve, reject) => {
+                commit('global/setLoading', true, { root: true })
+                axios({
+                    method: 'post',
+                    url: 'listings/update',
+                    data: { listing: listing },
+                    headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
                 })
                     .then(response => {
                         resolve(response)

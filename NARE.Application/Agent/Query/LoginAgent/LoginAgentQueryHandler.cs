@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
@@ -54,9 +56,11 @@ namespace NARE.Application.Agent.Query.LoginAgent
                 throw new InvalidCredentialException();
             }
 
-            var claims = _mediator.Send(new GetAgentClaimQuery(mappedAgent), cancellationToken).Result;
+            var claims = await _mediator.Send(new GetAgentClaimQuery(mappedAgent), cancellationToken) ?? new List<Claim>();
 
             _logger.LogInformation($"LoginAgent: {agent.Email}: Successful login");
+
+            claims.Add(new Claim("Id", agent.Id) );
 
             return await _mediator.Send(new GenerateLoginTokenQuery(claims), cancellationToken);
         }

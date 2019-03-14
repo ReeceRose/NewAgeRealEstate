@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NARE.Application.Listing.Command.CreateListing;
+using NARE.Application.Listing.Command.UpdateListing;
 using NARE.Application.Listing.Query.GetAllListingsPaginated;
 using NARE.Application.Listing.Query.GetListingById;
 using NARE.Application.Listing.Query.GetListingCount;
@@ -34,6 +37,15 @@ namespace NARE.API.Controllers.v1
         public async Task<IActionResult> GetListingByIdAsync(string listingId) => Ok(new { result = await _mediator.Send(new GetListingByIdQuery(Guid.Parse(listingId))) });
 
         [HttpPost("Create")]
-        public async Task<IActionResult> PostCreateListingAsync([FromBody] Listing listing) => Ok(new { result = await _mediator.Send(new CreateListingCommand(listing)) });
+        [Authorize]
+        public async Task<IActionResult> PostCreateListingAsync([FromBody] CreateListingCommand createListingCommand)
+        {
+            createListingCommand.Listing.Agent.Id = User.Claims.First(c => c.Type == "Id").Value;
+            return Ok(new { result = await _mediator.Send(createListingCommand) });
+        }
+
+        [HttpPost("Update")]
+        [Authorize]
+        public async Task<IActionResult> PostUpdateListingAsync([FromBody] UpdateListingCommand updateListingCommand) => Ok(new { result = await _mediator.Send(updateListingCommand) });
     }
 }

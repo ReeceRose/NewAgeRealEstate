@@ -120,9 +120,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.pointer {
-    cursor: pointer;
-}
 .upper::first-letter {
     text-transform: capitalize;
 }

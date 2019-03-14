@@ -38,7 +38,6 @@ namespace NARE.API.Controllers.v1.Admin
 
 
         [HttpGet("Count")]
-        [Authorize(Policy = "AdministratorOnly")]
         public async Task<IActionResult> GetAgentCountAsync() => Ok(new { result = await _mediator.Send(new GetAgentCountQuery()) });
 
         // Agent specific actions

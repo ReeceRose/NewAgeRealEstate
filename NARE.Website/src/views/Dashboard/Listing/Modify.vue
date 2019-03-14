@@ -3,38 +3,41 @@
         <form @submit.prevent="submit">
             <div class="row form-group">
                 <div class="col-12">
+                    <p class="text-danger" v-if="error">Failed to {{ action.toLowerCase() }} listing</p>
+                    <p class="text-danger" v-if="errorLoadingListing">Failed to load listing</p>
+                    
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
-                            <label for="addressInput">Address</label>
-                            <TextInput id="addressInput" v-model="listing.address" :value="listing.address" :validator="$v.listing.address" errorMessage="Address is required" placeholder="Address"/>
+                            <label>Address</label>
+                            <TextInput id="addressInput" v-model="listing.address" :value="listing.address" :validator="$v.listing.address" errorMessage="Invalid address" placeholder="Address"/>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
-                            <label for="cityInput">City</label>
-                            <TextInput id="cityInput" v-model="listing.city" :value="listing.city" :validator="$v.listing.city" errorMessage="City is required" placeholder="City"/>
+                            <label>City</label>
+                            <TextInput id="cityInput" v-model="listing.city" :value="listing.city" :validator="$v.listing.city" errorMessage="Invalid city" placeholder="City"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
-                            <label for="askingPriceInput">Asking Price</label>
-                            <TextInput id="askingPriceInput" v-model="listing.askingPrice" :value="listing.askingPrice" :validator="$v.listing.askingPrice" errorMessage="Asking price must be a valid number" placeholder="Asking Price"/>
+                            <label>Postal Code</label>
+                            <TextInput id="postalCodeInput" v-model="listing.postalCode" :value="listing.postalCode" :validator="$v.listing.postalCode" errorMessage="Invalid postal code" placeholder="Postal Code"/>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
-                            <label for="yearBuiltInput">Year Built</label>
-                            <TextInput id="askingPriceInput" v-model="listing.yearBuilt" :value="listing.yearBuilt" :validator="$v.listing.yearBuilt" errorMessage="Year built must be a valid year" placeholder="Year Built"/>
+                            <label>Asking Price</label>
+                            <TextInput id="askingPriceInput" v-model="listing.askingPrice" :value="listing.askingPrice" :validator="$v.listing.askingPrice" errorMessage="Invalid asking price" placeholder="Asking Price"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
-                            <label for="bathroomCountInput">Bathroom Count</label>
-                            <select id="bathroomCountInput" class="form-control" v-model="listing.bathroomCount">
+                            <label>Bathroom Count</label>
+                            <select class="form-control" v-model="listing.bathroomCount">
                                 <option v-for="(value, index) in [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12 ]" :key="index" :value="value">
                                     {{ value }}
                                 </option>
                             </select>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
-                            <label for="bedroomCountInput">Bedroom Count</label>
-                            <select id="bedroomCountInput" class="form-control" v-model="listing.bedroomCount">
+                            <label>Bedroom Count</label>
+                            <select class="form-control" v-model="listing.bedroomCount">
                                 <option v-for="(value, index) in 15" :key="index" :value="index">
                                     {{ value }}
                                 </option>
@@ -43,18 +46,32 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
-                            <label for="squareFeetInput">Square Feet</label>
-                            <TextInput id="squareFeetInput" v-model="listing.squareFeet" :value="listing.squareFeet" :validator="$v.listing.squareFeet" errorMessage="Square footage must be a valid number" placeholder="Square Footage"/>
+                            <label>Square Feet</label>
+                            <TextInput id="squareFeetInput" v-model="listing.squareFeet" :value="listing.squareFeet" :validator="$v.listing.squareFeet" errorMessage="Invalid square footage" placeholder="Square Footage"/>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
-                            <label for="lotSizeInput">Lot Size</label>
-                            <TextInput id="lotSizeInput" v-model="listing.lotSize" :value="listing.lotSize" :validator="$v.listing.lotSize" errorMessage="Lot size must be a valid number" placeholder="Lot Size"/>
+                            <label>Lot Size</label>
+                            <TextInput id="lotSizeInput" v-model="listing.lotSize" :value="listing.lotSize" :validator="$v.listing.lotSize" errorMessage="Invalid lot size" placeholder="Lot Size"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
+                            <label>Year Built</label>
+                            <TextInput id="yearBuiltInput" v-model="listing.yearBuilt" :value="listing.yearBuilt" :validator="$v.listing.yearBuilt" errorMessage="Invalid year built" placeholder="Year Built"/>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
+                            <label>Listing Status</label>
+                            <select class="form-control" v-model="listing.listingStatus">
+                                <option value="Listed" selected>Listed</option>
+                                <option value="Sold">Sold</option>
+                                <option value="ComingSoon">Coming Soon</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 pb-3">                            
-                            <label for="mainImageInput">Main Image</label>
-                            <TextInput id="squareFeetInput" v-model="listing.mainImageUrl" :value="listing.mainImageUrl" :validator="$v.listing.mainImageUrl" errorMessage="Main image URL required" placeholder="Main Image URL"/>
+                            <label>Main Image</label>
+                            <TextInput id="mainImageUrlInput" v-model="listing.mainImageUrl" :value="listing.mainImageUrl" :validator="$v.listing.mainImageUrl" errorMessage="Invalid main image URL" placeholder="Main Image URL"/>
                         </div>
                     </div>
                     <div class="row">
@@ -78,8 +95,8 @@
                     </div>
                     <div class="row">
                         <div class="col-12 pb-3">
-                            <label for="descriptionInput">Description</label>
-                            <TextAreaInput id="descriptionInput" v-model="listing.description" :value="listing.description" :validator="$v.listing.description" errorMessage="Description required" placeholder="Description"/>
+                            <label>Description</label>
+                            <TextAreaInput id="descriptionInput" v-model="listing.description" :value="listing.description" :validator="$v.listing.description" errorMessage="Invalid description" placeholder="Description"/>
                         </div>
                     </div>
                 </div>
@@ -117,12 +134,15 @@ export default {
                 lotSize: '',
                 description: '',
                 mainImageUrl: '',
+                listingStatus: '',
+                images: [],
             },
+            errorLoadingListing: false,
 			error: false,
 		}
     },
     computed: {
-        action(){
+        action() {
             return this.$route.params.id != null ? 'Edit' : 'Save'
         },
     },
@@ -135,20 +155,27 @@ export default {
     },
     methods: {
         submit() {
-            if (this.$route.params.id) {
-                console.log('Edit')
-            } else {
-                console.log('Save')
+            this.$v.$touch();
+			if (this.$v.$invalid) {
+				return
             }
+            var mode = this.$route.params.id ? 'edit' :'create'
+            this.$store.dispatch(`listings/${mode}`, this.listing)
+                .then(() => {
+                    this.$router.push({ name: 'listingDashboard' })
+                })
+                .catch(() => {
+                    this.error = true
+                })
         },
         getListing() {
             this.$store.dispatch("listings/listingById", this.$route.params.id)
                 .then((result) => {
                     this.listing = result
-                    this.error = false
+                    this.errorLoadingListing = false
                 })
                 .catch(() => {
-                    this.error = true
+                    this.errorLoadingListing = true
                 })
         },
         removeImage(index) {
