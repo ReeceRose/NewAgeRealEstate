@@ -142,6 +142,27 @@ const agents = {
                     })
             })
         },
+        updateAgent: ({ commit, rootGetters }, agent) => {
+            return new Promise((resolve, reject) => {
+                commit('global/setLoading', true, { root: true })
+                axios({
+                    method: 'post',
+                    url: `agents/${agent.id}/update`,
+                    data: {agent: agent },
+                    headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
+                })
+                    .then(() => {
+                        resolve()
+                    })
+                    .catch((error) => {
+                        console.log(JSON.stringify(error))
+                        reject()
+                    })
+                    .finally(() => {
+                        commit('global/setLoading', false, { root: true })
+                    })
+            })
+        },
         addClaim: ({ commit, rootGetters }, payload) => {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })

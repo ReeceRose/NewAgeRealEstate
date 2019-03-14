@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-3">
+    <div>
         <div class="row">
             <div class="col">
                 <h2 class="text-center pb-4">Agent</h2>
@@ -18,6 +18,9 @@
                 <p v-if="accountDisabledError" class="text-danger text-center">Failed to disable agent</p>
 
                 <p v-if="deleteAgentError" class="text-danger text-center">Failed to delete agent</p>
+
+                <p v-if="updatedAgent" class="text-success text-center">Agent has been updated</p>
+                <p v-if="updatedAgentError" class="text-danger text-center">Failed to update agent</p>
             </div>
         </div>
         <WideCard :title="agent.email" v-if="agent">
@@ -25,8 +28,9 @@
                 <div class="col-12">
                     <ul>
                         <li>
-                            <!-- <Text> -->
-                            <span class="item">{{ agent.name }}</span>
+                            <span class="item">
+                                <TextInput id="nameInput" v-model="agent.name" :validator="$v.agent.name" errorMessage="Invalid agent name" placeholder="Agent name"/>
+                            </span>
                         </li>
                         <li><span class="item" v-if="agent.dateJoined">Date Joined: {{ agent.dateJoined.substr(0, 10) }}</span></li>
                         <li class="pt-3">
@@ -42,15 +46,18 @@
                             </span>
                         </li>
                         <li class="pt-3">
-                            <span class="item" v-if="isAdministrator"><button class="btn btn-main bg-blue fade-on-hover" @click="revokeAdministrator(agent.id)">Revoke administrator</button></span>
-                            <span v-else><button class="btn btn-main bg-blue fade-on-hover" @click="makeAdministrator(agent.id)">Make administrator</button></span>
+                            <span class="item" v-if="isAdministrator"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="revokeAdministrator(agent.id)">Revoke administrator</button></span>
+                            <span v-else><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="makeAdministrator(agent.id)">Make administrator</button></span>
                         </li>
                         <li>
-                            <span class="item" v-if="agent.accountEnabled"><button class="btn btn-main bg-blue fade-on-hover" @click="disableAccount(agent.id)">Disable Account</button></span>
-                            <span class="item" v-else><button class="btn btn-main bg-blue fade-on-hover" @click="enableAccount(agent.id)">Enable Account</button></span>
+                            <span class="item" v-if="agent.accountEnabled"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="disableAccount(agent.id)">Disable Account</button></span>
+                            <span class="item" v-else><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="enableAccount(agent.id)">Enable Account</button></span>
                         </li>
                         <li>
-                            <span class="item"><button class="btn btn-main bg-blue fade-on-hover" @click="deleteAgent(agent.id)">Delete Agent</button></span>
+                            <span class="item"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="deleteAgent(agent.id)">Delete Agent</button></span>
+                        </li>
+                            <li>
+                            <span class="item"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="updateAgent()">Update Agent</button></span>
                         </li>
                         <li class="pt-3">
                             <button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="$router.go(-1)">Return <i class="fas fa-undo"></i></button>
@@ -64,10 +71,14 @@
 
 <script>
 import WideCard from '@/components/UI/Card/WideCard.vue'
+import TextInput from '@/components/UI/Form/Text.vue'
+
+import { required } from 'vuelidate/lib/validators'
 
 export default {
     name: 'DetailedAgent',
     components: {
+        TextInput,
         WideCard
     },
     data() {
@@ -85,6 +96,8 @@ export default {
             accountEnabled: false,
             accountEnabledError: false,
             deleteAgentError: false,
+            updatedAgent: false,
+            updatedAgentError: false,
         }
     },
     methods: {
@@ -167,9 +180,31 @@ export default {
                     }, 3000)
                 })
         },
+        updateAgent(agentId) {
+            this.$store.dispatch("agents/updateAgent", this.agent)
+                .then(() => {
+                    this.updatedAgent = true
+                    this.updatedAgentError = false
+                })
+                .catch(() => {
+                    this.updatedAgentError = true
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        this.updatedAgentError = false
+                    }, 3000)
+                })
+        },
     },
     created() {
         this.getAgent(this.$route.params.id)
+    },
+    validations: {
+        agent: {
+            name: {
+                required
+            },
+        }
     }
 }
 </script>
