@@ -64,7 +64,7 @@ namespace NARE.API.Controllers.v1.Admin
 
         [HttpPost("{AgentId}/Update")]
         [Authorize(Policy = "AdministratorOnly")]
-        public async Task<IActionResult> PostUpdateAgentAsync(UpdateAgentInformationCommand updateAgentInformationCommand) => Ok(new { result = await _mediator.Send(updateAgentInformationCommand) });
+        public async Task<IActionResult> PostUpdateAgentAsync([FromBody] UpdateAgentInformationCommand updateAgentInformationCommand) => Ok(new { result = await _mediator.Send(updateAgentInformationCommand) });
 
         [HttpGet("{AgentId}/Delete")]
         [Authorize(Policy = "AdministratorOnly")]
@@ -79,10 +79,10 @@ namespace NARE.API.Controllers.v1.Admin
         public async Task<IActionResult> PostRemoveClaimAsync(string agentId, string claim) => Ok( new { result = await _mediator.Send(new RemoveAgentClaimCommand(await _mediator.Send(new GetAgentByIdQuery(agentId)), claim))} );
 
         [HttpPost("GenerateResetPasswordEmail")]
-        public async Task<IActionResult> PostGenerateRestResetPasswordEmailAsync(GenerateResetPasswordEmailQuery generateResetPasswordEmailQuery) => Ok(new { result = await _mediator.Send(generateResetPasswordEmailQuery) });
+        public async Task<IActionResult> PostGenerateRestResetPasswordEmailAsync([FromBody] GenerateResetPasswordEmailQuery generateResetPasswordEmailQuery) => Ok(new { result = await _mediator.Send(generateResetPasswordEmailQuery) });
 
         [HttpPost("ResetPassword")]
-        public async Task<IActionResult> PostResetPasswordAsync(ResetPasswordCommand resetPasswordCommand) => Ok(new { result = await _mediator.Send(resetPasswordCommand) });
+        public async Task<IActionResult> PostResetPasswordAsync([FromBody] ResetPasswordCommand resetPasswordCommand) => Ok(new { result = await _mediator.Send(resetPasswordCommand) });
 
     }
 }

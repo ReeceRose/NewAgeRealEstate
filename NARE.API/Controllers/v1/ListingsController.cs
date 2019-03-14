@@ -26,7 +26,6 @@ namespace NARE.API.Controllers.v1
             _mediator = mediator;
         }
 
-
         [HttpPost]
         public async Task<IActionResult> PostAllListingsAsync([FromBody] PaginationModel model) => Ok(new { result = await _mediator.Send(new GetAllListingsPaginatedQuery(model)) });
 
@@ -40,7 +39,7 @@ namespace NARE.API.Controllers.v1
         [Authorize]
         public async Task<IActionResult> PostCreateListingAsync([FromBody] CreateListingCommand createListingCommand)
         {
-            createListingCommand.Listing.Agent.Id = User.Claims.First(c => c.Type == "Id").Value;
+            createListingCommand.Listing.Agent.Id = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
             return Ok(new { result = await _mediator.Send(createListingCommand) });
         }
 

@@ -22,8 +22,22 @@
                             <TextInput id="postalCodeInput" v-model="listing.postalCode" :value="listing.postalCode" :validator="$v.listing.postalCode" errorMessage="Invalid postal code" placeholder="Postal Code"/>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
+                            <label>Provincal Code</label>
+                                <select class="form-control" v-model="listing.provinceCode">
+                                <option v-for="(value, index) in ['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'NU', 'NT', 'ON', 'PE', 'QC', 'SK', 'YT' ]" :key="index" :value="value">
+                                    {{ value }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
                             <label>Asking Price</label>
                             <TextInput id="askingPriceInput" v-model="listing.askingPrice" :value="listing.askingPrice" :validator="$v.listing.askingPrice" errorMessage="Invalid asking price" placeholder="Asking Price"/>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
+                            <label>Year Built</label>
+                            <TextInput id="yearBuiltInput" v-model="listing.yearBuilt" :value="listing.yearBuilt" :validator="$v.listing.yearBuilt" errorMessage="Invalid year built" placeholder="Year Built"/>
                         </div>
                     </div>
                     <div class="row">
@@ -56,15 +70,9 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
-                            <label>Year Built</label>
-                            <TextInput id="yearBuiltInput" v-model="listing.yearBuilt" :value="listing.yearBuilt" :validator="$v.listing.yearBuilt" errorMessage="Invalid year built" placeholder="Year Built"/>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
                             <label>Garage Size</label>
                             <TextInput id="garageSizeInput" v-model="listing.garageSize" :value="listing.garageSize" :validator="$v.listing.garageSize" errorMessage="Invalid garage size" placeholder="Garage Size"/>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
                             <label>Listing Status</label>
                             <select class="form-control" v-model="listing.listingStatus">
@@ -73,7 +81,9 @@
                                 <option value="ComingSoon">Coming Soon</option>
                             </select>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 pb-3">                            
+                    </div>
+                    <div class="row">
+                        <div class="col-12 pb-3">                            
                             <label>Main Image</label>
                             <TextInput id="mainImageUrlInput" v-model="listing.mainImageUrl" :value="listing.mainImageUrl" :validator="$v.listing.mainImageUrl" errorMessage="Invalid main image URL" placeholder="Main Image URL"/>
                         </div>
@@ -141,6 +151,9 @@ export default {
                 listingStatus: '',
                 garageSize: '',
                 images: [],
+                agent: {
+                    id: '',
+                }
             },
             errorLoadingListing: false,
 			error: false,
@@ -169,7 +182,8 @@ export default {
                 .then(() => {
                     this.$router.push({ name: 'listingDashboard' })
                 })
-                .catch(() => {
+                .catch((error) => {
+                    console.log(JSON.stringify(error))
                     this.error = true
                 })
         },
