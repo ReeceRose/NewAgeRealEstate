@@ -154,8 +154,7 @@ const agents = {
                     .then(() => {
                         resolve()
                     })
-                    .catch((error) => {
-                        console.log(JSON.stringify(error))
+                    .catch(() => {
                         reject()
                     })
                     .finally(() => {

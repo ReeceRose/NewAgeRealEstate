@@ -46,15 +46,15 @@
                             </span>
                         </li>
                         <li class="pt-3">
-                            <span class="item" v-if="isAdministrator"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="revokeAdministrator(agent.id)">Revoke administrator</button></span>
-                            <span v-else><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="makeAdministrator(agent.id)">Make administrator</button></span>
+                            <span class="item" v-if="isAdministrator"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="revokeAdministrator()">Revoke administrator</button></span>
+                            <span v-else><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="makeAdministrator()">Make administrator</button></span>
                         </li>
                         <li>
-                            <span class="item" v-if="agent.accountEnabled"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="disableAccount(agent.id)">Disable Account</button></span>
-                            <span class="item" v-else><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="enableAccount(agent.id)">Enable Account</button></span>
+                            <span class="item" v-if="agent.accountEnabled"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="disableAccount()">Disable Account</button></span>
+                            <span class="item" v-else><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="enableAccount()">Enable Account</button></span>
                         </li>
                         <li>
-                            <span class="item"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="deleteAgent(agent.id)">Delete Agent</button></span>
+                            <span class="item"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="deleteAgent()">Delete Agent</button></span>
                         </li>
                             <li>
                             <span class="item"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="updateAgent()">Update Agent</button></span>
@@ -101,8 +101,8 @@ export default {
         }
     },
     methods: {
-        getAgent(agentId) {
-            this.$store.dispatch("agents/agentById", agentId)
+        getAgent() {
+            this.$store.dispatch("agents/agentById", this.agent.id)
                 .then((data) => {
                     this.agent = data.agent
                     this.claims = data.claims
@@ -114,8 +114,8 @@ export default {
         checkIsAdministrator(claim) {
             claim.type == 'Administrator' ? this.isAdministrator = true : null;
         },
-        revokeAdministrator(agentId) {
-            this.$store.dispatch("agents/removeClaim", { agentId, claim: "Administrator" })
+        revokeAdministrator() {
+            this.$store.dispatch("agents/removeClaim", { agentId: this.agent.id, claim: "Administrator" })
                 .then(() => {
                     this.isAdministrator = false
                     this.revokedAdministrator = true
@@ -124,8 +124,8 @@ export default {
                     this.revokedAdministratorError = true
                 })
         },
-        makeAdministrator(agentId) {
-            this.$store.dispatch("agents/addClaim", { agentId, claim: "Administrator"})
+        makeAdministrator() {
+            this.$store.dispatch("agents/addClaim", { agentId: this.agent.id, claim: "Administrator"})
                 .then(() => {
                     this.isAdministrator = true
                     this.promotedToAdministrator = true
@@ -134,8 +134,8 @@ export default {
                     this.promotedToAdministratorError = true
                 })
         },
-        enableAccount(agentId) {
-            this.$store.dispatch("agents/enableAccount", agentId)
+        enableAccount() {
+            this.$store.dispatch("agents/enableAccount", this.agent.id)
                 .then(() => {
                     this.agent.accountEnabled = true
                     this.accountEnabled = true
@@ -150,8 +150,8 @@ export default {
                     }, 3000)
                 })
         },
-        disableAccount(agentId) {
-            this.$store.dispatch("agents/disableAccount", agentId)
+        disableAccount() {
+            this.$store.dispatch("agents/disableAccount", this.agent.id)
                 .then(() => {
                     this.agent.accountEnabled = false
                     this.accountDisabled = true
@@ -166,8 +166,8 @@ export default {
                     }, 3000)
                 })
         },
-        deleteAgent(agentId) {
-            this.$store.dispatch("agents/deleteAgent", agentId)
+        deleteAgent() {
+            this.$store.dispatch("agents/deleteAgent", this.agent.id)
                 .then(() => {
                     this.$router.push({ name: 'agentDashboard'})
                 })
@@ -180,7 +180,7 @@ export default {
                     }, 3000)
                 })
         },
-        updateAgent(agentId) {
+        updateAgent() {
             this.$store.dispatch("agents/updateAgent", this.agent)
                 .then(() => {
                     this.updatedAgent = true

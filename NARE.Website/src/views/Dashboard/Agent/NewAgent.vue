@@ -74,8 +74,7 @@ export default {
                     this.error = null
                     this.success = true
                 })
-                .catch((error) => {
-                    console.log(JSON.stringify(error))
+                .catch(() => {
                     this.error = true
                 })
         },

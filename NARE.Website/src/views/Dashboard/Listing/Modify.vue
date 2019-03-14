@@ -182,8 +182,7 @@ export default {
                 .then(() => {
                     this.$router.push({ name: 'listingDashboard' })
                 })
-                .catch((error) => {
-                    console.log(JSON.stringify(error))
+                .catch(() => {
                     this.error = true
                 })
         },
