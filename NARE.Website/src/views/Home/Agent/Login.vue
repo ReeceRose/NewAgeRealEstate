@@ -23,10 +23,10 @@
 
 <script>
 import FormNarrowCard from '@/components/UI/Card/Form/FormNarrowCard.vue'
-import FormEmail from "@/components/UI/Form/Email.vue"
-import FormPassword from "@/components/UI/Form/Password.vue"
+import FormEmail from '@/components/UI/Form/Email.vue'
+import FormPassword from '@/components/UI/Form/Password.vue'
 
-import { required, minLength, email } from "vuelidate/lib/validators"
+import { required, minLength, email } from 'vuelidate/lib/validators'
 
 export default {
 	name: "LoginIndex",

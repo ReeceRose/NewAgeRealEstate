@@ -6,7 +6,7 @@
             :class="{ 'is-invalid': validator.$error }"
             type="text" 
             id="inputEmail" 
-            class="form-control" 
+            class="form-control"
             placeholder="Email address" 
             autofocus
         >

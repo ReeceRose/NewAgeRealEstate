@@ -75,7 +75,7 @@ export default {
     },
     methods: {
         viewDetailedListing(id) {
-            this.$router.push({ name: 'listingDetails', params: { id: id } })
+            this.$router.push({ name: 'editListing', params: { id: id } })
         },
         getAllListings() {
             this.$store.dispatch("listings/listings", { currentPage: this.currentPage, pageSize: 10})

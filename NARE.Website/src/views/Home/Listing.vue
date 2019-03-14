@@ -141,7 +141,6 @@ export default {
             this.$store.dispatch("listings/listingById", this.$route.params.id)
                 .then((result) => {
                     this.listing = result
-                    this.pageCount = result.paginationModel.totalPages
                     this.error = false
                 })
                 .catch(() => {

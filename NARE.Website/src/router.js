@@ -20,8 +20,7 @@ const AgentDetails = () => import('@/views/Dashboard/Agent/Details.vue')
 const NewAgent = () => import('@/views/Dashboard/Agent/NewAgent.vue')
 // Listing - Dashboard
 const ListingDashboard = () => import('@/views/Dashboard/Listing/Index.vue')
-const ListingDetails = () => import('@/views/Dashboard/Listing/Details.vue')
-const NewListing = () => import('@/views/Dashboard/Listing/NewListing.vue')
+const ModifyListing = () => import('@/views/Dashboard/Listing/Modify.vue')
 
 // Agent
 const AgentIndex = () => import('@/views/Home/Agent/Index.vue')
@@ -166,14 +165,14 @@ const router = new Router({
                     component: ListingDashboard,
                     children: [
                         {
-                            path: 'Details/:id',
-                            name: 'listingDetails',
-                            component: ListingDetails
+                            path: 'Edit/:id?',
+                            name: 'editListing',
+                            component: ModifyListing
                         },                        
                         {
-                            path: 'NewListing',
+                            path: 'New',
                             name: 'newListing',
-                            component: NewListing
+                            component: ModifyListing
                         }
                     ]
                 }

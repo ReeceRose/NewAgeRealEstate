@@ -13,14 +13,10 @@
                     </div>
                     <div class="form-group">
                         <label for="bedrooms">Bedrooms: </label>
-                        <select class="form-control" id="bedrooms" v-model="bedrooms">
-                            <option value="0">0</option>
-                            <option value="1" selected>1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6+</option>
+                        <select id="bedrooms" class="form-control" v-model="bedrooms">
+                            <option v-for="(value, index) in 15" :key="index" :value="value" selected>
+                                {{ value }}
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -35,15 +31,10 @@
                     </div>
                     <div class="form-group">
                         <label for="bathrooms">Bathrooms: </label>
-                        <select class="form-control" id="bathrooms" v-model="bathrooms">
-                            <option value="0">0</option>
-                            <option value="1" selected>1</option>
-                            <option value="1.5">1.5</option>
-                            <option value="2">2</option>
-                            <option value="2.5">2.5</option>
-                            <option value="3">3</option>
-                            <option value="3.5">3.5</option>
-                            <option value="4">4+</option>
+                       <select id="bathrooms" class="form-control" v-model="bathrooms">
+                            <option v-for="(value, index) in [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12 ]" :key="index" :value="value" selected>
+                                {{ value }}
+                            </option>
                         </select>
                     </div>
                 </div>
