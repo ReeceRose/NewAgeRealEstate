@@ -43,7 +43,7 @@ const authentication = {
                 axios({
                     method: 'post',
                     url: 'authentication/create',
-                    data: { email: payload.email, password: payload.password }
+                    data: { name: payload.name, email: payload.email, password: payload.password }
                 })
                     .then(response => {
                         resolve(response)

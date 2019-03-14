@@ -60,6 +60,12 @@
                             <TextInput id="yearBuiltInput" v-model="listing.yearBuilt" :value="listing.yearBuilt" :validator="$v.listing.yearBuilt" errorMessage="Invalid year built" placeholder="Year Built"/>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
+                            <label>Garage Size</label>
+                            <TextInput id="garageSizeInput" v-model="listing.garageSize" :value="listing.garageSize" :validator="$v.listing.garageSize" errorMessage="Invalid garage size" placeholder="Garage Size"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
                             <label>Listing Status</label>
                             <select class="form-control" v-model="listing.listingStatus">
                                 <option value="Listed" selected>Listed</option>
@@ -67,9 +73,7 @@
                                 <option value="ComingSoon">Coming Soon</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 pb-3">                            
+                        <div class="col-lg-6 col-md-6 col-sm-12 pb-3">                            
                             <label>Main Image</label>
                             <TextInput id="mainImageUrlInput" v-model="listing.mainImageUrl" :value="listing.mainImageUrl" :validator="$v.listing.mainImageUrl" errorMessage="Invalid main image URL" placeholder="Main Image URL"/>
                         </div>
@@ -135,6 +139,7 @@ export default {
                 description: '',
                 mainImageUrl: '',
                 listingStatus: '',
+                garageSize: '',
                 images: [],
             },
             errorLoadingListing: false,
@@ -159,7 +164,7 @@ export default {
 			if (this.$v.$invalid) {
 				return
             }
-            var mode = this.$route.params.id ? 'edit' :'create'
+            var mode = this.$route.params.id ? 'update' :'create'
             this.$store.dispatch(`listings/${mode}`, this.listing)
                 .then(() => {
                     this.$router.push({ name: 'listingDashboard' })
@@ -218,6 +223,10 @@ export default {
             },
             mainImageUrl: {
                 required
+            },
+            garageSize: {
+                required,
+                numberOnlyRegex
             }
         }
 	},

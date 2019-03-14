@@ -64,6 +64,18 @@ export default {
 .fas {
     color: color(primaryBlue);
 }
+.img-fluid {
+    @include mobile {
+        height: 45vw;
+    }
+    @include tablet {
+        height: 25vw;
+    }
+    @include desktop {
+        height: 15vw;
+    }
+    object-fit: cover;
+}
 .information {
     .address-main {
         font-size: 1.5rem;

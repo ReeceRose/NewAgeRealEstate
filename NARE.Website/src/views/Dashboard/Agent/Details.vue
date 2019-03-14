@@ -24,6 +24,10 @@
             <div slot="card-content" class="text-center">
                 <div class="col-12">
                     <ul>
+                        <li>
+                            <!-- <Text> -->
+                            <span class="item">{{ agent.name }}</span>
+                        </li>
                         <li><span class="item" v-if="agent.dateJoined">Date Joined: {{ agent.dateJoined.substr(0, 10) }}</span></li>
                         <li class="pt-3">
                             <h3>Agent Claims:</h3>
@@ -49,7 +53,7 @@
                             <span class="item"><button class="btn btn-main bg-blue fade-on-hover" @click="deleteAgent(agent.id)">Delete Agent</button></span>
                         </li>
                         <li class="pt-3">
-                            <button class="btn btn-main bg-blue fade-on-hover" @click="$router.go(-1)">Return <i class="fas fa-undo"></i></button>
+                            <button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="$router.go(-1)">Return <i class="fas fa-undo"></i></button>
                         </li>
                     </ul>
                 </div>

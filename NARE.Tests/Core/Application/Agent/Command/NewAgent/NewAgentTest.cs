@@ -35,41 +35,41 @@ namespace NARE.Tests.Core.Application.Agent.Command.NewAgent
         }
 
         [Theory]
-        [InlineData("test@test.ca", "Test123!")]
-        [InlineData("user@domain.com", "Password!1f4")]
-        public void NewAgent_SuccessfullyRegistersUser(string email, string password)
+        [InlineData("Test Agent", "test@test.ca", "Test123!")]
+        [InlineData("Agent", "user@domain.com", "Password!1f4")]
+        public void NewAgent_SuccessfullyRegistersUser(string name, string email, string password)
         {
             // Arrange
             Mediator.Setup(m => m.Send(It.IsAny<GetAgentByEmailQuery>(), default(CancellationToken))).ReturnsAsync((NARE.Domain.Entities.Agent) null);
             Mediator.Setup(m => m.Send(It.IsAny<CreateAgentCommand>(), default(CancellationToken))).ReturnsAsync(IdentityResult.Success);
             // Act
-            var result = Handler.Handle(new NewAgentCommand(email, password), CancellationToken.None).Result;
+            var result = Handler.Handle(new NewAgentCommand(name, email, password), CancellationToken.None).Result;
             // Assert
             Assert.True(result);
         }
 
         [Theory]
-        [InlineData("test@test.ca", "Test123!")]
-        [InlineData("user@domain.com", "Password!1f4")]
-        public async Task NewAgent_ThrowsAccountAlreadyExistsException(string email, string password)
+        [InlineData("Test Agent", "test@test.ca", "Test123!")]
+        [InlineData("Agent", "user@domain.com", "Password!1f4")]
+        public async Task NewAgent_ThrowsAccountAlreadyExistsException(string name, string email, string password)
         {
             // Arrange
             var requestedUser = new NARE.Domain.Entities.Agent() { Email = email };
             Mediator.Setup(m => m.Send(It.IsAny<GetAgentByEmailQuery>(), default(CancellationToken))).ReturnsAsync(requestedUser);
             // Act / Assert
-            await Assert.ThrowsAsync<AccountAlreadyExistsException>(() => Handler.Handle(new NewAgentCommand(email, password), CancellationToken.None));
+            await Assert.ThrowsAsync<AccountAlreadyExistsException>(() => Handler.Handle(new NewAgentCommand(name, email, password), CancellationToken.None));
         }
 
         [Theory]
-        [InlineData("test@test.ca", "Test123!")]
-        [InlineData("user@domain.com", "Password!1f4")]
-        public async Task NewAgent_FailedToRegistersUser(string email, string password)
+        [InlineData("Test Agent", "test@test.ca", "Test123!")]
+        [InlineData("Agent", "user@domain.com", "Password!1f4")]
+        public async Task NewAgent_FailedToRegistersUser(string name, string email, string password)
         {
             // Arrange
             Mediator.Setup(m => m.Send(It.IsAny<GetAgentByEmailQuery>(), default(CancellationToken))).ReturnsAsync((NARE.Domain.Entities.Agent) null);
             Mediator.Setup(m => m.Send(It.IsAny<CreateAgentCommand>(), default(CancellationToken))).ReturnsAsync(IdentityResult.Failed());
             // Act / Assert
-            await Assert.ThrowsAsync<InvalidRegisterException>(() => Handler.Handle(new NewAgentCommand(email, password), CancellationToken.None));
+            await Assert.ThrowsAsync<InvalidRegisterException>(() => Handler.Handle(new NewAgentCommand(name, email, password), CancellationToken.None));
         }
     }
 }

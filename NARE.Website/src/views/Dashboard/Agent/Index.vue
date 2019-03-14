@@ -1,5 +1,6 @@
 <template>
     <div v-if="this.$route.name === 'agentDashboard' " class="pt-3 table-responsive">
+                <a @click="$router.go(-1)" class="btn btn-link"><i class="fas fa-arrow-left"></i> Back</a>
         <h2 class="text-center">Agents</h2 >
 
         <SearchBar class="col-12" :submit="searchEmail"/>

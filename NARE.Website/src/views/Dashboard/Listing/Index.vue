@@ -1,5 +1,6 @@
 <template>
     <div v-if="this.$route.name === 'listingDashboard' " class="pt-3 table-responsive">
+                <a @click="$router.go(-1)" class="btn btn-link"><i class="fas fa-arrow-left"></i> Back</a>
         <h2 class="text-center">Listings</h2 >
 
         <div class="text-right col-1 offset-11">

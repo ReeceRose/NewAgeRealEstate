@@ -6,16 +6,19 @@
         </div>
 
         <div slot="card-content">
+            <TextInput id="nameInput" v-model="name" :validator="$v.name" errorMessage="Invalid agent name" placeholder="Agent name"/>
             <FormEmail v-model="email" :validator="$v.email"/>
             <FormPassword v-model="password" :validator="$v.password"/>
             <FormPassword v-model="confirmationPassword" confirmationPassword="true" :validator="$v.confirmationPassword"/>
 
+            <button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="$router.go(-1)">Return <i class="fas fa-undo"></i></button>
             <button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" type="submit">Create</button>
         </div>
     </FormNarrowCard>
 </template>
 
 <script>
+import TextInput from '@/components/UI/Form/Text.vue'
 import FormNarrowCard from '@/components/UI/Card/Form/FormNarrowCard.vue'
 import FormEmail from '@/components/UI/Form/Email.vue'
 import FormPassword from '@/components/UI/Form/Password.vue'
@@ -26,12 +29,14 @@ const passwordRegex = helpers.regex('passwordRegex', /^(?=.*[a-z])(?=.*[A-Z])(?=
 export default {
     name: 'newAgent',
     components: {
+        TextInput,
         FormNarrowCard,
         FormEmail,
         FormPassword
     },
     data() {
         return {
+            name: '',
             email: '',
             password: '',
             confirmationPassword: '',
@@ -41,6 +46,9 @@ export default {
         }
     },
     validations: {
+        name: {
+            required
+        },
         email: {
             required,
             email
@@ -61,15 +69,13 @@ export default {
             if (this.$v.$invalid) {
                 return
             }
-            this.$store.dispatch('authentication/create', { email: this.email, password: this.password })
+            this.$store.dispatch('authentication/create', { name: this.name, email: this.email, password: this.password })
                 .then(() => {
                     this.error = null
                     this.success = true
                 })
                 .catch((error) => {
-                    if (error.response) {
-                        this.errorMessage = error.response.data.error[0]
-                    }
+                    console.log(JSON.stringify(error))
                     this.error = true
                 })
         },
