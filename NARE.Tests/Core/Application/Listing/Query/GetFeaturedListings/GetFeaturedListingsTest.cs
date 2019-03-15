@@ -23,7 +23,6 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetFeaturedListings
             // Arrange
             Mediator = new Mock<IMediator>();
             Mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile())));
-            Handler = new GetFeaturedListingsQueryHandler(Mediator.Object, Mapper);
             Listings = new List<NARE.Domain.Entities.Listing>()
             {
                 new NARE.Domain.Entities.Listing() { Address = "123 test", Featured = true },
@@ -32,6 +31,7 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetFeaturedListings
                 new NARE.Domain.Entities.Listing() { Address = "714 test", Featured = true },
                 new NARE.Domain.Entities.Listing() { Address = "967 test", Featured = true },
             };
+            Handler = new GetFeaturedListingsQueryHandler(Mediator.Object, Mapper);
             Mediator.Setup(m => m.Send(It.IsAny<GetAllListingsQuery>(), default(CancellationToken))).ReturnsAsync(Listings);
         }
 

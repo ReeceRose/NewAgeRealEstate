@@ -10,6 +10,7 @@ using NARE.Application.Listing.Query.GetAllListingsPaginated;
 using NARE.Application.Listing.Query.GetFeaturedListings;
 using NARE.Application.Listing.Query.GetListingById;
 using NARE.Application.Listing.Query.GetListingCount;
+using NARE.Application.Listing.Query.GetNewestListings;
 using NARE.Domain.Entities;
 
 namespace NARE.API.Controllers.v1
@@ -32,7 +33,10 @@ namespace NARE.API.Controllers.v1
 
         [HttpGet("Featured/{Count}")]
         public async Task<IActionResult> GetFeaturedListingsAsync(int count) => Ok(new { result = await _mediator.Send(new GetFeaturedListingsQuery(count)) });
-        
+
+        [HttpGet("Newest/{Count}")]
+        public async Task<IActionResult> GetNewestListingsAsync(int count) => Ok(new { result = await _mediator.Send(new GetNewestListingsQuery(count)) });
+
         [HttpGet("Count")]
         public async Task<IActionResult> GetListingCountAsync() => Ok(new { result = await _mediator.Send(new GetListingCountQuery()) });
 

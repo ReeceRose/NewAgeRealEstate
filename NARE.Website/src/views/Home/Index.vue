@@ -67,11 +67,9 @@ export default {
                 })
         },
         getLatestListings() {
-            // TODO: Change this to latest listings ( payload can be removed )
-            this.$store.dispatch("listings/listings", { currentPage: this.currentPage, pageSize: 10})
+            this.$store.dispatch("listings/newestListings")
                 .then((result) => {
-                    this.newListings = result.listings
-                    this.pageCount = result.paginationModel.totalPages
+                    this.newListings = result
                     this.newListingsError = false
                 })
                 .catch(() => {
