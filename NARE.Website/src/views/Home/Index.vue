@@ -18,7 +18,7 @@
                 <div class="col">
                     <div class="featured-listings">
                         <h2>Featured Listings</h2>
-                        <p v-if="newListingsError" class="text-danger">Failed to load featured listings</p>
+                        <p v-if="featuredListingsError" class="text-danger">Failed to load featured listings</p>
                         <Listings :listings="featuredListings" v-else/>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                 <div class="col">
                     <div class="new-listings">
                         <h2>New Listings</h2>
-                        <p v-if="featuredListingsError" class="text-danger">Failed to load new listings</p>
+                        <p v-if="newListingsError" class="text-danger">Failed to load new listings</p>
                         <Listings :listings="newListings" v-else/>
                         <router-link :to="{ name: 'listings' }" class="mt-3 btn btn-main bg-blue fade-on-hover text-uppercase">View All</router-link>
                     </div>
@@ -57,11 +57,9 @@ export default {
     },
     methods: {
         getFeaturedListings() {
-            // TODO: Change this to featued listings ( payload can be removed )
-            this.$store.dispatch("listings/listings", { currentPage: this.currentPage, pageSize: 10})
+            this.$store.dispatch("listings/featuredListings")
                 .then((result) => {
-                    this.featuredListings = result.listings
-                    this.pageCount = result.paginationModel.totalPages
+                    this.featuredListings = result
                     this.featuredListingsError = false
                 })
                 .catch(() => {

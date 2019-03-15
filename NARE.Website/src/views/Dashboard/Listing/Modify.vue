@@ -83,10 +83,18 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 pb-3">                            
+                        <div class="col-lg-6 col-md-6 col-sm-12 pb-3" v-if="this.$store.getters['authentication/isAdmin']">
+                            <label>Featured</label>
+                            <select class="form-control" v-model="listing.featured">
+                                <option value="false" selected>False</option>
+                                <option value="true">True</option>
+                            </select>
+                        </div>
+                        <div class="col pb-3">
                             <label>Main Image</label>
                             <TextInput id="mainImageUrlInput" v-model="listing.mainImageUrl" :value="listing.mainImageUrl" :validator="$v.listing.mainImageUrl" errorMessage="Invalid main image URL" placeholder="Main Image URL"/>
                         </div>
+                            <!-- v-if="this.$store.getters['authentication/isAdmin']"-->
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -150,6 +158,7 @@ export default {
                 mainImageUrl: '',
                 listingStatus: '',
                 garageSize: '',
+                featured: '',
                 images: [],
                 agent: {
                     id: '',

@@ -19,7 +19,6 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetAllListingsPaginated
         public Mock<IMediator> Mediator { get; }
         public IMapper Mapper { get; }
         public GetAllListingsPaginatedQueryHandler Handler { get; }
-
         public List<NARE.Domain.Entities.Listing> Listings { get; }
 
         public GetAllListingsPaginatedTest()
@@ -28,7 +27,6 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetAllListingsPaginated
             Mediator = new Mock<IMediator>();
             Mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile())));
             Handler = new GetAllListingsPaginatedQueryHandler(Mediator.Object, Mapper);
-            // Arrange
             Listings = new List<NARE.Domain.Entities.Listing>()
             {
                 new NARE.Domain.Entities.Listing() { Address = "123 test" },

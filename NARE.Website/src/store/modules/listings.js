@@ -73,6 +73,25 @@ const listings  = {
                     })
             })
         },
+        featuredListings: ({ commit, rootGetters }) => {
+            return new Promise((resolve, reject) => {
+                commit('global/setLoading', true, { root: true })
+                axios({
+                    method: 'get',
+                    url: 'listings/featured/6',
+                    headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
+                })
+                    .then((response) => {
+                        resolve(response.data.result)
+                    })
+                    .catch(() => {
+                        reject()
+                    })
+                    .finally(() => {
+                        commit('global/setLoading', false, { root: true })
+                    })
+            })
+        },
         create: ({ commit, rootGetters }, listing) => {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })

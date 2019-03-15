@@ -8,4 +8,6 @@ Add-Migration AddedListingImage -Context ApplicationDbContext -OutputDir Migrati
 Add-Migration AddedListingStatus -Context ApplicationDbContext -OutputDir Migrations
 Add-Migration AlteredListingStatus -Context ApplicationDbContext -OutputDir Migrations
 Add-Migration RevertListingStatus -Context ApplicationDbContext -OutputDir Migrations
+Add-Migration AddedListingFeatured -Context ApplicationDbContext -OutputDir Migrations
+Add-Migration ModifiedListingFeatured -Context ApplicationDbContext -OutputDir Migrations
 Update-Database
