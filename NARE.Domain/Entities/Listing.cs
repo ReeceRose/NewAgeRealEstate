@@ -27,6 +27,7 @@ namespace NARE.Domain.Entities
         [NotMapped]
         public string ListingStatus { get; set; }
         public string MainImageUrl { get; set; }
+        public bool Featured { get; set; }
         public virtual IEnumerable<Image> Images { get; set; }
     }
 }
