@@ -27,7 +27,7 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetListingCount
             // Arrange
             Mediator.Setup(m => m.Send(It.IsAny<GetAllListingsQuery>(), default(CancellationToken))).ReturnsAsync((List<NARE.Domain.Entities.Listing>)null);
             // Act
-            var result = await Handler.Handle(new GetListingCountQuery(), CancellationToken.None);
+            var result = await Handler.Handle(new GetListingCountQuery(null), CancellationToken.None);
             // Assert
             Assert.Equal(0, result);
         }
@@ -48,7 +48,7 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetListingCount
 
             Mediator.Setup(m => m.Send(It.IsAny<GetAllListingsQuery>(), default(CancellationToken))).ReturnsAsync(listings);
             // Act
-            var result = await Handler.Handle(new GetListingCountQuery(), CancellationToken.None);
+            var result = await Handler.Handle(new GetListingCountQuery(null), CancellationToken.None);
             // Assert
             Assert.Equal(result, listings.Count);
         }

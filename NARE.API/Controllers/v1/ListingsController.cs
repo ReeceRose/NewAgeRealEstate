@@ -52,7 +52,7 @@ namespace NARE.API.Controllers.v1
         [HttpGet("Count")]
         public async Task<IActionResult> GetListingCountAsync() => Ok(new { result = await _mediator.Send(new GetListingCountQuery(null)) });
 
-        [HttpGet("AgentListingsCount")]
+        [HttpGet("AgentListingCount")]
         public async Task<IActionResult> GetAgentListingsCountAsync()
         {
             var id = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
