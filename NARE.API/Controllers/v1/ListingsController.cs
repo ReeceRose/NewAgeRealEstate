@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NARE.Application.Listing.Command.CreateListing;
 using NARE.Application.Listing.Command.UpdateListing;
+using NARE.Application.Listing.Query.GetAllActiveListingsPaginated;
 using NARE.Application.Listing.Query.GetAllListingsPaginated;
 using NARE.Application.Listing.Query.GetFeaturedListings;
 using NARE.Application.Listing.Query.GetListingById;
@@ -29,6 +30,10 @@ namespace NARE.API.Controllers.v1
         }
 
         [HttpPost]
+        public async Task<IActionResult> PostAllActiveListingsAsync([FromBody] PaginationModel model) => Ok(new { result = await _mediator.Send(new GetAllActiveListingsPaginatedQuery(model)) });
+        
+        [HttpPost("Dashboard")]
+        [Authorize]
         public async Task<IActionResult> PostAllListingsAsync([FromBody] PaginationModel model) => Ok(new { result = await _mediator.Send(new GetAllListingsPaginatedQuery(model)) });
 
         [HttpGet("Featured/{Count}")]

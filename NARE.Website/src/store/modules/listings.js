@@ -54,6 +54,29 @@ const listings  = {
                     })
             })
         },
+        allListings: ({ commit, rootGetters }, payload) => {
+            return new Promise((resolve, reject) => {
+                commit('global/setLoading', true, { root: true })
+                axios({
+                    method: 'post',
+                    url: 'listings/dashboard',
+                    data: {
+                        CurrentPage: payload.currentPage,
+                        PageSize: payload.pageSize
+                    },
+                    headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
+                })
+                    .then((response) => {
+                        resolve(response.data.result)
+                    })
+                    .catch(() => {
+                        reject()
+                    })
+                    .finally(() => {
+                        commit('global/setLoading', false, { root: true })
+                    })
+            })
+        },
         listingById: ({ commit }, listingId) => {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
