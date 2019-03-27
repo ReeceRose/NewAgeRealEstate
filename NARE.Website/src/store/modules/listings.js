@@ -77,6 +77,30 @@ const listings  = {
                     })
             })
         },
+        search: ({ commit, rootGetters }, payload) => {
+            return new Promise((resolve, reject) => {
+                commit('global/setLoading', true, { root: true })
+                axios({
+                    method: 'post',
+                    url: 'listings/search',
+                    data: {
+                        PaginationModel: payload.paginationModel,
+                        SearchModel: payload.searchModel
+                    },
+                    headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
+                })
+                    .then((response) => {
+                        resolve(response.data.result)
+                    })
+                    .catch((error) => {
+                        console.log(JSON.stringify(error))
+                        reject()
+                    })
+                    .finally(() => {
+                        commit('global/setLoading', false, { root: true })
+                    })
+            })
+        },
         agentListings: ({ commit, rootGetters }, payload) => {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })

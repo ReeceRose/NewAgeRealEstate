@@ -14,6 +14,7 @@ using NARE.Application.Listing.Query.GetFeaturedListings;
 using NARE.Application.Listing.Query.GetListingById;
 using NARE.Application.Listing.Query.GetListingCount;
 using NARE.Application.Listing.Query.GetNewestListings;
+using NARE.Application.Listing.Query.SearchActiveListings;
 using NARE.Domain.Entities;
 
 namespace NARE.API.Controllers.v1
@@ -32,7 +33,11 @@ namespace NARE.API.Controllers.v1
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAllActiveListingsAsync([FromBody] PaginationModel model) => Ok(new { result = await _mediator.Send(new GetAllActiveListingsPaginatedQuery(model)) });
+        public async Task<IActionResult> PostSearchActiveListingsAsync([FromBody] PaginationModel model) => Ok(new { result = await _mediator.Send(new GetAllActiveListingsPaginatedQuery(model)) });
+
+        [HttpPost("Search")]
+        public async Task<IActionResult> PostAllActiveListingsAsync([FromBody] SearchActiveListingsQuery searchActiveListingsQuery) => Ok(new { result = await _mediator.Send(searchActiveListingsQuery) });
+        //        public async Task<IActionResult> PostAllActiveListingsAsync(PaginationModel paginationModel, SearchModel searchModel) => Ok(new { result = await _mediator.Send(new SearchActiveListingsQuery(paginationModel, searchModel)) });
 
         [HttpPost("AgentListings")]
         public async Task<IActionResult> PostAllAgentListingsAsync([FromBody] PaginationModel model)
