@@ -5,7 +5,7 @@ using AutoMapper;
 using MediatR;
 using Moq;
 using NARE.Application.Listing.Model;
-using NARE.Application.Listing.Query.GetAllListings;
+using NARE.Application.Listing.Query.GetAllActiveListings;
 using NARE.Application.Listing.Query.GetAllListingsPaginated;
 using NARE.Application.Listing.Query.GetPaginatedListingsResult;
 using NARE.Application.Utilities;
@@ -32,7 +32,7 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetAllListingsPaginated
                 new NARE.Domain.Entities.Listing() { Address = "123 test" },
                 new NARE.Domain.Entities.Listing() { Address = "456 test" }
             };
-            Mediator.Setup(m => m.Send(It.IsAny<GetAllListingsQuery>(), default(CancellationToken))).ReturnsAsync(Listings);
+            Mediator.Setup(m => m.Send(It.IsAny<GetAllActiveListingsQuery>(), default(CancellationToken))).ReturnsAsync(Listings);
         }
 
         [Theory]

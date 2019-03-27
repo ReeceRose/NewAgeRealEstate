@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using NARE.Application.Listing.Query.GetAllListings;
+using NARE.Application.Listing.Query.GetAllActiveListings;
 using NARE.Domain.Entities;
 
 namespace NARE.Application.Listing.Query.GetFeaturedListings
@@ -22,7 +22,7 @@ namespace NARE.Application.Listing.Query.GetFeaturedListings
 
         public async Task<List<Domain.Entities.Listing>> Handle(GetFeaturedListingsQuery request, CancellationToken cancellationToken)
         {
-            var allListings = await _mediator.Send(new GetAllListingsQuery(), cancellationToken);
+            var allListings = await _mediator.Send(new GetAllActiveListingsQuery(), cancellationToken);
             var featuredListings = allListings
                 .OrderBy(l => l.ListingDate)
                 .Where(l => l.Featured)

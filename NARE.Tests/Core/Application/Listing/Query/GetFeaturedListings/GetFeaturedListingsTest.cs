@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Moq;
-using NARE.Application.Listing.Query.GetAllListings;
+using NARE.Application.Listing.Query.GetAllActiveListings;
 using NARE.Application.Listing.Query.GetFeaturedListings;
 using NARE.Application.Utilities;
 using Xunit;
@@ -32,7 +32,7 @@ namespace NARE.Tests.Core.Application.Listing.Query.GetFeaturedListings
                 new NARE.Domain.Entities.Listing() { Address = "967 test", Featured = true },
             };
             Handler = new GetFeaturedListingsQueryHandler(Mediator.Object, Mapper);
-            Mediator.Setup(m => m.Send(It.IsAny<GetAllListingsQuery>(), default(CancellationToken))).ReturnsAsync(Listings);
+            Mediator.Setup(m => m.Send(It.IsAny<GetAllActiveListingsQuery>(), default(CancellationToken))).ReturnsAsync(Listings);
         }
 
         [Theory]

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using NARE.Application.Listing.Model;
-using NARE.Application.Listing.Query.GetAllListings;
+using NARE.Application.Listing.Query.GetAllActiveListings;
 using NARE.Application.Listing.Query.GetPaginatedListingsResult;
 using NARE.Domain.Entities;
 
@@ -23,7 +23,7 @@ namespace NARE.Application.Listing.Query.GetAllListingsPaginated
 
         public async Task<PaginatedListingsDto> Handle(GetAllListingsPaginatedQuery request, CancellationToken cancellationToken)
         {
-            var allListings = await _mediator.Send(new GetAllListingsQuery(), cancellationToken);
+            var allListings = await _mediator.Send(new GetAllActiveListingsQuery(), cancellationToken);
             var orderedListings = allListings
                 .OrderBy(l => l.Address);
             request.PaginationModel.Count = orderedListings.Count();
