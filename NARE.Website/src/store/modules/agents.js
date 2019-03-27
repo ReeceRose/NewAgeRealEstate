@@ -46,7 +46,6 @@ const agents = {
             })
         },
         agentById: ({ commit, rootGetters }, agentId) => {
-            console.log(agentId);
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({

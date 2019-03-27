@@ -13,7 +13,6 @@ const listings  = {
     },
     actions: {        
         listingCount: ({ commit, rootGetters }, type) => {
-            console.log(type)
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
