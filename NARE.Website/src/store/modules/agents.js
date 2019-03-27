@@ -148,7 +148,7 @@ const agents = {
                 axios({
                     method: 'put',
                     url: `agents/${agent.id}/update`,
-                    data: {agent: agent },
+                    data: { agent: agent },
                     headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
                 })
                     .then(() => {

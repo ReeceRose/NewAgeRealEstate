@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using NARE.Application.Listing.Command.RemoveListing;
-using NARE.Application.Listing.Query.GetListingById;
 using NARE.Domain.Exceptions.Listing;
 using NARE.Persistence;
 using NARE.Tests.Context;

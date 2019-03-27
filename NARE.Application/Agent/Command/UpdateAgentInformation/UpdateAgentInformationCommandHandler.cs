@@ -20,6 +20,8 @@ namespace NARE.Application.Agent.Command.UpdateAgentInformation
             var agent = await _mediator.Send(new GetAgentByIdQuery(request.Agent.Id), cancellationToken);
             // Add any other updates here
             agent.Name = request.Agent.Name;
+            agent.ImageUrl = request.Agent.ImageUrl;
+            agent.PhoneNumber = request.Agent.PhoneNumber;
             return await Task.FromResult(await _mediator.Send(new UpdateAgentCommand(agent), cancellationToken));
         }
     }

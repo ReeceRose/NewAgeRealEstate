@@ -27,11 +27,15 @@
             <div slot="card-content" class="text-center">
                 <div class="col-12">
                     <ul>
-                        <li>
-                            <span class="item">
-                                <TextInput id="nameInput" v-model="agent.name" :validator="$v.agent.name" errorMessage="Invalid agent name" placeholder="Agent name"/>
-                            </span>
-                        </li>
+                        <li><span class="item">
+                            <TextInput id="nameInput" v-model="agent.name" :validator="$v.agent.name" errorMessage="Invalid agent name" placeholder="Agent name"/>
+                        </span></li>
+                        <li class="pt-2"><span class="item">
+                            <TextInput id="phoneInput" v-model="agent.phoneNumber" :validator="$v.agent.phoneNumber" errorMessage="Invalid phone number" placeholder="Agent phone number"/>
+                        </span></li>
+                        <li class="pt-2"><span class="item">
+                            <TextInput id="imageInput" v-model="agent.imageUrl" :validator="$v.agent.imageUrl" errorMessage="Invalid agent URL" placeholder="Agent image URL"/>
+                        </span></li>
                         <li><span class="item" v-if="agent.dateJoined">Date Joined: {{ agent.dateJoined.substr(0, 10) }}</span></li>
                         <li class="pt-3">
                             <h3>Agent Claims:</h3>
@@ -73,7 +77,8 @@
 import WideCard from '@/components/UI/Card/WideCard.vue'
 import TextInput from '@/components/UI/Form/Text.vue'
 
-import { required } from 'vuelidate/lib/validators'
+import { required, helpers } from 'vuelidate/lib/validators'
+const phoneRegex = helpers.regex('phoneRegex', /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)
 
 export default {
     name: 'DetailedAgent',
@@ -204,6 +209,13 @@ export default {
             name: {
                 required
             },
+            phoneNumber: {
+                required,
+                phoneRegex
+            },
+            imageUrl: {
+                required
+            }
         }
     }
 }
