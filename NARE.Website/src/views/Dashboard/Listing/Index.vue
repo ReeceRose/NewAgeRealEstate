@@ -79,7 +79,8 @@ export default {
             this.$router.push({ name: 'editListing', params: { id: id } })
         },
         getAllListings() {
-            this.$store.dispatch("listings/allListings", { currentPage: this.currentPage, pageSize: 10})
+            var listings = this.$store.getters['authentication/isAdmin'] ? 'allListings' : 'agentListings';
+            this.$store.dispatch(`listings/${listings}`, { currentPage: this.currentPage, pageSize: 10})
                 .then((result) => {
                     this.listings = result.listings
                     this.pageCount = result.paginationModel.totalPages

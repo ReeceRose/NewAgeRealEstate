@@ -101,8 +101,8 @@ export default {
         }
     },
     methods: {
-        getAgent() {
-            this.$store.dispatch("agents/agentById", this.agent.id)
+        getAgent(agentId) {
+            this.$store.dispatch("agents/agentById", this.agent.id || agentId)
                 .then((data) => {
                     this.agent = data.agent
                     this.claims = data.claims
