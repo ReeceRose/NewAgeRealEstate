@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using NARE.Application.Listing.Query.GetAllListings;
@@ -17,7 +18,8 @@ namespace NARE.Application.Listing.Query.GetListingCount
         public async Task<int> Handle(GetListingCountQuery request, CancellationToken cancellationToken)
         {
             var listings = await _mediator.Send(new GetAllListingsQuery(), cancellationToken);
-            return listings?.Count ?? 0;
+            if (request.AgentId == null) return listings?.Count ?? 0;
+            return listings.Count(l => l.Agent.Id == request.AgentId);
         }
     }
 }

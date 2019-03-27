@@ -12,12 +12,13 @@ const listings  = {
 
     },
     actions: {        
-        listingCount: ({ commit, rootGetters }) => {
+        listingCount: ({ commit, rootGetters }, type) => {
+            console.log(type)
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
                     method: 'get',
-                    url: 'listings/count',
+                    url: `listings/${type}`,
                     headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
                 })
                     .then((response) => {

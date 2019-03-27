@@ -50,7 +50,14 @@ namespace NARE.API.Controllers.v1
         public async Task<IActionResult> GetNewestListingsAsync(int count) => Ok(new { result = await _mediator.Send(new GetNewestListingsQuery(count)) });
 
         [HttpGet("Count")]
-        public async Task<IActionResult> GetListingCountAsync() => Ok(new { result = await _mediator.Send(new GetListingCountQuery()) });
+        public async Task<IActionResult> GetListingCountAsync() => Ok(new { result = await _mediator.Send(new GetListingCountQuery(null)) });
+
+        [HttpGet("AgentListingsCount")]
+        public async Task<IActionResult> GetAgentListingsCountAsync()
+        {
+            var id = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+            return Ok(new { result = await _mediator.Send(new GetListingCountQuery(id)) });
+        }
 
         [HttpGet("{ListingId}/Details")]
         public async Task<IActionResult> GetListingByIdAsync(string listingId) => Ok(new { result = await _mediator.Send(new GetListingByIdQuery(Guid.Parse(listingId))) });

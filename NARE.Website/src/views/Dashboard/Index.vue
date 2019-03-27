@@ -63,7 +63,8 @@ export default {
                 })
         },
         getListingCount() {
-            this.$store.dispatch("listings/listingCount")
+            var countType = this.$store.getters['authentication/isAdmin'] ? 'count' : 'agentListingCount'
+            this.$store.dispatch("listings/listingCount", countType)
                 .then((listingCount) => {
                     this.listingCount = listingCount;
                 })
