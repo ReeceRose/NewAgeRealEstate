@@ -30,7 +30,7 @@ const global = {
         },
         // LOADING
         setLoading: (state, isLoading) => state.loading = isLoading,
-        setRefresh: (state, refresh) => state.refreshListings = !state.refreshListings
+        setRefresh: (state) => state.refreshListings = !state.refreshListings
     },
     actions: {
         // TOKEN
