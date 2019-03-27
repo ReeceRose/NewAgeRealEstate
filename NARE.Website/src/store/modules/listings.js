@@ -92,8 +92,7 @@ const listings  = {
                     .then((response) => {
                         resolve(response.data.result)
                     })
-                    .catch((error) => {
-                        console.log(JSON.stringify(error))
+                    .catch(() => {
                         reject()
                     })
                     .finally(() => {

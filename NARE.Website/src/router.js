@@ -128,7 +128,8 @@ const router = new Router({
         {
             path: '/Listings',
             name: 'listings',
-            component: Listings
+            component: Listings,
+            props: true
         },
         {
             path: '/SessionExpired',

@@ -46,6 +46,14 @@ export default {
     computed: {
         c() {
             return this.currentPage
+        },
+        refresh() {
+            return this.$store.getters['global/isRefreshing']
+        }
+    },
+    watch: {
+        refresh: function() {
+            this.getAllListings()
         }
     },
     methods: {
@@ -53,6 +61,12 @@ export default {
             this.$router.push({ name: 'listing', params: { id: id } })
         },
         getAllListings() {
+            if (this.$route.params.tempListings != null && this.$route.params.paginationModel != null) {
+                this.listings = this.$route.params.tempListings
+                this.pageCount = this.$route.params.paginationModel.totalPages || 1
+                this.error = false
+                return
+            }
             this.$store.dispatch("listings/listings", { currentPage: this.currentPage, pageSize: 10})
                 .then((result) => {
                     this.listings = result.listings

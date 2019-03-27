@@ -4,13 +4,15 @@ const global = {
     namespaced: true,
     state: {
         token: null,
-        loading: false
+        loading: false,
+        refreshListings: false
     },
     getters: {
         // TOKEN
         getToken: state => state.token,
         // LOADING
-        isLoading: state => state.loading
+        isLoading: state => state.loading,
+        isRefreshing: state => state.refreshListings
     },
     mutations: {
         // TOKEN
@@ -27,7 +29,8 @@ const global = {
             window.$cookies.remove("token")
         },
         // LOADING
-        setLoading: (state, isLoading) => state.loading = isLoading
+        setLoading: (state, isLoading) => state.loading = isLoading,
+        setRefresh: (state, refresh) => state.refreshListings = !state.refreshListings
     },
     actions: {
         // TOKEN
@@ -68,6 +71,9 @@ const global = {
         updateLoading({ commit }, isLoading) {
             commit("setLoading", isLoading)
         },
+        refreshListings({ commit }) {
+            commit("setRefresh")
+        }
     }
 }
 
