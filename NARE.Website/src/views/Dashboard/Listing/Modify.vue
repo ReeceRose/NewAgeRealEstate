@@ -5,6 +5,7 @@
                 <div class="col-12">
                     <p class="text-danger" v-if="error">Failed to {{ action.toLowerCase() }} listing</p>
                     <p class="text-danger" v-if="errorLoadingListing">Failed to load listing</p>
+                    <p class="text-danger" v-if="errorDeleting">Failed to delete listing</p>
                     
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
@@ -123,7 +124,14 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-main bg-blue fade-on-hover text-uppercase"> {{ action }}</button>
+            <div class="row">
+                <div class="col-12 p-2">
+                    <button type="submit" class="btn btn-main bg-blue fade-on-hover text-uppercase"> {{ action }}</button>
+                </div>
+                <div class="col-12" v-if="this.$route.params.id">
+                    <button type="button" @click="deleteListing()" class="btn btn-main bg-blue fade-on-hover text-uppercase">Delete</button>
+                </div>
+            </div>
         </form>
     </div>
 </template>
@@ -158,19 +166,20 @@ export default {
                 mainImageUrl: '',
                 listingStatus: '',
                 garageSize: '',
-                featured: '',
+                featured: false,
                 images: [],
                 agent: {
                     id: '',
                 }
             },
             errorLoadingListing: false,
+            errorDeleting: false,
 			error: false,
 		}
     },
     computed: {
         action() {
-            return this.$route.params.id != null ? 'Edit' : 'Save'
+            return this.$route.params.id != null ? 'Update' : 'Save'
         },
     },
     created() {
@@ -210,6 +219,15 @@ export default {
         },
         addImage() {
             this.listing.images.push({ url: '', alternative: '' })
+        },
+        deleteListing() {
+            this.$store.dispatch("listings/delete", this.$route.params.id)
+                .then(() => {
+                    this.$router.push({ name: 'listingDashboard' })
+                })
+                .catch(() => {
+                    this.errorDeleting = true
+                })
         }
     },
 	validations: {

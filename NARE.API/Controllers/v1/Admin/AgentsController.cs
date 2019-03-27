@@ -62,11 +62,11 @@ namespace NARE.API.Controllers.v1.Admin
         [Authorize(Policy = "AdministratorOnly")]
         public async Task<IActionResult> GetDisableAAgentByIdAsync(string agentId) => Ok(new { result = await _mediator.Send(new DisableAgentCommand(agentId)) });
 
-        [HttpPost("{AgentId}/Update")]
+        [HttpPut("{AgentId}/Update")]
         [Authorize(Policy = "AdministratorOnly")]
         public async Task<IActionResult> PostUpdateAgentAsync([FromBody] UpdateAgentInformationCommand updateAgentInformationCommand) => Ok(new { result = await _mediator.Send(updateAgentInformationCommand) });
 
-        [HttpGet("{AgentId}/Delete")]
+        [HttpDelete("{AgentId}/Delete")]
         [Authorize(Policy = "AdministratorOnly")]
         public async Task<IActionResult> GetRemoveAgentAsync(string agentId) => Ok(new { result = await _mediator.Send(new RemoveAgentCommand(agentId)) });
 

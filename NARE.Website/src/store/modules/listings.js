@@ -161,7 +161,7 @@ const listings  = {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
-                    method: 'post',
+                    method: 'put',
                     url: 'listings/create',
                     data: { listing: listing },
                     headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
@@ -181,13 +181,33 @@ const listings  = {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
-                    method: 'post',
+                    method: 'put',
                     url: 'listings/update',
                     data: { listing: listing },
                     headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
                 })
                     .then(response => {
                         resolve(response)
+                    })
+                    .catch((error) => {
+                        reject(error)
+                    })
+                    .finally(() => {
+                        commit('global/setLoading', false, { root: true })
+                    })
+            })
+        },
+        delete: ({ commit, rootGetters }, listingId) => {
+            return new Promise((resolve, reject) => {
+                commit('global/setLoading', true, { root: true })
+                axios({
+                    method: 'delete',
+                    url: `listings/delete/${listingId}`,
+                    // data: { listingId: listingId },
+                    headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
+                })
+                    .then(() => {
+                        resolve()
                     })
                     .catch((error) => {
                         reject(error)

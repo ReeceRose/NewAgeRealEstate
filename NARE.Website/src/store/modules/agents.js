@@ -127,7 +127,7 @@ const agents = {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
-                    method: 'get',
+                    method: 'delete',
                     url: `agents/${agentId}/delete`,
                     headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}
                 })
@@ -146,7 +146,7 @@ const agents = {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
-                    method: 'post',
+                    method: 'put',
                     url: `agents/${agent.id}/update`,
                     data: {agent: agent },
                     headers: { Authorization: `Bearer ${rootGetters['global/getToken']}`}

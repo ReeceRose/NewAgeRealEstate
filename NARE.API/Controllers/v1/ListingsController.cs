@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NARE.Application.Listing.Command.CreateListing;
+using NARE.Application.Listing.Command.RemoveListing;
 using NARE.Application.Listing.Command.UpdateListing;
 using NARE.Application.Listing.Query.GetAgentListings;
 using NARE.Application.Listing.Query.GetAllActiveListingsPaginated;
@@ -62,7 +63,7 @@ namespace NARE.API.Controllers.v1
         [HttpGet("{ListingId}/Details")]
         public async Task<IActionResult> GetListingByIdAsync(string listingId) => Ok(new { result = await _mediator.Send(new GetListingByIdQuery(Guid.Parse(listingId))) });
 
-        [HttpPost("Create")]
+        [HttpPut("Create")]
         [Authorize]
         public async Task<IActionResult> PostCreateListingAsync([FromBody] CreateListingCommand createListingCommand)
         {
@@ -70,8 +71,12 @@ namespace NARE.API.Controllers.v1
             return Ok(new { result = await _mediator.Send(createListingCommand) });
         }
 
-        [HttpPost("Update")]
+        [HttpPut("Update")]
         [Authorize]
         public async Task<IActionResult> PostUpdateListingAsync([FromBody] UpdateListingCommand updateListingCommand) => Ok(new { result = await _mediator.Send(updateListingCommand) });
+
+        [HttpDelete("Delete/{ListingId}")]
+        [Authorize]
+        public async Task<IActionResult> PostUpdateListingAsync(string listingId) => Ok(new { result = await _mediator.Send(new RemoveListingCommand(listingId)) });
     }
 }
