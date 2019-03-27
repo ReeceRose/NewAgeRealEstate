@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NARE.Application.Listing.Command.RemoveListing;
 using NARE.Domain.Exceptions.Listing;
@@ -15,6 +16,7 @@ namespace NARE.Tests.Core.Application.Listing.Command.RemoveListing
     {
         public Mock<IMediator> Mediator { get; }
         public ApplicationDbContext Context { get; }
+        public Mock<ILogger<RemoveListingCommandHandler>> Logger { get; }
         public RemoveListingCommandHandler Handler { get; }
 
         public RemoveListingTest()
@@ -22,7 +24,8 @@ namespace NARE.Tests.Core.Application.Listing.Command.RemoveListing
             // Arrange
             Mediator = new Mock<IMediator>();
             Context = ContextFactory.Create();
-            Handler = new RemoveListingCommandHandler(Mediator.Object, Context);
+            Logger = new Mock<ILogger<RemoveListingCommandHandler>>();
+            Handler = new RemoveListingCommandHandler(Mediator.Object, Context, Logger.Object);
         }
 
         [Theory]

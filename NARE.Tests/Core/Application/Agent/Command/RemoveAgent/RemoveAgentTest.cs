@@ -1,7 +1,9 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NARE.Application.Agent.Command.RemoveAgent;
 using NARE.Application.Agent.Query.GetAgentById;
@@ -15,6 +17,7 @@ namespace NARE.Tests.Core.Application.Agent.Command.RemoveAgent
     {
         public Mock<IMediator> Mediator { get; }
         public Mock<MockUserManager> UserManager { get; }
+        public Mock<ILogger<RemoveAgentCommandHandler>> Logger { get; }
         public RemoveAgentCommandHandler Handler { get; }
 
         public RemoveAgentTest()
@@ -22,7 +25,8 @@ namespace NARE.Tests.Core.Application.Agent.Command.RemoveAgent
             // Arrange
             Mediator = new Mock<IMediator>();
             UserManager = new Mock<MockUserManager>();
-            Handler = new RemoveAgentCommandHandler(Mediator.Object, UserManager.Object);
+            Logger = new Mock<ILogger<RemoveAgentCommandHandler>>();
+            Handler = new RemoveAgentCommandHandler(Mediator.Object, UserManager.Object, Logger.Object);
         }
 
         [Theory]

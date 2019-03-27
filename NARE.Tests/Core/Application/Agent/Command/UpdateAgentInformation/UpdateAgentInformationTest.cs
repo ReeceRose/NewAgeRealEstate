@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NARE.Application.Agent.Command.UpdateAgentInformation;
 using NARE.Application.Agent.Query.GetAgentById;
@@ -16,6 +17,7 @@ namespace NARE.Tests.Core.Application.Agent.Command.UpdateAgentInformation
     {
         public Mock<IMediator> Mediator { get; }
         public ApplicationDbContext Context { get; }
+        public Mock<ILogger<UpdateAgentInformationCommandHandler>> Logger { get; }
         public UpdateAgentInformationCommandHandler Handler { get; }
 
         public UpdateAgentInformationTest()
@@ -23,7 +25,8 @@ namespace NARE.Tests.Core.Application.Agent.Command.UpdateAgentInformation
             // Arrange
             Mediator = new Mock<IMediator>();
             Context = ContextFactory.Create();
-            Handler = new UpdateAgentInformationCommandHandler(Mediator.Object);
+            Logger = new Mock<ILogger<UpdateAgentInformationCommandHandler>>();
+            Handler = new UpdateAgentInformationCommandHandler(Mediator.Object, Logger.Object);
         }
 
         [Theory]

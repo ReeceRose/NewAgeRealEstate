@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Moq;
 using NARE.Application.Listing.Command.CreateListing;
 using NARE.Persistence;
 using NARE.Tests.Context;
@@ -12,13 +14,15 @@ namespace NARE.Tests.Core.Application.Listing.Command.CreateListing
     public class CreateListingTest : IDisposable
     {
         public ApplicationDbContext Context { get; }
+        public Mock<ILogger<CreateListingCommandHandler>> Logger { get; }
         public CreateListingCommandHandler Handler { get; }
 
         public CreateListingTest()
         {
             // Arrange
             Context = ContextFactory.Create();
-            Handler = new CreateListingCommandHandler(Context);
+            Logger = new Mock<ILogger<CreateListingCommandHandler>>();
+            Handler = new CreateListingCommandHandler(Context, Logger.Object);
         }
 
         [Theory]
