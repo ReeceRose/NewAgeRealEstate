@@ -1,18 +1,25 @@
 <template>
-    <div>
+    <div class="container">
         <ApiHealth/>
-        <!-- <div v-if="this.$route.name === 'dashboard' && verifyIsAdmin()" > -->
         <div v-if="this.$route.name === 'dashboard'" >
             <h1 class="text-left pt-3">
-                Admin Dashboard
+                Dashboard
             </h1>
             <div class="row">
-                <HeaderCard title="Users" class="text-center" :click="userClick">
+                <HeaderCard title="Agents" class="text-center" :click="agentClick" v-if="this.$store.getters['authentication/isAdmin']">
                     <div slot="card-icon">
                         <i class="fas fa fa-4x fa-users"></i>
                     </div>
                     <div slot="card-content">
-                        <p>User Count: {{ userCount }}</p>
+                        <p>Agent Count: {{ agentCount }}</p>
+                    </div>
+                </HeaderCard>
+                <HeaderCard title="Listings" class="text-center" :click="listingClick">
+                    <div slot="card-icon">
+                        <i class="fas fa fa-4x fa-home"></i>
+                    </div>
+                    <div slot="card-content">
+                        <p>Listing Count: {{ listingCount }}</p>
                     </div>
                 </HeaderCard>
             </div>
@@ -25,7 +32,7 @@
 
 <script>
 import ApiHealth from '@/components/UI/Dashboard/ApiHealth.vue'
-import HeaderCard from '@/components/UI/Card/Admin/HeaderCard.vue'
+import HeaderCard from '@/components/UI/Card/Agent/HeaderCard.vue'
 
 export default {
     name: 'Dashboard',
@@ -35,39 +42,40 @@ export default {
     },
     data() {
         return {
-            userCount: 0,
+            agentCount: 0,
+            listingCount: 0,
         }
     },
     methods: {
-        userClick() {
-            this.$router.push({ name: 'userDashboard' })
+        agentClick() {
+            this.$router.push({ name: 'agentDashboard' })
         },
-        verifyIsAdmin() {
-            this.$store.dispatch("authentication/verifyIsAdmin")
-                .then(() => {
-                    // Nothing
+        listingClick() {
+            this.$router.push({ name: 'listingDashboard' })
+        },
+        getAgentCount() {
+            this.$store.dispatch("agents/agentCount")
+                .then((agentCount) => {
+                    this.agentCount = agentCount
                 })
                 .catch(() => {
-                    // This will clean up the tokens
-                    this.$store.dispatch("authentication/logout")
-                    this.$router.push({ name: 'home' })
+                    this.agentCount = 'Failed to load'
                 })
-            // Won't be reached if not true    
-            return true
         },
-        getUserCount() {
-            this.$store.dispatch("users/userCount")
-                .then((userCount) => {
-                    this.userCount = userCount
+        getListingCount() {
+            var countType = this.$store.getters['authentication/isAdmin'] ? 'count' : 'agentListingCount'
+            this.$store.dispatch("listings/listingCount", countType)
+                .then((listingCount) => {
+                    this.listingCount = listingCount;
                 })
                 .catch(() => {
-                    this.userCount = 'Failed to load'
+                    this.listingCount = 'Failed to load'
                 })
         }
     },
     created() {
-        this.verifyIsAdmin()
-        this.getUserCount()
+        this.getAgentCount()
+        this.getListingCount()
     }
 }
 </script>

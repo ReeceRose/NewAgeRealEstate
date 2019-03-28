@@ -5,17 +5,18 @@ using NARE.Domain.Entities;
 
 namespace NARE.Persistence
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<Agent>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
 
+        public DbSet<Listing> Listings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<ApplicationUser>(entity => entity.Property(m => m.Id).HasMaxLength(127));
             builder.Entity<IdentityRole>(entity => entity.Property(m => m.Id).HasMaxLength(127));
             builder.Entity<IdentityUserLogin<string>>(entity =>
             {
@@ -33,17 +34,20 @@ namespace NARE.Persistence
                 entity.Property(m => m.LoginProvider).HasMaxLength(127);
                 entity.Property(m => m.Name).HasMaxLength(127);
             });
-            builder.Entity<ApplicationUser>(i =>
+            builder.Entity<Agent>(i =>
             {
+                i.Property(o => o.Id).HasMaxLength(127);
                 i.Property(o => o.EmailConfirmed).HasConversion<int>();
                 i.Property(o => o.LockoutEnabled).HasConversion<int>();
                 i.Property(o => o.PhoneNumberConfirmed).HasConversion<int>();
                 i.Property(o => o.TwoFactorEnabled).HasConversion<int>();
                 i.Property(o => o.AccountEnabled).HasConversion<short>();
+                i.Property(b => b.DateJoined).HasDefaultValueSql("GETDATE()");
             });
-            builder.Entity<ApplicationUser>()
-                .Property(b => b.DateJoined)
-                .HasDefaultValueSql("GETDATE()");
+            builder.Entity<Listing>(i =>
+            {
+                i.Property(o => o.Featured).HasConversion<short>();
+            });
         }
     }
 }

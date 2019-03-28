@@ -1,7 +1,6 @@
 import axios from '@/axios.js'
 import utilities from '@/utilities.js'
-// For reference
-// headers: { Authorization: `Bearer ${getters['uthentication/getToken'] || ''}`}
+
 const authentication = {
     namespaced: true,
     getters: {
@@ -38,13 +37,13 @@ const authentication = {
             commit("global/removeToken", null, { root: true })
             dispatch("global/updateCookie", null, { root: true })
         },
-        register: ({ commit }, payload) => {
+        create: ({ commit }, payload) => {
             return new Promise((resolve, reject) => {
                 commit('global/setLoading', true, { root: true })
                 axios({
                     method: 'post',
-                    url: 'authentication/register',
-                    data: { email: payload.email, password: payload.password }
+                    url: 'authentication/create',
+                    data: { name: payload.name, email: payload.email, password: payload.password }
                 })
                     .then(response => {
                         resolve(response)

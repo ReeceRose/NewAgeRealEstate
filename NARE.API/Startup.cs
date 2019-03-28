@@ -13,8 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using NARE.Application.Agent.Query.LoginAgent;
 using NARE.Application.Interfaces;
-using NARE.Application.User.Command.RegisterUser;
 using NARE.Application.Utilities;
 using NARE.API.Filters;
 using NARE.Domain.Entities;
@@ -56,13 +56,13 @@ namespace NARE.API
                 options.UseMySQL(Configuration["ConnectionStrings:MySQL"],
                     optionsBuilder => { optionsBuilder.MigrationsAssembly("NARE.Persistence"); }));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            services.AddIdentity<Agent, IdentityRole>(options =>
             {
                     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
                     options.Lockout.MaxFailedAccessAttempts = 5;
                     options.Lockout.AllowedForNewUsers = true;
                     options.User.RequireUniqueEmail = true;
-                    options.SignIn.RequireConfirmedEmail = true;
+                    options.SignIn.RequireConfirmedEmail = false;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -108,7 +108,7 @@ namespace NARE.API
                         options.Filters.Add(typeof(CustomExceptionFilterAttribute));
                     })
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<RegisterUserCommandValidator>());
+                .AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<LoginAgentQueryValidator>());
 
             services.AddSwaggerGen(c =>
             {
@@ -175,7 +175,7 @@ namespace NARE.API
                     {
                         context.Database.Migrate();
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         // Database is already migrated. No issues here
                     }

@@ -8,7 +8,7 @@
 </h1>
 
 <h4 align="center">
-    JSON Web Tokens with ASP.NET and Vue.js
+    New Age Real Estate
 </h4>
 
 <p align="center">
@@ -18,6 +18,8 @@
 </p>
 
 ## About
+[![Build Status](https://reecerose.visualstudio.com/NewAgeRealEstate/_apis/build/status/NewAgeRealEstate?branchName=master)](https://reecerose.visualstudio.com/NewAgeRealEstate/_build/latest?definitionId=7&branchName=master)
+
 
 ## Features
 
