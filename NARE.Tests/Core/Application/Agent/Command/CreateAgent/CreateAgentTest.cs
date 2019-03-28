@@ -4,8 +4,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Moq;
 using NARE.Application.Agent.Command.CreateAgent;
-using NARE.Application.Agent.Model;
 using NARE.Application.Utilities;
+using NARE.Domain.Entities;
 using NARE.Tests.Helpers;
 using Xunit;
 

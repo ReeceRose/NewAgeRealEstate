@@ -1,7 +1,7 @@
 <template>
     <div class="container p-5">
         <SearchListings/>
-        <Listings :listings="null" class="pt-5"/>
+        <Listings :listings="listings" class="pt-5"/>
         <ul class="pagination">
             <li class="page-item" :class="c == 1 ? 'disabled' : ''">
                 <span class="page-link" @click="setPage(c-1)">Previous</span>
@@ -32,7 +32,7 @@ export default {
         SearchListings,
         Listings
     },
-        data() {
+    data() {
         return {
             listings: [],
             error: false,
@@ -40,9 +40,20 @@ export default {
             pageCount: 1
         }
     },
+    created() {
+        this.getAllListings()
+    },
     computed: {
         c() {
             return this.currentPage
+        },
+        refresh() {
+            return this.$store.getters['global/isRefreshing']
+        }
+    },
+    watch: {
+        refresh: function() {
+            this.getAllListings()
         }
     },
     methods: {
@@ -50,9 +61,15 @@ export default {
             this.$router.push({ name: 'listing', params: { id: id } })
         },
         getAllListings() {
-            this.$store.dispatch("listings", { currentPage: this.currentPage, pageSize: 10})
+            if (this.$route.params.tempListings != null && this.$route.params.paginationModel != null) {
+                this.listings = this.$route.params.tempListings
+                this.pageCount = this.$route.params.paginationModel.totalPages || 1
+                this.error = false
+                return
+            }
+            this.$store.dispatch("listings/listings", { currentPage: this.currentPage, pageSize: 10})
                 .then((result) => {
-                    this.agents = result.agents
+                    this.listings = result.listings
                     this.pageCount = result.paginationModel.totalPages
                     this.error = false
                 })

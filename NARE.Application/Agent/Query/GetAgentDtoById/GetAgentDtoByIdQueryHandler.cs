@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GetAgentById;
+using NARE.Domain.Entities;
 
 namespace NARE.Application.Agent.Query.GetAgentDtoById
 {

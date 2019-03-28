@@ -5,15 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20181230175546_MoveToApplicationDb.cs" />
-    <Compile Remove="Migrations\20190107193035_test.cs" />
-    <Compile Remove="Migrations\Identity\20190118033749_test.cs" />
-    <Compile Remove="Migrations\Identity\20190122211017_test.cs" />
+    <Compile Remove="Migrations\20190313192201_test.cs" />
+    <Compile Remove="Migrations\20190313193422_test.cs" />
+    <Compile Remove="Migrations\20190313194843_test.cs" />
+    <Compile Remove="Migrations\20190313200044_test.cs" />
+    <Compile Remove="Migrations\20190313200634_test.cs" />
+    <Compile Remove="Migrations\20190313201521_test.cs" />
+    <Compile Remove="Migrations\20190315012300_test.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.15" />
   </ItemGroup>
 

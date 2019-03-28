@@ -12,10 +12,11 @@ namespace NARE.Persistence
 
         }
 
+        public DbSet<Listing> Listings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Agent>(entity => entity.Property(m => m.Id).HasMaxLength(127));
             builder.Entity<IdentityRole>(entity => entity.Property(m => m.Id).HasMaxLength(127));
             builder.Entity<IdentityUserLogin<string>>(entity =>
             {
@@ -35,15 +36,18 @@ namespace NARE.Persistence
             });
             builder.Entity<Agent>(i =>
             {
+                i.Property(o => o.Id).HasMaxLength(127);
                 i.Property(o => o.EmailConfirmed).HasConversion<int>();
                 i.Property(o => o.LockoutEnabled).HasConversion<int>();
                 i.Property(o => o.PhoneNumberConfirmed).HasConversion<int>();
                 i.Property(o => o.TwoFactorEnabled).HasConversion<int>();
                 i.Property(o => o.AccountEnabled).HasConversion<short>();
+                i.Property(b => b.DateJoined).HasDefaultValueSql("GETDATE()");
             });
-            builder.Entity<Agent>()
-                .Property(b => b.DateJoined)
-                .HasDefaultValueSql("GETDATE()");
+            builder.Entity<Listing>(i =>
+            {
+                i.Property(o => o.Featured).HasConversion<short>();
+            });
         }
     }
 }

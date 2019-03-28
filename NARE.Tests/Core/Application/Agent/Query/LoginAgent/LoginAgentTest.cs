@@ -9,7 +9,7 @@ using NARE.Application.Agent.Query.GenerateLoginToken;
 using NARE.Application.Agent.Query.GetAgentByEmail;
 using NARE.Application.Agent.Query.LoginAgent;
 using NARE.Application.Utilities;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Account;
 using NARE.Tests.Helpers;
 using Xunit;
 
@@ -19,7 +19,6 @@ namespace NARE.Tests.Core.Application.Agent.Query.LoginAgent
     {
         public Mock<IMediator> Mediator { get; }
         public Mock<MockSignInManager> SignInManager { get; }
-        public Mock<MockUserManager> UserManager { get; }
         public IMapper Mapper { get; }
         public Mock<ILogger<LoginAgentQueryHandler>> Logger { get; }
         public LoginAgentQueryHandler Handler { get; }
@@ -29,20 +28,20 @@ namespace NARE.Tests.Core.Application.Agent.Query.LoginAgent
             // Arrange
             Mediator = new Mock<IMediator>();
             SignInManager = new Mock<MockSignInManager>();
-            UserManager = new Mock<MockUserManager>();
             Mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile())));
             Logger = new Mock<ILogger<LoginAgentQueryHandler>>();
-            Handler = new LoginAgentQueryHandler(Mediator.Object, SignInManager.Object, UserManager.Object, Mapper, Logger.Object);
+            Handler = new LoginAgentQueryHandler(Mediator.Object, SignInManager.Object, Mapper, Logger.Object);
         }
 
         [Theory]
-        [InlineData("test@test.ca", "Test123!", "1234567890")]
-        [InlineData("user@domain.com", "Password!1f4", "0987654321")]
-        public void LoginAgent_ReturnsValidToken(string email, string password, string token)
+        [InlineData("test@test.ca", "Test123!", "1234567890", "a23df1")]
+        [InlineData("user@domain.com", "Password!1f4", "0987654321", "asd123h56")]
+        public void LoginAgent_ReturnsValidToken(string email, string password, string token, string id)
         {
             // Arrange
             var requestedAgent = new NARE.Domain.Entities.Agent()
             {
+                Id = id,
                 Email = email,
                 AccountEnabled = true
             };

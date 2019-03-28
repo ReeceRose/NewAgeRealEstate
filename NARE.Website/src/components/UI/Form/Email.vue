@@ -6,7 +6,7 @@
             :class="{ 'is-invalid': validator.$error }"
             type="text" 
             id="inputEmail" 
-            class="form-control" 
+            class="form-control"
             placeholder="Email address" 
             autofocus
         >
@@ -40,3 +40,10 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+input {
+    text-align: center;
+    text-align-last: center;
+}
+</style>

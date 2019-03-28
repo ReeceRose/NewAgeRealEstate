@@ -6,7 +6,8 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using NARE.Application.Agent.Command.ResetPassword;
 using NARE.Application.Agent.Query.GetAgentByEmail;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Account;
+using NARE.Domain.Exceptions.Agent;
 using NARE.Tests.Helpers;
 using Xunit;
 

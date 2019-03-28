@@ -1,14 +1,16 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GenerateLoginToken;
 using NARE.Application.Agent.Query.GetAgentByEmail;
 using NARE.Application.Agent.Query.GetAgentClaim;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Entities;
+using NARE.Domain.Exceptions.Account;
 
 namespace NARE.Application.Agent.Query.LoginAgent
 {
@@ -16,16 +18,14 @@ namespace NARE.Application.Agent.Query.LoginAgent
     {
         private readonly IMediator _mediator;
         private readonly SignInManager<Domain.Entities.Agent> _signInManager;
-        private readonly UserManager<Domain.Entities.Agent> _userManager;
         private readonly IMapper _mapper;
         private readonly ILogger<LoginAgentQueryHandler> _logger;
 
 
-        public LoginAgentQueryHandler(IMediator mediator, SignInManager<Domain.Entities.Agent> signInManager, UserManager<Domain.Entities.Agent> userManager, IMapper mapper, ILogger<LoginAgentQueryHandler> logger)
+        public LoginAgentQueryHandler(IMediator mediator, SignInManager<Domain.Entities.Agent> signInManager, IMapper mapper, ILogger<LoginAgentQueryHandler> logger)
         {
             _mediator = mediator;
             _signInManager = signInManager;
-            _userManager = userManager;
             _mapper = mapper;
             _logger = logger;
         }
@@ -56,9 +56,11 @@ namespace NARE.Application.Agent.Query.LoginAgent
                 throw new InvalidCredentialException();
             }
 
-            var claims = _mediator.Send(new GetAgentClaimQuery(mappedAgent), cancellationToken).Result;
+            var claims = await _mediator.Send(new GetAgentClaimQuery(mappedAgent), cancellationToken) ?? new List<Claim>();
 
             _logger.LogInformation($"LoginAgent: {agent.Email}: Successful login");
+
+            claims.Add(new Claim("Id", agent.Id) );
 
             return await _mediator.Send(new GenerateLoginTokenQuery(claims), cancellationToken);
         }

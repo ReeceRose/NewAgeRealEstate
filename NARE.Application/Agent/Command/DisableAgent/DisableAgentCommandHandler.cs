@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using NARE.Application.Agent.Command.UpdateAgent;
 using NARE.Application.Agent.Query.GetAgentById;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Agent;
 
 namespace NARE.Application.Agent.Command.DisableAgent
 {

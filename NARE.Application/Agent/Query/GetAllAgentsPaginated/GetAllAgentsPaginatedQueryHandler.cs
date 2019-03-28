@@ -6,7 +6,8 @@ using AutoMapper;
 using MediatR;
 using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GetAllAgents;
-using NARE.Application.Agent.Query.GetPaginatedResults;
+using NARE.Application.Agent.Query.GetPaginatedAgentsResult;
+using NARE.Domain.Entities;
 
 namespace NARE.Application.Agent.Query.GetAllAgentsPaginated
 {
@@ -30,7 +31,7 @@ namespace NARE.Application.Agent.Query.GetAllAgentsPaginated
                 .Take(request.PaginationModel.PageSize).ToList();
             var result = _mapper.Map<List<AgentDto>>(paginatedAgents.ToList());
 
-            return await _mediator.Send(new GetPaginatedResultsQuery(result, request.PaginationModel), cancellationToken);
+            return await _mediator.Send(new GetPaginatedAgentResultQuery(result, request.PaginationModel), cancellationToken);
         }
     }
 }

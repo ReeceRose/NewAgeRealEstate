@@ -1,34 +1,34 @@
 <template>
     <div class="pb-4">
-        <img class="img-fluid w-100" :src="post.imageUrl" :alt="post.address" :title="post.address">
-        <div class="price">${{post.price}}</div>
+        <img class="img-fluid w-100" :src="listing.mainImageUrl" :alt="listing.address" :title="listing.address">
+        <div class="price">{{ format(listing.askingPrice) }}</div>
         <div class="information border-main">
             <div class="address text-center">
-                <p class="address-main font-bold">{{ post.address }}</p>
-                <p class="address-minor"><i class="fas fa-map-marker-alt"></i> {{ post.city }}, {{ post.province }}, {{ post.postalCode }}</p>
+                <p class="address-main font-bold">{{ listing.address }}</p>
+                <p class="address-minor"><i class="fas fa-map-marker-alt"></i> {{ listing.city }}, {{ listing.provinceCode }}, {{ listing.postalCode }}</p>
             </div>
             <div class="details pt-0">
                 <hr>
                 <div class="row">
-                    <div class="col"><i class="fas fa-square"></i> Sqft: {{ post.squareFootage }}</div>
-                    <div class="col"><i class="fas fa-car"></i> Garage: {{ post.garage }}</div>
+                    <div class="col"><i class="fas fa-square"></i> Sqft: {{ listing.squareFeet }}</div>
+                    <div class="col"><i class="fas fa-car"></i> Garage: {{ listing.garageSize }}</div>
                 </div>
                 <div class="row">
-                    <div class="col"><i class="fas fa-bed"></i> Bedrooms: {{ post.bedrooms }}</div>
-                    <div class="col"><i class="fas fa-bath"></i> Bathrooms: {{ post.bathrooms }}</div>
+                    <div class="col"><i class="fas fa-bed"></i> Bedrooms: {{ listing.bedroomCount }}</div>
+                    <div class="col"><i class="fas fa-bath"></i> Bathrooms: {{ listing.bathroomCount }}</div>
                 </div>
                 <hr>
                 <div class="row pb-2">
                     <div class="col text-center">
-                        <router-link :to="{ name: 'agent', params: { id: post.agent.id } }"><i class="fas fa-user"></i> {{ post.agent.name }}</router-link>
+                        <router-link :to="{ name: 'agent', params: { id: listing.agentDto.id } }"><i class="fas fa-user"></i> {{ listing.agentDto.name }}</router-link>
                     </div>
                 </div>
                 <div class="row pb-2">
-                    <div class="col text-center"><i class="fas fa-calendar-alt"></i> {{ post.listingDate }}</div>
+                    <div class="col text-center"><i class="fas fa-calendar-alt"></i> {{ listing.listingDate.substr(0, 10) }}</div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <router-link :to="{ name: 'listing', params: { id: post.id } }" class="btn btn-main btn-lg bg-blue fade-on-hover btn-block text-uppercase">View</router-link>
+                        <router-link :to="{ name: 'listing', params: { id: listing.id } }" class="btn btn-main btn-lg bg-blue fade-on-hover btn-block text-uppercase">View</router-link>
                     </div> 
                 </div>
             </div>
@@ -40,7 +40,12 @@
 export default {
     name: 'Listing',
     props: {
-        post: Object
+        listing: Object
+    },
+    methods: {
+        format(number) {
+            return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        }
     }
 }
 </script>
@@ -58,6 +63,18 @@ export default {
 }
 .fas {
     color: color(primaryBlue);
+}
+.img-fluid {
+    @include mobile {
+        height: 45vw;
+    }
+    @include tablet {
+        height: 25vw;
+    }
+    @include desktop {
+        height: 15vw;
+    }
+    object-fit: cover;
 }
 .information {
     .address-main {

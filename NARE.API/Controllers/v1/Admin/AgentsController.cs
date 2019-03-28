@@ -8,6 +8,7 @@ using NARE.Application.Agent.Command.EnableAgent;
 using NARE.Application.Agent.Command.RemoveAgent;
 using NARE.Application.Agent.Command.RemoveAgentClaim;
 using NARE.Application.Agent.Command.ResetPassword;
+using NARE.Application.Agent.Command.UpdateAgentInformation;
 using NARE.Application.Agent.Query.GenerateResetPassword.Email;
 using NARE.Application.Agent.Query.GetAgentById;
 using NARE.Application.Agent.Query.GetAgentClaim;
@@ -38,13 +39,11 @@ namespace NARE.API.Controllers.v1.Admin
 
 
         [HttpGet("Count")]
-        [Authorize(Policy = "AdministratorOnly")]
         public async Task<IActionResult> GetAgentCountAsync() => Ok(new { result = await _mediator.Send(new GetAgentCountQuery()) });
 
         // Agent specific actions
 
         [HttpGet("{AgentId}/Details")]
-        [Authorize(Policy = "AdministratorOnly")]
         public async Task<IActionResult> GetAgentDetailsByIdAsync(string agentId)
         {
             var agent = await _mediator.Send(new GetAgentDtoByIdQuery(agentId));
@@ -63,7 +62,11 @@ namespace NARE.API.Controllers.v1.Admin
         [Authorize(Policy = "AdministratorOnly")]
         public async Task<IActionResult> GetDisableAAgentByIdAsync(string agentId) => Ok(new { result = await _mediator.Send(new DisableAgentCommand(agentId)) });
 
-        [HttpGet("{AgentId}/Delete")]
+        [HttpPut("{AgentId}/Update")]
+        [Authorize(Policy = "AdministratorOnly")]
+        public async Task<IActionResult> PostUpdateAgentAsync([FromBody] UpdateAgentInformationCommand updateAgentInformationCommand) => Ok(new { result = await _mediator.Send(updateAgentInformationCommand) });
+
+        [HttpDelete("{AgentId}/Delete")]
         [Authorize(Policy = "AdministratorOnly")]
         public async Task<IActionResult> GetRemoveAgentAsync(string agentId) => Ok(new { result = await _mediator.Send(new RemoveAgentCommand(agentId)) });
 

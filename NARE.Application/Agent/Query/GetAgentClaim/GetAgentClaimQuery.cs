@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
 using MediatR;
-using NARE.Application.Agent.Model;
+using NARE.Domain.Entities;
 
 namespace NARE.Application.Agent.Query.GetAgentClaim
 {

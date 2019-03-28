@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using NARE.Application.Agent.Command.CreateAgent;
-using NARE.Application.Agent.Model;
+using NARE.Domain.Entities;
 using Xunit;
 
 namespace NARE.Tests.Core.Application.Agent.Command.CreateAgent

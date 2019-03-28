@@ -18,9 +18,8 @@
                 <div class="col">
                     <div class="featured-listings">
                         <h2>Featured Listings</h2>
-                        <!-- TODO: Pass the featured listings -->
-                        <p v-if="newListingsError" class="text-danger">Failed to load featured listings</p>
-                        <Listings :listings="null" v-else/>
+                        <p v-if="featuredListingsError" class="text-danger">Failed to load featured listings</p>
+                        <Listings :listings="featuredListings" v-else/>
                     </div>
                 </div>
             </div>
@@ -28,8 +27,8 @@
                 <div class="col">
                     <div class="new-listings">
                         <h2>New Listings</h2>
-                        <p v-if="featuredListingsError" class="text-danger">Failed to load new listings</p>
-                        <Listings :listings="null" v-else/>
+                        <p v-if="newListingsError" class="text-danger">Failed to load new listings</p>
+                        <Listings :listings="newListings" v-else/>
                         <router-link :to="{ name: 'listings' }" class="mt-3 btn btn-main bg-blue fade-on-hover text-uppercase">View All</router-link>
                     </div>
                 </div>
@@ -56,8 +55,31 @@ export default {
             newListingsError: false
         }
     },
-    beforeCreate() {
-
+    methods: {
+        getFeaturedListings() {
+            this.$store.dispatch("listings/featuredListings")
+                .then((result) => {
+                    this.featuredListings = result
+                    this.featuredListingsError = false
+                })
+                .catch(() => {
+                    this.featuredListingsError = true
+                })
+        },
+        getLatestListings() {
+            this.$store.dispatch("listings/newestListings")
+                .then((result) => {
+                    this.newListings = result
+                    this.newListingsError = false
+                })
+                .catch(() => {
+                    this.newListingsError = true
+                })
+        }
+    },
+    created() {
+        this.getFeaturedListings()
+        this.getLatestListings()
     }
 }
 </script>

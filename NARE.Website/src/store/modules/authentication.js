@@ -1,7 +1,6 @@
 import axios from '@/axios.js'
 import utilities from '@/utilities.js'
-// For reference
-// headers: { Authorization: `Bearer ${getters['uthentication/getToken'] || ''}`}
+
 const authentication = {
     namespaced: true,
     getters: {
@@ -44,7 +43,7 @@ const authentication = {
                 axios({
                     method: 'post',
                     url: 'authentication/create',
-                    data: { email: payload.email, password: payload.password }
+                    data: { name: payload.name, email: payload.email, password: payload.password }
                 })
                     .then(response => {
                         resolve(response)

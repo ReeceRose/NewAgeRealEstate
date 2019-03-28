@@ -6,7 +6,7 @@ using MediatR;
 using Moq;
 using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GetAllAgents;
-using NARE.Application.Agent.Query.GetPaginatedResults;
+using NARE.Application.Agent.Query.GetPaginatedAgentsResult;
 using NARE.Application.Agent.Query.SearchAgentsByEmail;
 using NARE.Application.Utilities;
 using NARE.Domain.Entities;
@@ -49,7 +49,7 @@ namespace NARE.Tests.Core.Application.Agent.Query.SearchAgentsByEmail
             var mappedAgents = Mapper.Map<List<AgentDto>>(agents);
             var paginationModel = new PaginationModel() { Count = agentCount };
             Mediator.Setup(m => m.Send(It.IsAny<GetAllAgentsQuery>(), default(CancellationToken))).ReturnsAsync(agents);
-            Mediator.Setup(m => m.Send(It.IsAny<GetPaginatedResultsQuery>(), default(CancellationToken)))
+            Mediator.Setup(m => m.Send(It.IsAny<GetPaginatedAgentResultQuery>(), default(CancellationToken)))
                                 .ReturnsAsync(new PaginatedAgentsDto()
                                 { PaginationModel = paginationModel, Agents = mappedAgents });
 

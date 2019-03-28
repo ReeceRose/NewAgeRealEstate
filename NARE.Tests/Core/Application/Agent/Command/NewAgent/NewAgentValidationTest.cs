@@ -14,12 +14,35 @@ namespace NARE.Tests.Core.Application.Agent.Command.NewAgent
         }
 
         [Theory]
+        [InlineData("Test Agent")]
+        [InlineData("Agent")]
+        public void NewAgent_NameIsValid(string name)
+        {
+            // Act
+            var result = Validator.Validate(new NewAgentCommand(name: name, email: "test@test.ca", password: "Test1!"));
+            // Assert
+            Assert.True(result.IsValid);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public void NewAgent_NameIsInvalid(string name)
+        {
+            // Act
+            var result = Validator.Validate(new NewAgentCommand(name: name, email: "test@test.ca", password: "Test1!"));
+            // Assert
+            Assert.Contains("Name is required", result.Errors.First().ErrorMessage);
+            Assert.False(result.IsValid);
+        }
+
+        [Theory]
         [InlineData("test@test.ca")]
         [InlineData("user@domain.com")]
         public void NewAgent_EmailIsValid(string email)
         {
             // Act
-            var result = Validator.Validate(new NewAgentCommand(email: email, password: "Test1!"));
+            var result = Validator.Validate(new NewAgentCommand(name: "Test Agent", email: email, password: "Test1!"));
             // Assert
             Assert.True(result.IsValid);
         }
@@ -31,7 +54,7 @@ namespace NARE.Tests.Core.Application.Agent.Command.NewAgent
         public void NewAgent_EmailIsInvalid(string email)
         {
             // Act
-            var result = Validator.Validate(new NewAgentCommand(email: email, password: "Test1!"));
+            var result = Validator.Validate(new NewAgentCommand(name: "Test Agent", email: email, password: "Test1!"));
             // Assert
             Assert.Contains("Email is required", result.Errors.First().ErrorMessage);
             Assert.False(result.IsValid);
@@ -43,7 +66,7 @@ namespace NARE.Tests.Core.Application.Agent.Command.NewAgent
         public void NewAgent_PasswordIsValid(string password)
         {
             // Act
-            var result = Validator.Validate(new NewAgentCommand(email: "test@test.ca", password: password));
+            var result = Validator.Validate(new NewAgentCommand(name: "Test Agent", email: "test@test.ca", password: password));
             // Assert
             Assert.True(result.IsValid);
         }
@@ -57,7 +80,7 @@ namespace NARE.Tests.Core.Application.Agent.Command.NewAgent
         public void NewAgent_PasswordIsInvalid(string password)
         {
             // Act
-            var result = Validator.Validate(new NewAgentCommand(email: "test@test.ca", password: password));
+            var result = Validator.Validate(new NewAgentCommand(name: "Test Agent", email: "test@test.ca", password: password));
             // Assert
             Assert.Contains("Password does not meet security constraints", result.Errors.First().ErrorMessage);
             Assert.False(result.IsValid);

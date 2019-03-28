@@ -3,9 +3,9 @@ using System.Security.Claims;
 using System.Threading;
 using AutoMapper;
 using Moq;
-using NARE.Application.Agent.Model;
 using NARE.Application.Agent.Query.GetAgentClaim;
 using NARE.Application.Utilities;
+using NARE.Domain.Entities;
 using NARE.Tests.Helpers;
 using Xunit;
 

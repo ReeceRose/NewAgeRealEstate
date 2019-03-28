@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-3">
+    <div>
         <div class="row">
             <div class="col">
                 <h2 class="text-center pb-4">Agent</h2>
@@ -18,12 +18,24 @@
                 <p v-if="accountDisabledError" class="text-danger text-center">Failed to disable agent</p>
 
                 <p v-if="deleteAgentError" class="text-danger text-center">Failed to delete agent</p>
+
+                <p v-if="updatedAgent" class="text-success text-center">Agent has been updated</p>
+                <p v-if="updatedAgentError" class="text-danger text-center">Failed to update agent</p>
             </div>
         </div>
         <WideCard :title="agent.email" v-if="agent">
             <div slot="card-content" class="text-center">
                 <div class="col-12">
                     <ul>
+                        <li><span class="item">
+                            <TextInput id="nameInput" v-model="agent.name" :validator="$v.agent.name" errorMessage="Invalid agent name" placeholder="Agent name"/>
+                        </span></li>
+                        <li class="pt-2"><span class="item">
+                            <TextInput id="phoneInput" v-model="agent.phoneNumber" :validator="$v.agent.phoneNumber" errorMessage="Invalid phone number" placeholder="Agent phone number"/>
+                        </span></li>
+                        <li class="pt-2"><span class="item">
+                            <TextInput id="imageInput" v-model="agent.imageUrl" :validator="$v.agent.imageUrl" errorMessage="Invalid agent URL" placeholder="Agent image URL"/>
+                        </span></li>
                         <li><span class="item" v-if="agent.dateJoined">Date Joined: {{ agent.dateJoined.substr(0, 10) }}</span></li>
                         <li class="pt-3">
                             <h3>Agent Claims:</h3>
@@ -38,18 +50,21 @@
                             </span>
                         </li>
                         <li class="pt-3">
-                            <span class="item" v-if="isAdministrator"><button class="btn btn-main bg-blue fade-on-hover" @click="revokeAdministrator(agent.id)">Revoke administrator</button></span>
-                            <span v-else><button class="btn btn-main bg-blue fade-on-hover" @click="makeAdministrator(agent.id)">Make administrator</button></span>
+                            <span class="item" v-if="isAdministrator"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="revokeAdministrator()">Revoke administrator</button></span>
+                            <span v-else><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="makeAdministrator()">Make administrator</button></span>
                         </li>
                         <li>
-                            <span class="item" v-if="agent.accountEnabled"><button class="btn btn-main bg-blue fade-on-hover" @click="disableAccount(agent.id)">Disable Account</button></span>
-                            <span class="item" v-else><button class="btn btn-main bg-blue fade-on-hover" @click="enableAccount(agent.id)">Enable Account</button></span>
+                            <span class="item" v-if="agent.accountEnabled"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="disableAccount()">Disable Account</button></span>
+                            <span class="item" v-else><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="enableAccount()">Enable Account</button></span>
                         </li>
                         <li>
-                            <span class="item"><button class="btn btn-main bg-blue fade-on-hover" @click="deleteAgent(agent.id)">Delete Agent</button></span>
+                            <span class="item"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="deleteAgent()">Delete Agent</button></span>
+                        </li>
+                            <li>
+                            <span class="item"><button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="updateAgent()">Update Agent</button></span>
                         </li>
                         <li class="pt-3">
-                            <button class="btn btn-main bg-blue fade-on-hover" @click="previous">Return <i class="fas fa-undo"></i></button>
+                            <button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="$router.go(-1)">Return <i class="fas fa-undo"></i></button>
                         </li>
                     </ul>
                 </div>
@@ -60,10 +75,15 @@
 
 <script>
 import WideCard from '@/components/UI/Card/WideCard.vue'
+import TextInput from '@/components/UI/Form/Text.vue'
+
+import { required, helpers } from 'vuelidate/lib/validators'
+const phoneRegex = helpers.regex('phoneRegex', /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)
 
 export default {
     name: 'DetailedAgent',
     components: {
+        TextInput,
         WideCard
     },
     data() {
@@ -81,11 +101,13 @@ export default {
             accountEnabled: false,
             accountEnabledError: false,
             deleteAgentError: false,
+            updatedAgent: false,
+            updatedAgentError: false,
         }
     },
     methods: {
         getAgent(agentId) {
-            this.$store.dispatch("agents/agentById", agentId)
+            this.$store.dispatch("agents/agentById", this.agent.id || agentId)
                 .then((data) => {
                     this.agent = data.agent
                     this.claims = data.claims
@@ -97,8 +119,8 @@ export default {
         checkIsAdministrator(claim) {
             claim.type == 'Administrator' ? this.isAdministrator = true : null;
         },
-        revokeAdministrator(agentId) {
-            this.$store.dispatch("agents/removeClaim", { agentId, claim: "Administrator" })
+        revokeAdministrator() {
+            this.$store.dispatch("agents/removeClaim", { agentId: this.agent.id, claim: "Administrator" })
                 .then(() => {
                     this.isAdministrator = false
                     this.revokedAdministrator = true
@@ -107,8 +129,8 @@ export default {
                     this.revokedAdministratorError = true
                 })
         },
-        makeAdministrator(agentId) {
-            this.$store.dispatch("agents/addClaim", { agentId, claim: "Administrator"})
+        makeAdministrator() {
+            this.$store.dispatch("agents/addClaim", { agentId: this.agent.id, claim: "Administrator"})
                 .then(() => {
                     this.isAdministrator = true
                     this.promotedToAdministrator = true
@@ -117,8 +139,8 @@ export default {
                     this.promotedToAdministratorError = true
                 })
         },
-        enableAccount(agentId) {
-            this.$store.dispatch("agents/enableAccount", agentId)
+        enableAccount() {
+            this.$store.dispatch("agents/enableAccount", this.agent.id)
                 .then(() => {
                     this.agent.accountEnabled = true
                     this.accountEnabled = true
@@ -133,8 +155,8 @@ export default {
                     }, 3000)
                 })
         },
-        disableAccount(agentId) {
-            this.$store.dispatch("agents/disableAccount", agentId)
+        disableAccount() {
+            this.$store.dispatch("agents/disableAccount", this.agent.id)
                 .then(() => {
                     this.agent.accountEnabled = false
                     this.accountDisabled = true
@@ -149,8 +171,8 @@ export default {
                     }, 3000)
                 })
         },
-        deleteAgent(agentId) {
-            this.$store.dispatch("agents/deleteAgent", agentId)
+        deleteAgent() {
+            this.$store.dispatch("agents/deleteAgent", this.agent.id)
                 .then(() => {
                     this.$router.push({ name: 'agentDashboard'})
                 })
@@ -163,12 +185,38 @@ export default {
                     }, 3000)
                 })
         },
-        previous() {
-            this.$router.go(-1)
-        }
+        updateAgent() {
+            this.$store.dispatch("agents/updateAgent", this.agent)
+                .then(() => {
+                    this.updatedAgent = true
+                    this.updatedAgentError = false
+                })
+                .catch(() => {
+                    this.updatedAgentError = true
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        this.updatedAgentError = false
+                    }, 3000)
+                })
+        },
     },
     created() {
         this.getAgent(this.$route.params.id)
+    },
+    validations: {
+        agent: {
+            name: {
+                required
+            },
+            phoneNumber: {
+                required,
+                phoneRegex
+            },
+            imageUrl: {
+                required
+            }
+        }
     }
 }
 </script>

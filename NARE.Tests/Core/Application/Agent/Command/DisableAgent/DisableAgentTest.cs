@@ -6,7 +6,7 @@ using Moq;
 using NARE.Application.Agent.Command.DisableAgent;
 using NARE.Application.Agent.Command.UpdateAgent;
 using NARE.Application.Agent.Query.GetAgentById;
-using NARE.Domain.Exceptions;
+using NARE.Domain.Exceptions.Agent;
 using Xunit;
 
 namespace NARE.Tests.Core.Application.Agent.Command.DisableAgent

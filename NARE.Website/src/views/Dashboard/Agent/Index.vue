@@ -1,5 +1,6 @@
 <template>
     <div v-if="this.$route.name === 'agentDashboard' " class="pt-3 table-responsive">
+                <a @click="$router.go(-1)" class="btn btn-link"><i class="fas fa-arrow-left"></i> Back</a>
         <h2 class="text-center">Agents</h2 >
 
         <SearchBar class="col-12" :submit="searchEmail"/>
@@ -14,7 +15,7 @@
         <table border="1" class="table table-bordered table-hover text-center">
             <thead class="thead-dark">
                 <tr>
-                    <th class="header">Email</th>
+                    <th class="header">Name</th>
                     <th class="">Date Joined</th>
                     <th class="header">Account Enabled</th>
                     <th class="header">Management</th>
@@ -22,7 +23,7 @@
             </thead>
             <tbody>
                 <tr v-for="agent in agents" :key="agent.id" @click="viewDetailedAgent(agent.id)" class="pointer">
-                    <td>{{ agent.email }}</td>
+                    <td>{{ agent.name }}</td>
                     <td>{{ agent.dateJoined.substr(0, 10) }}</td>
                     <td class="upper">{{ agent.accountEnabled }}</td>
                     <td><button class="btn btn-main bg-blue fade-on-hover" @click="viewDetailedAgent(agent.id)">Edit</button></td>
@@ -120,9 +121,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.pointer {
-    cursor: pointer;
-}
 .upper::first-letter {
     text-transform: capitalize;
 }
