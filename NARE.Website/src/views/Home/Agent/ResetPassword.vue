@@ -1,10 +1,10 @@
 <template>
     <FormNarrowCard title="Reset Password" :submit="submit">
-            <div slot="card-information">
-                <p v-if="emailSent" class="text-success text-center mb-3">Password reset email sent</p>
-                <p v-if="passwordReset" class="text-success text-center mb-3">Password has been reset</p>
-                <p v-if="error" class="text-danger text-center mb-3">An error has occured, please try again</p>
-            </div>
+        <div slot="card-information">
+            <p v-if="emailSent" class="text-success text-center mb-3">Password reset email sent</p>
+            <p v-if="passwordReset" class="text-success text-center mb-3">Password has been reset</p>
+            <p v-if="error" class="text-danger text-center mb-3">An error has occured, please try again</p>
+        </div>
         <div slot="card-content">
             <div v-if="!token">
                 <FormEmail
@@ -30,14 +30,14 @@
 
 <script>
 import FormNarrowCard from '@/components/UI/Card/Form/FormNarrowCard.vue'
-import FormEmail from "@/components/UI/Form/Email.vue"
-import FormPassword from "@/components/UI/Form/Password.vue"
+import FormEmail from '@/components/UI/Form/Email.vue'
+import FormPassword from '@/components/UI/Form/Password.vue'
 
 import { required, minLength, email, sameAs, helpers } from "vuelidate/lib/validators"
 const passwordRegex = helpers.regex("passwordRegex", /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$/)
 
 export default {
-    name: "ResetPassword",
+    name: 'resetPassword',
     components: {
         FormNarrowCard,
         FormEmail,

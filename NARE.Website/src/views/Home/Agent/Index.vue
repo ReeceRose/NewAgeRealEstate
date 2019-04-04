@@ -1,14 +1,5 @@
 <template>
-    <router-view></router-view>
+  <div>
+    <router-view/>
+  </div>
 </template>
-
-<script>
-export default {
-    beforeCreate() {
-        if (this.$route.name === 'agents') {
-            this.$router.push({ name: 'home' })
-        }
-    }
-}
-</script>
-
