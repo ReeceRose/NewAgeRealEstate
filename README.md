@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="https://reecerose.com/projects/NewAgeRealEstate">
-        <img src="https://static.reecerose.com/images/projects/NewAgeRealEstate/header.png" title="New Age Real Estate" alt="New Age Real Estate"  width="200">
+        <img src="https://static.reecerose.com/images/projects/NewAgeRealEstate/header.png" title="New Age Real Estate" alt="New Age Real Estate"  width="400">
     </a>
     <br>
     New Age Real Estate
@@ -8,7 +8,7 @@
 </h1>
 
 <h4 align="center">
-    New Age Real Estate
+    Full-stack Real Estate Application
 </h4>
 
 <p align="center">
@@ -20,8 +20,16 @@
 ## About
 [![Build Status](https://reecerose.visualstudio.com/NewAgeRealEstate/_apis/build/status/NewAgeRealEstate?branchName=master)](https://reecerose.visualstudio.com/NewAgeRealEstate/_build/latest?definitionId=7&branchName=master)
 
+New Age Real Estate is a full-stack application which allows users to browse agent created listings.
 
 ## Features
+- Login
+- Featured Listings
+- Newest Listings
+- Search Listings
+- Create new listings
+- Create new agents
+- And more
 
 ## License
 

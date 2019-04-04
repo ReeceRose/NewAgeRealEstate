@@ -31,6 +31,9 @@
                             <TextInput id="nameInput" v-model="agent.name" :validator="$v.agent.name" errorMessage="Invalid agent name" placeholder="Agent name"/>
                         </span></li>
                         <li class="pt-2"><span class="item">
+                            <TextInput id="descriptionInput" v-model="agent.description" :validator="$v.agent.description" errorMessage="Invalid description" placeholder="Agent description"/>
+                        </span></li>
+                        <li class="pt-2"><span class="item">
                             <TextInput id="phoneInput" v-model="agent.phoneNumber" :validator="$v.agent.phoneNumber" errorMessage="Invalid phone number" placeholder="Agent phone number"/>
                         </span></li>
                         <li class="pt-2"><span class="item">
@@ -207,6 +210,9 @@ export default {
     validations: {
         agent: {
             name: {
+                required
+            },
+            description: {
                 required
             },
             phoneNumber: {
