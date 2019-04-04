@@ -13,17 +13,21 @@ const Listings = () => import('@/views/Home/Listings.vue')
 const SessionExpired = () => import('@/views/Home/SessionExpired.vue')
 
 // Dashboard
-const Dashboard = () => import('@/views/Dashboard/Index.vue')
+const DashboardIndex = () => import('@/views/Dashboard/Index.vue')
+const DashboardHome = () => import('@/views/Dashboard/Home.vue')
 // Agent - Dashboard
-const AgentDashboard = () => import('@/views/Dashboard/Agent/Index.vue')
+const AgentDashboardIndex = () => import('@/views/Dashboard/Agent/Index.vue')
+const AgentDashboardHome = () => import('@/views/Dashboard/Agent/Home.vue')
 const AgentDetails = () => import('@/views/Dashboard/Agent/Details.vue')
 const NewAgent = () => import('@/views/Dashboard/Agent/NewAgent.vue')
 // Listing - Dashboard
-const ListingDashboard = () => import('@/views/Dashboard/Listing/Index.vue')
+const ListingDashboardIndex = () => import('@/views/Dashboard/Listing/Index.vue')
+const ListingDashboardHome = () => import('@/views/Dashboard/Listing/Home.vue')
 const ModifyListing = () => import('@/views/Dashboard/Listing/Modify.vue')
 
 // Agent
 const AgentIndex = () => import('@/views/Home/Agent/Index.vue')
+const AgentHome = () => import('@/views/Home/Agent/Home.vue')
 const Login  = () => import('@/views/Home/Agent/Login.vue')
 const ResetPassword = () => import('@/views/Home/Agent/ResetPassword.vue')
 
@@ -34,7 +38,7 @@ const AgentProtected = {
         const redirect = () => {
             const token = store.getters['global/getToken']
             if (token) {
-                    next()
+                next()
             } else {
                 next({ name: 'login', params: { redirect: to.fullPath }})
             }
@@ -115,7 +119,7 @@ const router = new Router({
             component: AccessDenied
         },
         {
-            path: '/Agent/:id',
+            path: '/AgentDetails/:id',
             name: 'agent',
             component: Agent
         },
@@ -138,16 +142,24 @@ const router = new Router({
         },
         {
             path: '/Dashboard',
-            name: 'dashboard',
-            component: Dashboard,
+            component: DashboardIndex,
             ...AgentProtected,
             children: [
                 {
+                    path: '',
+                    name: 'dashboard',
+                    component: DashboardHome
+                },
+                {
                     path: 'Agent',
-                    name: 'agentDashboard',
-                    component: AgentDashboard,
+                    component: AgentDashboardIndex,
                     ...AdminProtected,
                     children: [
+                        {
+                            path: '',
+                            name: 'agentDashboard',
+                            component: AgentDashboardHome
+                        },
                         {
                             path: 'Details/:id',
                             name: 'agentDetails',
@@ -162,9 +174,13 @@ const router = new Router({
                 },
                 {
                     path: 'Listing',
-                    name: 'listingDashboard',
-                    component: ListingDashboard,
+                    component: ListingDashboardIndex,
                     children: [
+                        {
+                            path: '',
+                            name: 'listingDashboard',
+                            component: ListingDashboardHome
+                        },
                         {
                             path: 'Edit/:id?',
                             name: 'editListing',
@@ -181,20 +197,24 @@ const router = new Router({
         },
         {
             path: '/Agent',
-            name: 'agentIndex',
             component: AgentIndex,
             children: [
+                {
+                    path: '',
+                    name: 'agentHome',
+                    component: AgentHome
+                },
                 {
                     path: 'Login/:redirect?',
                     name: 'login',
                     component: Login,
-                    ...NotLoggedIn,
+                    ...NotLoggedIn
                 },
                 {
                     path: 'ResetPassword',
                     name: 'resetPassword',
                     component: ResetPassword
-                },
+                }
             ]
         },
         {

@@ -38,7 +38,7 @@ namespace NARE.Application.Agent.Query.GenerateResetPassword.Email
             var token = _mediator.Send(new GenerateResetPasswordTokenQuery(agent), cancellationToken).Result;
 
             await _notificationService.SendNotificationAsync(toName: request.Email, toEmailAddress: request.Email, subject: "Password reset",
-                message: $"You have requested a password reset. To reset our password click <a href='{_configuration["FrontEndUrl"]}/Agent/ResetPassword?email={agent.Email}&token={Base64UrlEncoder.Encode(token)}'>here</a>");
+                message: $"You have requested a password reset. To reset your password click <a href='{_configuration["FrontEndUrl"]}/Agent/ResetPassword?email={agent.Email}&token={Base64UrlEncoder.Encode(token)}'>here</a>");
             _logger.LogInformation($"Generate Reset Password Email: {request.Email}: Sent email");
             return await Task.FromResult(token);
         }

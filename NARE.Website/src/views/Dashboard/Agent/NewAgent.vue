@@ -1,20 +1,22 @@
 <template>
-    <FormNarrowCard title="New Agent" :submit="submit">
-        <div slot="card-information">
-            <p v-if="success" class="text-success text-center mb-3">User successfully registered.</p>
-            <p v-if="error" class="text-danger text-center mb-3">{{ errorMessage }}</p>
-        </div>
+    <div class="container">
+        <FormNarrowCard title="New Agent" :submit="submit">
+            <div slot="card-information">
+                <p v-if="success" class="text-success text-center mb-3">User successfully registered.</p>
+                <p v-if="error" class="text-danger text-center mb-3">{{ errorMessage }}</p>
+            </div>
 
-        <div slot="card-content">
-            <TextInput id="nameInput" v-model="name" :validator="$v.name" errorMessage="Invalid agent name" placeholder="Agent name"/>
-            <FormEmail v-model="email" :validator="$v.email"/>
-            <FormPassword v-model="password" :validator="$v.password"/>
-            <FormPassword v-model="confirmationPassword" confirmationPassword="true" :validator="$v.confirmationPassword"/>
+            <div slot="card-content">
+                <TextInput id="nameInput" v-model="name" :validator="$v.name" errorMessage="Invalid agent name" placeholder="Agent name"/>
+                <FormEmail v-model="email" :validator="$v.email"/>
+                <FormPassword v-model="password" :validator="$v.password"/>
+                <FormPassword v-model="confirmationPassword" confirmationPassword="true" :validator="$v.confirmationPassword"/>
 
-            <button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="$router.go(-1)">Return <i class="fas fa-undo"></i></button>
-            <button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" type="submit">Create</button>
-        </div>
-    </FormNarrowCard>
+                <button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" @click="$router.go(-1)">Return <i class="fas fa-undo"></i></button>
+                <button class="btn btn-main btn-lg btn-block bg-blue fade-on-hover" type="submit">Create</button>
+            </div>
+        </FormNarrowCard>
+    </div>
 </template>
 
 <script>

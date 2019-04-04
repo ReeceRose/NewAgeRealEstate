@@ -1,8 +1,8 @@
 <template>
-	<FormNarrowCard title="Login" :submit="submit" v-if="this.$route.name === 'login'">
+	<FormNarrowCard title="Login" :submit="submit">
 		<div slot="card-information">
 			<p v-if="redirect" class="text-danger text-center mb-3">You must be logged in to view this. Please login below.</p>
-            <p v-if="error" class="text-danger text-center mb-3">{{ errorMessage }}</p>
+			<p v-if="error" class="text-danger text-center mb-3">{{ errorMessage }}</p>
 		</div>
 
 		<div slot="card-content" class="text-center">
@@ -16,9 +16,6 @@
 			<button class="btn btn-main btn-lg bg-blue fade-on-hover btn-block text-uppercase" type="submit">Login</button>
 		</div>
 	</FormNarrowCard>
-	<div v-else>
-		<router-view></router-view>
-	</div>
 </template>
 
 <script>
