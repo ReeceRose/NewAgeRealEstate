@@ -2,7 +2,7 @@
     <form @submit.prevent="submit">
         <div class="d-flex justify-content-center h-100">
             <div class="search-box">
-                <input class="search-input" type="text" placeholder="Enter an email" :value="search" aria-label="Enter an emaik">
+                <input class="search-input" type="text" placeholder="Enter an email" :value="search" aria-label="Enter an email">
                 <button type="submit" class="search-button" aria-label="Search for an email"><i class="fas text-primary fa-search"></i></button>
             </div>
         </div>
